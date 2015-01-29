@@ -7,15 +7,8 @@
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
-		<div class="jumbotron">
+		<?php require_once '../../partials/project-header.php'; ?>
 
-			<h1>Projekt!</h1>
-			<a class="btn btn-primary" href="/" role="button">Startsida</a>
-			<a class="btn btn-primary pull-right" href="#" role="button">Lägg upp Projekt</a>
-			
-		</div>
-	<div class="container">
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
