@@ -1,0 +1,20 @@
+TABLE - LIA-PROJECTS
+--------------------
+id		(int primary key AI)
+name		(varchar)
+description	(varchar)
+spots		(int)
+company		(varchar)
+estimated_time	(varchar)
+
+TABLE - TAGS
+------------
+id		(int primary key AI)
+name		(varchar)
+
+TABLE - PROJECT-TAGA
+--------------------
+id		(int primary AI)
+project_id	(int foreign key -> LIA-PROJECTS id)
+tag_id		(int foreign key -> TAGS id)
+
