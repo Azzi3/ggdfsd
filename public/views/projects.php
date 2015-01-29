@@ -1,6 +1,7 @@
 <?php
 require_once '../../config.php';
 $projects = LiaProject::all();
+$tags = ProjectTag::all();
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +35,14 @@ $projects = LiaProject::all();
 					<td><?php echo $project->company ?></td>
 						<td><?php echo $project->spots ?></td>
 						<td><?php echo $project->estimated_time ?></td>
-						<td>TAGG</td>
+						<td><?php $projectTags = ProjectTag::whereProjectId($project->id);
+						$counter = 0;
+						foreach ($projectTags as $projectTag) {
+							echo $projectTag->name; if ($counter != count($projectTags) - 1){
+								echo ", ";
+							};
+							$counter++;
+						} ?></td>
 						<td>
 							<a href="btn" title="">Ändra</a>
 							<a href="btn btn-danger" title="">Ta bort</a>
