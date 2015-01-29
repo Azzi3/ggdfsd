@@ -15,7 +15,6 @@
 			<li><a href="views/projects.php" title="">Lägg upp lia projekt</a></li>
 		</ul>
 	</nav>
-<?php require_once '../views/projekt.php'; ?>
 
 </body>
 </html>
