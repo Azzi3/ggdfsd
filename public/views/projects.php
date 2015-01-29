@@ -1,3 +1,7 @@
+<?php
+require_once '../../config.php';
+$projects = LiaProject::all();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,57 +11,40 @@
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>
-		<?php require_once '../../partials/project-header.php'; ?>
+	<?php require_once '../../partials/project-header.php'; ?>
 
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
 					<th>Namn</th>
 					<th>Beskrivning</th>
 					<th>Företag</th>
+					<th>Platser</th>
 					<th>Uppskattad tid</th>
 					<th>Taggar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Bygg en app</td>
-						<td style="max-width: 10em">Den ska vara bra o fin</td>
-						<td>Fortnox</td>
-						<td>2 veckor</td>
-						<td>PHP</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				<?php foreach ($projects as $project){  ?>
+				<tr>
+					<td><?php echo $project->name ?></td>
+					<td style="max-width: 10em"><?php echo $project->description ?></td>
+					<td><?php echo $project->company ?></td>
+						<td><?php echo $project->spots ?></td>
+						<td><?php echo $project->estimated_time ?></td>
+						<td>TAGG</td>
 						<td>
 							<a href="btn" title="">Ändra</a>
 							<a href="btn btn-danger" title="">Ta bort</a>
 						</td>
 					</tr>
-					<tr>
-						<td>Bygg en app</td>
-						<td style="max-width: 10em">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta unde temporibus, et, adipisci minima sunt debitis hic, veniam, repellendus saepe quam sint vitae fugiat delectus ipsa deleniti architecto culpa voluptate lorem lroem lroem lroem lreoen,rlemfs?</td>
-						<td>Fortnox</td>
-						<td>2 veckor</td>
-						<td>PHP</td>
-						<td>
-							<a href="btn" title="">Ändra</a>
-							<a href="btn btn-danger" title="">Ta bort</a>
-						</td>
-					</tr>
-					<tr>
-						<td>Bygg en app</td>
-						<td style="max-width: 10em">Den ska vara bra o fin</td>
-						<td>Fortnox</td>
-						<td>2 veckor</td>
-						<td>PHP</td>
-						<td>
-							<a href="btn" title="">Ändra</a>
-							<a href="btn btn-danger" title="">Ta bort</a>
-						</td>
-					</tr>
+					<?php } ?>
 				</tbody>
-			</table>
+
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
