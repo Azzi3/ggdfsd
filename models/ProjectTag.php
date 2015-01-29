@@ -1,17 +1,13 @@
 <?php
 
-class LiaProject extends BaseModel
+class ProjectTag extends BaseModel
 {
   // Anger vad tabellen i databasen heter flör denna klass
-  const TABLE_NAME = 'lia_projects';
+  const TABLE_NAME = 'tags';
 
   // Skapar en variable för varje kolumn i databasen.
   public $id,
-         $name,
-         $description,
-         $spots,
-		 $company,
-		 $estimated_time;
+         $name;
 
   public function __construct(array $attributes = null) {
     // Om ingen array skickades med och värdet är null så kör vi inte våran loop
@@ -98,14 +94,15 @@ class LiaProject extends BaseModel
 		return $this->category;
   }
   
-	public static function whereCategoryId($id) {
+	public static function whereProjectId($id) {
     // Förbereder SQL strängen
-    $statement = self::$db->prepare("SELECT * FROM " . self::TABLE_NAME . "
-                                      WHERE category_id=:category_id");
+    $statement = self::$db->prepare("SELECT tags.name FROM " . self::TABLE_NAME . " INNER JOIN `project_tags` ON
+     tags.id = project_tags.tag_id INNER JOIN lia_projects ON project_tags.project_id = lia_projects.id WHERE lia_projects.id = :id");
     // Kör SQL strängen
-    $statement->execute(array('category_id' => $id));
+
+    $statement->execute(array('id' => $id));
 
     // Hämta varje rad som en instans av Users
-    return $statement->fetchAll(PDO::FETCH_CLASS, 'LiaProject');
+    return $statement->fetchAll(PDO::FETCH_CLASS, 'ProjectTag');
   }
 }
