@@ -1,5 +1,3 @@
-
-
     <form name="reg" action="code_exec.php" onsubmit="return validateForm()" method="post">
     <table width="274" border="0" align="center" cellpadding="2" cellspacing="0">
     <tr>
@@ -19,36 +17,36 @@
     </div></td>
     </tr>
     <tr>
-    <td width="95"><div align="right">First Name:</div></td>
-    <td width="171"><input type="text" name="fname" /></td>
+    <td width="95"><div align="right">Företag Namn:</div></td>
+    <td width="171"><input type="text" name="company_name" /></td>
     </tr>
     <tr>
-    <td><div align="right">Last Name:</div></td>
-    <td><input type="text" name="lname" /></td>
+    <td><div align="right">Företag Adress:</div></td>
+    <td><input type="text" name="company_address" /></td>
     </tr>
     <tr>
-    <td><div align="right">Gender:</div></td>
-    <td><input type="text" name="mname" /></td>
+    <td><div align="right">Kontaktperson:</div></td>
+    <td><input type="text" name="contact person" /></td>
     </tr>
     <tr>
-    <td><div align="right">Address:</div></td>
-    <td><input type="text" name="address" /></td>
+    <td><div align="right">kontaktuppgifter:</div></td>
+    <td><input type="text" name="contact information" /></td>
     </tr>
     <tr>
     <td><div align="right">Contact No.:</div></td>
     <td><input type="text" name="contact" /></td>
     </tr>
     <tr>
-    <td><div align="right">Picture:</div></td>
+    <td><div align="right">Länk till webbsida:</div></td>
     <td><input type="text" name="pic" /></td>
     </tr>
     <tr>
-    <td><div align="right">Username:</div></td>
-    <td><input type="text" name="username" /></td>
+    <td><div align="right">Kort beskrivning:</div></td>
+    <td><input type="text" name="description" /></td>
     </tr>
     <tr>
-    <td><div align="right">Password:</div></td>
-    <td><input type="text" name="password" /></td>
+    <td><div align="right">Tekniker (programmeringsspråk):</div></td>
+    <td><input type="text" name="technique" /></td>
     </tr>
     <tr>
     <td><div align="right"></div></td>

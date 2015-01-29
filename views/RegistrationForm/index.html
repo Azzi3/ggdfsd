@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Registration form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="page-header">
+    <h1>Registration form</h1>
+</div>
+
+<!-- Registration form - START -->
+<div class="container">
+    <div class="row">
+        <form role="form">
+            <div class="col-lg-6">
+                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+
+                <div class="form-group">
+                    <label for="Input_Company_Name">Företag namn:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Input_Company_Name" id="Input_Company_Name" placeholder="Skriva in företag namn:" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+
+                 <div class="form-group">
+                    <label for="Input_Company_address">Företag adress:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Input_Company_address" id="Input_Company_address" placeholder="Skriva in företag adress:" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+
+                 <div class="form-group">
+                    <label for="Input_Contact_Person">Kontaktpersons namn:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Input_Contact_Person" id="Input_Contact_Person" placeholder="Skriva in kontaktperson:" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="Input_Contact_information">Kontaktuppgifte no:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Input_Contact_information" id="Input_Contact_information" placeholder="Skriva in name:" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Input_Contact_Email">Kontaktpersons email:</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="Input_Contact_Email_First" name="Input_Contact_Email" placeholder="Skriva in email:" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Link_To_Website">Länk till webbsida</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="Link_To_Website" name="Link_To_Website" placeholder="Link to website:" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputMessage">Enter Message</label>
+                    <div class="input-group">
+                        <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+
+                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Registration form - END -->
+
+</div>
+
+</body>
+</html>
