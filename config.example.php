@@ -8,6 +8,7 @@ $showdate = date('l jS F');
 //Models
 require_once 'models/base-model.php';
 require_once 'models/LiaProject.php';
+require_once 'models/ProjectTag.php';
 
 //SETUP FOR PDO DB CONNECTION
 $user = 'root';
