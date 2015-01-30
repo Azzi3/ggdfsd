@@ -3,7 +3,7 @@
 class LiaProject extends BaseModel
 {
   // Anger vad tabellen i databasen heter flör denna klass
-  const TABLE_NAME = 'lia_projects';
+  const TABLE_NAME = 'lia_project';
 
   // Skapar en variable för varje kolumn i databasen.
   public $id,
@@ -84,7 +84,7 @@ class LiaProject extends BaseModel
 	public function delete()
 	{
 		$id_to_delete = $this->id;	
-		$sql = "DELETE FROM `lia-projects` WHERE `id` = :id_to_delete";
+		$sql = "DELETE FROM `lia-project` WHERE `id` = :id_to_delete";
 		$query = self::$db->prepare( $sql );
 		$query->execute( array( ":id_to_delete" => $id_to_delete ) );		
 	}

@@ -3,7 +3,7 @@
 class ProjectTag extends BaseModel
 {
   // Anger vad tabellen i databasen heter flör denna klass
-  const TABLE_NAME = 'tags';
+  const TABLE_NAME = 'tag';
 
   // Skapar en variable för varje kolumn i databasen.
   public $id,
@@ -80,7 +80,7 @@ class ProjectTag extends BaseModel
 	public function delete()
 	{
 		$id_to_delete = $this->id;	
-		$sql = "DELETE FROM `lia-projects` WHERE `id` = :id_to_delete";
+		$sql = "DELETE FROM `lia-project` WHERE `id` = :id_to_delete";
 		$query = self::$db->prepare( $sql );
 		$query->execute( array( ":id_to_delete" => $id_to_delete ) );		
 	}
@@ -96,7 +96,7 @@ class ProjectTag extends BaseModel
   
 	public static function whereProjectId($id) {
     // Förbereder SQL strängen
-    $statement = self::$db->prepare("SELECT tags.name FROM " . self::TABLE_NAME . " INNER JOIN `project_tags` ON
+    $statement = self::$db->prepare("SELECT tag.name FROM " . self::TABLE_NAME . " INNER JOIN `project_tags` ON
      tags.id = project_tags.tag_id INNER JOIN lia_projects ON project_tags.project_id = lia_projects.id WHERE lia_projects.id = :id");
     // Kör SQL strängen
 
