@@ -1,19 +1,55 @@
 <?php
-//ROOT PATH
-define("ROOT_PATH", dirname(__FILE__));
+/**
+ * CONFIG-FILE!
+ * Fill with your personal variables
+ * RENAME TO config.php
+ */
 
-//PUTTING THE FUCTION DATE INTO A VARIABLE
-$showdate = date('l jS F');	
 
-//Models
-require_once 'models/base-model.php';
-require_once 'models/LiaProject.php';
-require_once 'models/ProjectTag.php';
 
-//SETUP FOR PDO DB CONNECTION
-$user = 'root';
-$pass = '';
-$db = new PDO( 'mysql:host=localhost;dbname=lia-projekt', $user, $pass );
 
-BaseModel::setDbh($db);
+
+
+//-------------------------------------------------
+//define Database variables
+//CHANGE THIS TO YOUR VARIABLES
+define("DB_HOST", "localhost");
+define("DB_DATABASE", "lia-projekt");
+define("DB_USERNAME", "root");
+define("DB_PASSWORD", "root");
+//-------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------DON'T TOUCH, KK THX BBQ-----------------------------
+//startSession
+$lifetime=7200;
+session_set_cookie_params($lifetime);
+session_start();
+
+
+
+//Define paths
+if(isset($_GET['url'])){
+	$url = $_GET['url'];
+}else{
+	$url = '';
+}
+
+define('ROOT_PATH',__DIR__);
+$path = str_replace($url, '', $_SERVER['REQUEST_URI']);
+$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
+define("CURRENT_PATH", $_SERVER['REQUEST_URI']);
+define("PATH", $path);
+
+
 ?>
