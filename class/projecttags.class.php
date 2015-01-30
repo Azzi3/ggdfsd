@@ -2,7 +2,7 @@
 
 class ProjectTag extends Database{
 
-	private $tbl = 'tags';
+	private $tbl = 'tag';
 
 
 	public function save($items = array()) {

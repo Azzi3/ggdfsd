@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Skapad: 30 jan 2015 kl 14:05
+-- Skapad: 30 jan 2015 kl 14:46
 -- Serverversion: 5.5.32
 -- PHP-version: 5.4.19
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Databas: `lia-projekt`
 --
-
 DROP DATABASE IF EXISTS `lia-projekt`;
 
 CREATE DATABASE IF NOT EXISTS `lia-projekt` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci;
@@ -28,11 +27,10 @@ USE `lia-projekt`;
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `buisnesses`
+-- Tabellstruktur `company`
 --
 
-DROP TABLE IF EXISTS `buisnesses`;
-CREATE TABLE IF NOT EXISTS `buisnesses` (
+CREATE TABLE IF NOT EXISTS `company` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8_swedish_ci NOT NULL,
   `street_address` varchar(45) COLLATE utf8_swedish_ci NOT NULL,
@@ -42,23 +40,22 @@ CREATE TABLE IF NOT EXISTS `buisnesses` (
   `description` varchar(1000) COLLATE utf8_swedish_ci NOT NULL,
   `id_contact_person` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumpning av Data i tabell `buisnesses`
+-- Dumpning av Data i tabell `company`
 --
 
-INSERT INTO `buisnesses` (`id`, `name`, `street_address`, `zip_code`, `city`, `website_url`, `description`, `id_contact_person`) VALUES
+INSERT INTO `company` (`id`, `name`, `street_address`, `zip_code`, `city`, `website_url`, `description`, `id_contact_person`) VALUES
 (2, 'GoBrave', 'Nygatan 8', 12345, 'växjö', 'www.gobrave.se', 'hej hå', 1);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `lia_projects`
+-- Tabellstruktur `lia_project`
 --
 
-DROP TABLE IF EXISTS `lia_projects`;
-CREATE TABLE IF NOT EXISTS `lia_projects` (
+CREATE TABLE IF NOT EXISTS `lia_project` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
   `description` varchar(1024) NOT NULL,
@@ -69,10 +66,10 @@ CREATE TABLE IF NOT EXISTS `lia_projects` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumpning av Data i tabell `lia_projects`
+-- Dumpning av Data i tabell `lia_project`
 --
 
-INSERT INTO `lia_projects` (`id`, `name`, `description`, `spots`, `company`, `estimated_time`) VALUES
+INSERT INTO `lia_project` (`id`, `name`, `description`, `spots`, `company`, `estimated_time`) VALUES
 (1, 'Test Projekt', 'Testar som bara den!', 2, 'TestFöretaget', '8 veckor'),
 (2, 'Test Projekt 2', 'Ännu mer testning', 3, 'Megaföretaget', '6 veckor'),
 (3, 'Test Projekt 3', 'Testar hela dagen', 1, 'Superföretaget', '7 veckor');
@@ -80,11 +77,10 @@ INSERT INTO `lia_projects` (`id`, `name`, `description`, `spots`, `company`, `es
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `project_tags`
+-- Tabellstruktur `project_tag`
 --
 
-DROP TABLE IF EXISTS `project_tags`;
-CREATE TABLE IF NOT EXISTS `project_tags` (
+CREATE TABLE IF NOT EXISTS `project_tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
@@ -94,10 +90,10 @@ CREATE TABLE IF NOT EXISTS `project_tags` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Dumpning av Data i tabell `project_tags`
+-- Dumpning av Data i tabell `project_tag`
 --
 
-INSERT INTO `project_tags` (`id`, `project_id`, `tag_id`) VALUES
+INSERT INTO `project_tag` (`id`, `project_id`, `tag_id`) VALUES
 (3, 1, 2),
 (4, 1, 1),
 (5, 2, 4),
@@ -107,21 +103,20 @@ INSERT INTO `project_tags` (`id`, `project_id`, `tag_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `tags`
+-- Tabellstruktur `tag`
 --
 
-DROP TABLE IF EXISTS `tags`;
-CREATE TABLE IF NOT EXISTS `tags` (
+CREATE TABLE IF NOT EXISTS `tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumpning av Data i tabell `tags`
+-- Dumpning av Data i tabell `tag`
 --
 
-INSERT INTO `tags` (`id`, `name`) VALUES
+INSERT INTO `tag` (`id`, `name`) VALUES
 (1, 'CSS'),
 (2, 'HTML'),
 (3, 'PHP'),
@@ -134,11 +129,11 @@ INSERT INTO `tags` (`id`, `name`) VALUES
 --
 
 --
--- Restriktioner för tabell `project_tags`
+-- Restriktioner för tabell `project_tag`
 --
-ALTER TABLE `project_tags`
-  ADD CONSTRAINT `project_tags_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `lia_projects` (`id`),
-  ADD CONSTRAINT `project_tags_ibfk_4` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`);
+ALTER TABLE `project_tag`
+  ADD CONSTRAINT `project_tag_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `lia_project` (`id`),
+  ADD CONSTRAINT `project_tag_ibfk_4` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

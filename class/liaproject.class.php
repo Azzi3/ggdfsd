@@ -2,7 +2,7 @@
 
 class LiaProject extends Database{
 
-	private $tbl = 'lia_projects';
+	private $tbl = 'lia_project';
 
 
 	public function getAll(){
@@ -51,12 +51,12 @@ class LiaProject extends Database{
 	public function getTags($id) {
 
 		$str = " SELECT *
-				FROM project_tags
-				  INNER JOIN lia_projects
-				    ON project_tags.project_id = lia_projects.id
-				  INNER JOIN tags
-				    ON project_tags.tag_id = tags.id
-				WHERE lia_projects.id = :id ";
+				FROM project_tag
+				  INNER JOIN lia_project
+				    ON project_tag.project_id = lia_project.id
+				  INNER JOIN tag
+				    ON project_tag.tag_id = tag.id
+				WHERE lia_project.id = :id ";
 
 		$arr = array('id' => $id);
 
