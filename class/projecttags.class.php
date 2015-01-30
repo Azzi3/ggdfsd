@@ -5,24 +5,13 @@ class ProjectTag extends Database{
 	private $tbl = 'tags';
 
 
-	public function save($items = array()) {
-	$str = " UPDATE $this->tbl SET name=:name,
-		description=:description,
-		spots=:spots,
-		company=:company,
-		estimated_time=:estimated_time
-		WHERE id=:id";
-	// Exekverar mysql kommando
-	/*$arr = array('id' => $items['id'], 
-		'name' => $items['name'],
-		'description' => $items['description'],
-		'spots' => $items['spots'],
-		'company' => $this->company,
-		'estimated_time' => $this->estimated_time
-		));*/
+	public function getAll(){
+		$str = " SELECT * FROM $this->tbl ";
 
-		$this->update($str, $items);
+		return $this->selectAll($str);
 	}
+
+
 
 }
 
