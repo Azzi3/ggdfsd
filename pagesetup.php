@@ -13,6 +13,14 @@ else if($curPage == 'manage-projects'){
 	$pageName = "manage-projects";
 	$subTitle = "Manage project";
 }
+else if($curPage == 'manage-company'){
+	$pageName = "manage-company";
+	$subTitle = "Hantera företag";
+}
+else if($curPage == 'company-list'){
+	$pageName = "company-list";
+	$subTitle = "Företagslista";
+}
 else{
 	$pageName = "404";
 	$subTitle = "404 (Page not found)";
