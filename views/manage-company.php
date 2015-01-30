@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
-    <style type="text/css">
-    label {
-        
-    }
-    legend {
- 
-    }
-    </style>
-</head>
-<body>
+<div class="container">
+    <div class="jumbotron">
 
-    <?php require_once '../../partials/project-header.php'; ?>
+        <h1>Hantera företagsprofil!</h1>
+        <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
+        <a class="btn btn-primary" href="<?php echo $path; ?>company-list" role="button">Visa företag</a>
 
-    <h1>Hantera företagsprofil</h1>
+    </div>
+</div>
 
     <div class="table-responsive">
 
