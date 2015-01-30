@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Skapad: 30 jan 2015 kl 13:52
+-- Skapad: 30 jan 2015 kl 14:05
 -- Serverversion: 5.5.32
 -- PHP-version: 5.4.19
 
@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Databas: `lia-projekt`
 --
+
+DROP DATABASE IF EXISTS `lia-projekt`;
+
 CREATE DATABASE IF NOT EXISTS `lia-projekt` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 USE `lia-projekt`;
 
@@ -28,6 +31,7 @@ USE `lia-projekt`;
 -- Tabellstruktur `buisnesses`
 --
 
+DROP TABLE IF EXISTS `buisnesses`;
 CREATE TABLE IF NOT EXISTS `buisnesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8_swedish_ci NOT NULL,
@@ -38,14 +42,14 @@ CREATE TABLE IF NOT EXISTS `buisnesses` (
   `description` varchar(1000) COLLATE utf8_swedish_ci NOT NULL,
   `id_contact_person` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumpning av Data i tabell `buisnesses`
 --
 
 INSERT INTO `buisnesses` (`id`, `name`, `street_address`, `zip_code`, `city`, `website_url`, `description`, `id_contact_person`) VALUES
-(1, '', '', 0, '', '', '', 0);
+(2, 'GoBrave', 'Nygatan 8', 12345, 'växjö', 'www.gobrave.se', 'hej hå', 1);
 
 -- --------------------------------------------------------
 
@@ -53,6 +57,7 @@ INSERT INTO `buisnesses` (`id`, `name`, `street_address`, `zip_code`, `city`, `w
 -- Tabellstruktur `lia_projects`
 --
 
+DROP TABLE IF EXISTS `lia_projects`;
 CREATE TABLE IF NOT EXISTS `lia_projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
@@ -78,6 +83,7 @@ INSERT INTO `lia_projects` (`id`, `name`, `description`, `spots`, `company`, `es
 -- Tabellstruktur `project_tags`
 --
 
+DROP TABLE IF EXISTS `project_tags`;
 CREATE TABLE IF NOT EXISTS `project_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
@@ -104,6 +110,7 @@ INSERT INTO `project_tags` (`id`, `project_id`, `tag_id`) VALUES
 -- Tabellstruktur `tags`
 --
 
+DROP TABLE IF EXISTS `tags`;
 CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
