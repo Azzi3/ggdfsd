@@ -11,7 +11,7 @@ class ProjectTag extends Database{
 		spots=:spots,
 		company=:company,
 		estimated_time=:estimated_time
-		WHERE id=:id");
+		WHERE id=:id";
 	// Exekverar mysql kommando
 	/*$arr = array('id' => $items['id'], 
 		'name' => $items['name'],

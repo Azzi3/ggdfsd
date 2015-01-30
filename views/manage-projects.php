@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Lägg till projekt</title>
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-
-</head>
-<body>
-    <?php require '../../partials/project-header.php'; ?>
-    </div>
+<?php
+require_once('../partials/project-header.php');
+?>
     <div class="container">
     	<form>
     	  <div class="form-group">
@@ -43,6 +34,3 @@
     	</form>
 
     </div>
-	
-</body>
-</html>

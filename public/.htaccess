@@ -2,7 +2,7 @@ Options -Indexes
 
 RewriteEngine On
 
-RewriteRule ^.+?/((img|css|js)/.+)$ /$1 [L,R=403,NC,QSA]
+#RewriteRule ^.+?/((img|css|js)/.+)$ /$1 [L,R=403,NC,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f 
 RewriteCond %{REQUEST_FILENAME} !-d
 

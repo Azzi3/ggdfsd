@@ -2,7 +2,15 @@
 
 class LiaProject extends Database{
 
-	private $tbl = 'lia_project';
+	private $tbl = 'lia_projects';
+
+
+	public function getAll(){
+		$str = " SELECT * FROM $this->tbl ";
+
+		return $this->selectAll($str);
+
+	}
 
 
 
@@ -13,7 +21,7 @@ class LiaProject extends Database{
 			spots=:spots,
 			company=:company,
 			estimated_time=:estimated_time
-			WHERE id=:id");
+			WHERE id = :id";
 		// Exekverar mysql kommando
 		/*$statement->execute(array('id' => $this->id,
 		'name' => $this->name,
@@ -42,11 +50,13 @@ class LiaProject extends Database{
 
 	public function getTags($id) {
 
-		$str = " SELECT tags.name FROM $this->tbl INNER JOIN project_tags ON
-		tags.id = project_tags.tag_id
-		INNER JOIN $this->tbl
-		ON project_tags.project_id = lia_projects.id
-		WHERE lia_projects.id = :id ");
+		$str = " SELECT *
+				FROM project_tags
+				  INNER JOIN lia_projects
+				    ON project_tags.project_id = lia_projects.id
+				  INNER JOIN tags
+				    ON project_tags.tag_id = tags.id
+				WHERE lia_projects.id = :id ";
 
 		$arr = array('id' => $id);
 
