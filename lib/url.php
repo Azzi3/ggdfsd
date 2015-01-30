@@ -15,7 +15,6 @@ $url = array_values($urlEm);
 //Set usefull variables.
 $urlParams = 0;
 $curPage = "";
-$thisURL = ROOT_PATH;
 
 //Loop through array of url-params and naming them url0, url1 etc (no ending).
 if(isset($url[0])){
@@ -37,7 +36,6 @@ if(isset($url[0])){
 		//Naming the last parameter to our current page.
 		$curPage = ${'url'.($key)};
 	}
-
 }
 
 ?>
