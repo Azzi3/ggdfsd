@@ -35,6 +35,7 @@ public function __destruct() {
 
 		$str = $this->conn->prepare($sqlStr);
 		$str->execute($execArray);
+		return $this->conn->lastInsertId();
 	}
 
 	//Update function

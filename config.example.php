@@ -45,11 +45,16 @@ if(isset($_GET['url'])){
 	$url = '';
 }
 
+/**
+ * ROOT_PATH 	= the root (c:/..../...)
+ * CURRENT_PATH = /projects/id
+ * PATH / $path = homeDir
+ */
 define('ROOT_PATH',__DIR__);
-$path = str_replace($url, '', $_SERVER['REQUEST_URI']);
 $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
-define("CURRENT_PATH", $_SERVER['REQUEST_URI']);
+$currentUrlNoQuery = explode('?', $_SERVER['REQUEST_URI'])[0];
+define("CURRENT_PATH", $currentUrlNoQuery);
+$path = str_replace($url, '', CURRENT_PATH);
 define("PATH", $path);
-
 
 ?>

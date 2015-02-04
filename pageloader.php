@@ -23,8 +23,8 @@ $title = " ".$titleSeperator. " ".$subTitle;
 
 
 //Require all the necessary files
-require_once("views/header.php");
+require_once("partials/header.php");
 require_once("views/".$pageName.".php");
-require_once("views/footer.php");
+require_once("partials/footer.php");
 
 ?>
