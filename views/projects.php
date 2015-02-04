@@ -37,7 +37,7 @@ require_once('../partials/project-header.php');
 							$counter++;
 						} ?></td>
 						<td>
-							<a href="btn" title="">Ändra</a>
+							<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
 							<a href="btn btn-danger" title="">Ta bort</a>
 						</td>
 					</tr>
