@@ -6,6 +6,8 @@
  */
 
 
+error_reporting(-1);
+ini_set('display_errors', 'On');
 
 
 
@@ -35,6 +37,7 @@ define("DB_PASSWORD", "root");
 $lifetime=7200;
 session_set_cookie_params($lifetime);
 session_start();
+ob_start();
 
 
 

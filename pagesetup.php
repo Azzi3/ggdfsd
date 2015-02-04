@@ -21,10 +21,17 @@ else if($curPage == 'company-list'){
 	$pageName = "company-list";
 	$subTitle = "Företagslista";
 }
+
 else if($curPage == 'company-profile'){
 	$pageName = "company-profile";
 	$subTitle = "Företagsprofil";
 }
+
+else if($curPage == 'manage-courses') {
+	$pageName = "manage-courses";
+	$subTitle = "Hantera kurser";
+}
+
 else{
 	$pageName = "404";
 	$subTitle = "404 (Page not found)";
