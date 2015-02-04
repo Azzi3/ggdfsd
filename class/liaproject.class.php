@@ -3,6 +3,7 @@
 class LiaProject extends Database{
 
 	private $tbl = 'lia_project';
+	private $tbl_tags = 'project_tag';
 
 
 	public function getAll(){
@@ -91,9 +92,19 @@ class LiaProject extends Database{
 
 
 	public function deleteProjectAndTag($id){
+<<<<<<< HEAD
 		$str = " DELETE FROM $this->tbl WHERE id = :id ";
-		$arr = array('id'=>$id);
+=======
 
+		// ta bort mellantabell rader 
+		// ta bort tagger med projekt 
+		$str = " DELETE FROM $this->tbl_tags WHERE project_id = :id ";
+>>>>>>> ac57bd58345696db0f7577f21fbf759465412800
+		$arr = array('id'=>$id);
+		$this->delete($str, $arr);		
+
+		$str = "DELETE FROM $this->tbl WHERE id = :id";
+		 $arr = array('id'=>$id);
 		$this->delete($str, $arr);		
 	}
 
