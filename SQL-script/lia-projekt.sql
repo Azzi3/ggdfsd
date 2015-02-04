@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Skapad: 30 jan 2015 kl 14:46
+-- Skapad: 04 feb 2015 kl 14:15
 -- Serverversion: 5.5.32
 -- PHP-version: 5.4.19
 
@@ -48,6 +48,19 @@ CREATE TABLE IF NOT EXISTS `company` (
 
 INSERT INTO `company` (`id`, `name`, `street_address`, `zip_code`, `city`, `website_url`, `description`, `id_contact_person`) VALUES
 (2, 'GoBrave', 'Nygatan 8', 12345, 'växjö', 'www.gobrave.se', 'hej hå', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `company_tag`
+--
+
+CREATE TABLE IF NOT EXISTS `company_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
