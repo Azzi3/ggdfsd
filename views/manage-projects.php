@@ -43,7 +43,7 @@ if(isset($_POST['project'])){
     }
     
 
-    redirect(CURRENT_PATH);
+    redirect($path.'/projects/');
 
 }
 
