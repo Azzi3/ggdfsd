@@ -5,16 +5,26 @@ class User extends Database{
 	public $tbl = 'user';
 
 
-	public function createUser($items = array()){
+	//find user with guid (session).
+	public function getUserByGuid($guid){
+		$str = " SELECT * FROM $this->tbl WHERE guid = :guid ";
+		$arr = array('guid'=>$guid);
 
+		return $this->select($str, $arr);
+	}
+
+
+
+
+	public function createUser($items = array()){
 
 		$token = randomStr();
 		$cleanPassword = $items['password'];
 
 		$cryptedPassword = cryptPassword($cleanPassword, $token);
 
-		$str = " INSERT INTO $this->tbl (email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id)
-		VALUES (:email, :password, :token, :firstname, :lastname, :course_leader, :company_owner, :student, :kommunId) ";
+		$str = " INSERT INTO $this->tbl (email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id, guid)
+		VALUES (:email, :password, :token, :firstname, :lastname, :course_leader, :company_owner, :student, :kommunId, UUID()) ";
 
 		$arr = array('email'=>$items['email'],
 			'password'=>$cryptedPassword,
@@ -70,7 +80,7 @@ class User extends Database{
 
 		if($userToken){
 			$newPassword = cryptPassword($items['password'], $userToken['token']);
-			$str = " SELECT email, id FROM $this->tbl WHERE email = :mail AND password = :password ";
+			$str = " SELECT email, id, guid FROM $this->tbl WHERE email = :mail AND password = :password ";
 			$arr = array('mail'=>$items['email'], 'password'=>$newPassword);
 
 			$result = $this->select($str, $arr);

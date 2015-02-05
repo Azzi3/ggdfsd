@@ -27,6 +27,11 @@ else if($curPage == 'company-profile'){
 	$subTitle = "Företagsprofil";
 }
 
+else if($curPage == 'generate-key'){
+	$pageName = "generate-key";
+	$subTitle = "Generera nyckel";
+}
+
 else if($curPage == 'manage-courses') {
 	$pageName = "manage-courses";
 	$subTitle = "Hantera kurser";

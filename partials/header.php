@@ -11,3 +11,13 @@
 	<script src="<?php echo $path; ?>assets/js/main.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<?php
+
+$user = new User();
+$session = new Session();
+$signedUser = null;
+if($user->getUserByGuid($session->getSession('guid'))){
+	$signedUser = $user->getUserByGuid($session->getSession('guid'));
+}
+
+?>

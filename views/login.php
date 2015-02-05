@@ -1,13 +1,11 @@
 <?php
-$session = new Session();
 
 if(isset($_POST['loginform'])){
-	$user = new User();
 
 	$userResult = $user->loginUser($_POST['loginform']);
 
 	if($userResult){
-		$session->setSession('user',$userResult['email']);
+		$session->setSession('guid',$userResult['guid']);
 	}else{
 		$session->setSession('error','Fel användaruppgifter.');
 	}
@@ -19,7 +17,7 @@ if(isset($_POST['loginform'])){
 ?>
 
 
-<?php if(!$session->getSession('user')) : ?>
+<?php if(!$session->getSession('guid')) : ?>
 <form action="" method="POST" accept-charset="utf-8">
 
 <?php
@@ -36,7 +34,7 @@ if($session->getSession('error')){
 	</div>
 	<div class="form-group">
 		<label for="password">Lösenord</label>
-		<input type="text" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord">
+		<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord">
 	</div>
 	<button type="submit" class="btn">Logga in</button>
 </form>
