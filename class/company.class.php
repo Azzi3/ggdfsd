@@ -38,15 +38,12 @@ class Company extends Database{
 
 
 
-	public function delete($id){
+	public function deleteCompany($id){
 		$str = " DELETE FROM $this->tbl WHERE id = :id ";
 		$arr = array('id'=>$id);
 
 		$this->delete($str, $arr);		
 	}
-
-
-
 
 
 	public function getTags($id) {

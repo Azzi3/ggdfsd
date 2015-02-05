@@ -1,6 +1,6 @@
 <?php
-$company = new Company();
-$companies = $company->getAll();
+$companyObj = new Company();
+$companies = $companyObj->getAll();
 ?>
 
 <div class="container">
@@ -35,7 +35,7 @@ $companies = $company->getAll();
 						<td><?php echo $company['description'] ?></td>
 						<td><?php
 						$counter = 0;
-						$companyTags = $company->getTags($company['id']);
+						$companyTags = $companyObj->getTags($company['id']);
 						foreach ($companyTags as $companyTag) {
 							echo $companyTag['name']; if ($counter != count($companyTags) - 1){
 								echo ", ";
