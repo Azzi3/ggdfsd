@@ -61,7 +61,7 @@ if(isset($_GET['deleteid'])){
 							$counter++;
 						} ?></td>
 						<td>
-							<a title=""><button class="btn" >Ändra</button></a>
+						<a href="<?php echo $path; ?>manage-company?id=<?php echo $company['id']; ?>"><button class="btn">Ändra</button></a>
 							<a id="deleteCompanyBtn" data-companyid="<?php echo $company['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
 						</td>
 					</tr>

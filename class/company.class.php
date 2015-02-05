@@ -13,6 +13,13 @@ class Company extends Database{
 
 	}
 
+	public function getFromId($id){
+		$str = " SELECT * FROM $this->tbl WHERE id = :id ";
+		$arr = array('id'=>$id);
+		return $this->select($str, $arr);
+	}
+
+
 	public function createCompanyAndContact($item, $tags){
 
 		$str = " INSERT INTO $this->tbl_contact (name, email, phone)
@@ -93,6 +100,16 @@ class Company extends Database{
 				WHERE company.id = :id ";
 
 		$arr = array('id' => $id);
+
+		return $this->selectAll($str, $arr);
+	}
+
+	public function getContact($contactId){
+		$str = "SELECT * 
+		FROM contact_person
+		WHERE id=:id";
+
+		$arr = array('id' => $contactId);
 
 		return $this->selectAll($str, $arr);
 	}
