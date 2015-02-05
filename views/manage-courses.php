@@ -1,15 +1,16 @@
 
 <?php
 //open the object/class....
-$liaCourse = new LiaCourse();
-$courseTag = new CourseTag();
+$course = new Course();
+//$courseTag = new CourseTag();
 
 
 //default values for form
-$items = array( 'name'=>'',
-                'description'=>'',
-                'course_start'=>'',
-                'course_end'=>'',
+$items = array('name'=>'',
+               'description'=>'',
+               'course_start'=>'',
+               'course_end'=>''
+               );
                 
 
 
@@ -28,7 +29,7 @@ if(isset($_GET['id'])){
 
 //insert function
 if(isset($_POST['course'])){
-    $course = $_POST['course'];
+    $courseItems = $_POST['course'];
 
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
@@ -37,14 +38,14 @@ if(isset($_POST['course'])){
     }
 
     if($id > 0){
-        $liaCourse->updateCourse($course, $tags, $id);
+        $course->updateCourse($courseItems, $tags, $id);
     }
     else{
-        $liaCourse->create($course, $tags);
+        $course->create($courseItems);
     }
     
 
-    redirect($path.'/courses/');
+    redirect(CURRENT_PATH);
 
 }
 ?>
@@ -59,33 +60,32 @@ if(isset($_POST['course'])){
     </div>
 </div>
 
-    <div class="table-responsive">
+    <div class="container">  
+        <form method="POST" action="">
 
-        <div class="container">
-            <form class="col-md-4"> 
-
-                <legend>Kurs</legend>
-                <div class="form-group">
-                    <label for="courseName">Namn:</label>
-                    <input type="text" class="form-control" id="courseName">
-                </div>
-                <div class="form-group">
-                    <label for="courseDescription">Beskrivning:</label>
-                    <input type="textarea" class="form-control" id="courseDescription">
-                </div>
-                <div class="form-group">
-                    <label for="courseStart">Start:</label>
-                    <input type="date" class="form-control" id="courseStart">
-                </div>
-                <div class="form-group">
-                    <label for="courseEnd">Slut:</label>
-                    <input type="date" class="form-control" id="courseEnd">
-                </div>
-                
-                <button type="submit" class="btn btn-default">Spara</button>
-            </form>
-        </div>
+          <div class="form-group">
+            <label for="name">Namn</label>
+            <input type="text" name="course[name]" value="<?php echo $items['name']; ?>" class="form-control" id="name" placeholder="Namn" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Beskriving</label>
+            <textarea id="description" name="course[description]" class="form-control" rows="3"><?php echo $items['description']; ?></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="courseStart">Startdatum</label>
+            <input type="text" name="course[course_start]" value="<?php echo $items['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="courseEnd">Slutdatum</label>
+            <input type="text" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" required>
+          </div>
+          
+          <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
+        
+        </form>
     </div>
-
 </body>
 </html>
