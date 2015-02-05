@@ -1,3 +1,54 @@
+
+<?php
+//open the object/class....
+$liaCourse = new LiaCourse();
+$courseTag = new CourseTag();
+
+
+//default values for form
+$items = array( 'name'=>'',
+                'description'=>'',
+                'course_start'=>'',
+                'course_end'=>'',
+                
+
+
+//fetch ID (it's an edit)
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    $items = $liacourse->getFromId($id);
+    $usedTags = $courseTag->getAllFromCourseId($id);
+
+    $buttonText = 'Spara';
+}else{
+    $id = 0;
+    $buttonText = 'Skapa';
+}
+
+//insert function
+if(isset($_POST['course'])){
+    $course = $_POST['course'];
+
+    if(isset($_POST['tag'])){
+        $tags = $_POST['tag'];
+    }else{
+        $tags = array();
+    }
+
+    if($id > 0){
+        $liaCourse->updateCourse($course, $tags, $id);
+    }
+    else{
+        $liaCourse->create($course, $tags);
+    }
+    
+
+    redirect($path.'/courses/');
+
+}
+?>
+
 <div class="container">
     <div class="jumbotron">
 
