@@ -15,7 +15,7 @@ class Company extends Database{
 
 	public function createCompanyAndContact($item){
 
-		$str = " INSERT INTO $this->tbl_contact (contact_name, contact_email, contact_phone)
+		$str = " INSERT INTO $this->tbl_contact (name, email, phone)
 		VALUES(:contact_name, :contact_email, :contact_phone) ";
 
 		$arr = array('contact_name'=>$item['contact_name'],
