@@ -1,16 +1,29 @@
 <?php
+$newCompany = new Company();
+$companyTag = new CompanyTag();
+
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    $items = $liaProject->getFromId($id);
+    $usedTags = $projectTag->getAllFromProjectId($id);
+
+    $buttonText = 'Spara';
+}else{
+    $id = 0;
+    $buttonText = 'Skapa';
+}
 
 if(isset($_POST['company'])){
     $company = $_POST['company'];
 
-    /*if(isset($_POST['tag'])){
+    if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
     }else{
         $tags = array();
-    }*/
+    }
 
-    $newCompany = new Company();
-    $newCompany->createCompanyAndContact($company);
+    $newCompany->createCompanyAndContact($company, $tags);
 
     redirect(CURRENT_PATH);
 
@@ -32,14 +45,6 @@ if(isset($_POST['company'])){
 
         <div class="container">
             <form class="col-md-4" method="POST" action="">
-                <!-- <div class="form-group">
-                    <label for="companyChangedPassword">Ändra lösenord</label>
-                    <input type="text" class="form-control" id="companyPassword">
-                </div>
-                <div class="form-group">
-                    <label for="companyConfirmPassword">Bekräfta lösenord</label>
-                    <input type="text" class="form-control" id="companyComfirmdPassword">
-                </div> -->
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
                     <label for="contactPersonName">Namn:</label>
@@ -81,16 +86,19 @@ if(isset($_POST['company'])){
                     <textarea id="description" class="form-control" rows="3" name="company[description]"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="companyTags">Företagstaggar</label>
-                <!--<div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="tags" value="JAVA">JAVA
-                    </label>
-                </div>-->
+                    <label for="checkbox">Företagstaggar</label>
+                <div class="checkbox">
+                          <?php foreach ($companyTag->getAll() as $item) :
+                            $tag = $companyTag->checkIfTagIsUsed($id, $item['id']);
+                          ?>
+                            <label>
+                              <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
+                            </label>
+                            <?php endforeach; ?>
+                </div>
                     
                 </div>
-
-                <button type="submit" class="btn btn-default">Spara</button>
+                <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
             </form>
         </div>
     </div>
