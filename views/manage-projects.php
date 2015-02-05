@@ -60,7 +60,7 @@ require_once('../partials/project-header.php');
     	  </div>
           <div class="form-group">
             <label for="spots">Antal platser</label>
-            <input type="text" name="project[spots]" value="<?php echo $items['spots']; ?>" class="form-control" id="spots" placeholder="Antal platser" required>
+            <input type="number" name="project[spots]" value="<?php echo $items['spots']; ?>" class="form-control" id="spots" placeholder="Antal platser" required>
           </div>
     	  <div class="form-group">
     	    <label for="company">Företag</label>

@@ -13,6 +13,13 @@ class Company extends Database{
 
 	}
 
+	public function getFromId($id){
+		$str = " SELECT * FROM $this->tbl WHERE id = :id ";
+		$arr = array('id'=>$id);
+		return $this->select($str, $arr);
+	}
+
+
 	public function createCompanyAndContact($item, $tags){
 
 		$str = " INSERT INTO $this->tbl_contact (name, email, phone)
@@ -45,6 +52,51 @@ class Company extends Database{
 			$this->insert($str, $arr);
 		}
 
+	}
+
+	public function updateCompany($item, $tags, $id){
+
+		$str = " UPDATE $this->tbl SET name = :name,
+		street_address = :street_address,
+		zip_code = :zip_code,
+		city = :city,
+		website_url = :website_url,
+		description = :description
+		WHERE id = :id ";
+
+
+		$arr = array('name'=>$item['name'],
+					'street_address'=>$item['street_address'],
+					'zip_code'=>$item['zip_code'],
+					'city'=>$item['city'],
+					'website_url'=>$item['website_url'],
+					'description'=>$item['website_url'],
+					'id'=>$id);
+
+		$this->update($str, $arr);
+
+		$str = "UPDATE $this->tbl_contact SET name = :name,
+		email= :email, phone= :phone
+		WHERE id = :id";
+		
+		$arr = array('name'=> $item['contact_name'],
+					'email' => $item['contact_email'],
+					'phone' => $item['contact_phone'],
+					'id' => $item['id_contact_person']);
+		$this->update($str, $arr);
+
+		$str = " DELETE FROM $this->tbl_tags WHERE company_id = :companyId ";
+		$arr = array('companyId'=>$id);
+		$this->delete($str, $arr);
+
+		foreach ($tags as $key) {
+			
+			$str = " INSERT INTO $this->tbl_tags (company_id, tag_id)
+			values(:company_id, :tagId) ";
+			$arr = array('company_id' => $id, 'tagId'=>$key);
+
+			$this->insert($str, $arr);
+		}
 	}
 
 
@@ -93,6 +145,16 @@ class Company extends Database{
 				WHERE company.id = :id ";
 
 		$arr = array('id' => $id);
+
+		return $this->selectAll($str, $arr);
+	}
+
+	public function getContact($contactId){
+		$str = "SELECT * 
+		FROM contact_person
+		WHERE id=:id";
+
+		$arr = array('id' => $contactId);
 
 		return $this->selectAll($str, $arr);
 	}
