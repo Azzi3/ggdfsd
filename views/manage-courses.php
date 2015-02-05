@@ -55,7 +55,7 @@ if(isset($_POST['course'])){
 
         <h1>Hantera kurser!</h1>
         <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        <a class="btn btn-primary" href="<?php echo $path; ?>company-list" role="button">Visa företag</a>
+        <a class="btn btn-primary" href="<?php echo $path; ?>list-courses" role="button">Visa kurser</a>
 
     </div>
 </div>
