@@ -3,6 +3,8 @@
 class Company extends Database{
 
 	private $tbl = 'company';
+	private $tbl_tags = 'company_tag';
+
 	private $tbl_contact = 'contact_person';
 
 
@@ -72,10 +74,14 @@ class Company extends Database{
 
 
 
-	public function deleteCompany($id){
-		$str = " DELETE FROM $this->tbl WHERE id = :id ";
+	public function deleteCompanyAndTag($id){
+			// ta bort mellantabell rader 
+		// ta bort tagger med projekt 
+		$str = " DELETE FROM $this->tbl_tags WHERE company_id = :id ";
 		$arr = array('id'=>$id);
-
+		$this->delete($str, $arr);		
+		$str = "DELETE FROM $this->tbl WHERE id = :id";
+		 $arr = array('id'=>$id);
 		$this->delete($str, $arr);		
 	}
 
