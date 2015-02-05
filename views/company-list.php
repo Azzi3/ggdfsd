@@ -1,7 +1,25 @@
 <?php
 $companyObj = new Company();
 $companies = $companyObj->getAll();
-?>
+if(isset($_GET['deleteid'])){
+	$companyObj->deleteCompanyAndTag($_GET['deleteid']);
+	redirect(CURRENT_PATH);
+}?>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort</h4>
+			</div>
+		
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button id="reallyDelete" type="button" class="btn btn-danger">Tabort</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="container">
     <div class="jumbotron">
@@ -44,7 +62,7 @@ $companies = $companyObj->getAll();
 						} ?></td>
 						<td>
 							<a title=""><button class="btn" >Ändra</button></a>
-							<a class="btn btn-danger" title="">Ta bort</a>
+							<a id="deleteCompanyBtn" data-companyid="<?php echo $company['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
 						</td>
 					</tr>
 					<?php } ?>

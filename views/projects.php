@@ -64,7 +64,7 @@ if(isset($_GET['deleteid'])){
 						} ?></td>
 						<td>
 							<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
-													<a id="deleteBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
+							<a id="deleteProjectBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
 
 						</td>
 				</tr>
