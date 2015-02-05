@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `lia-projekt` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci */;
+﻿CREATE DATABASE  IF NOT EXISTS `lia-projekt` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci */;
 USE `lia-projekt`;
 -- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
@@ -222,6 +222,7 @@ CREATE TABLE `user` (
   `kommun_id` int(11) DEFAULT NULL,
   `online` int(11) NOT NULL DEFAULT '0',
   `last_activity` varchar(255) COLLATE utf8_swedish_ci NOT NULL DEFAULT '0',
+  `guid` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AVG_ROW_LENGTH=5461;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -232,7 +233,12 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'leader@test.se','a55ce15e01a7242d0c83a6d39b54aa138996d6481cf0cdc4fdcfba9f26c16a21f8ba88efa54c9ebe553421277d5a1be2ca1ec740c98c2c676464595cdab3205d','3VJ9r3hP1p','Kurs','Ledare',1,0,0,77,0,'0'),(3,'student@test.se','555f15734152b60ac1aa33088126f3f9e9488b26e6225c0eeac7d775590615736b3b913629e3b3b85450d542d93c6cab8a930dbdcca0f55e0aa664dbffb7e720','gMMxB9qV5a','Vanlig','Student',0,0,1,77,0,'0'),(4,'company@test.se','7c97d74ae02e77fdad73f01852ec381c7650863b1464ca36a78112b16bf5a553a8844a1a73437bca1188c06130e37179aac45c6acd1f7b4b0afca5e6f6a87d2e','TRVDTtBs1Y','Företags','Ägare',0,1,0,77,0,'0');
+INSERT INTO `user`(id, email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id, online, last_activity, guid) VALUES
+(1, 'leader@test.se', '2d21bb673d85955d0f185c8494eb5deea073a5105d2e7e40aa2ea3861cfacd504edd4577f4bcd8f6eb24c17f706c67b721d7910008d369821c4c535b3c9303a1', 'Mihwe-oTmr', 'Kurs', 'Ledare', 1, 0, 0, 77, 0, '0', '8867d026-ad1e-11e4-b658-0c8bfd7a8af4');
+INSERT INTO `lia-projekt`.user(id, email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id, online, last_activity, guid) VALUES
+(2, 'student@test.se', 'b0aaad22ae294d9dff7a3c4164e89d9ab109766635254e755c803b36d8e640dd179093e8d4f65a9a40d4dabb5ba2b55a802d144aaea20170eb80303e1cae089b', 'FvTS2Uw9he', 'Vanlig', 'Student', 0, 0, 1, 77, 0, '0', '886c219f-ad1e-11e4-b658-0c8bfd7a8af4');
+INSERT INTO `lia-projekt`.user(id, email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id, online, last_activity, guid) VALUES
+(3, 'company@test.se', '4d6d675a0967f19bcf92e9168e732ba46b6f06902d91b5be97fbe44fcbee37b90626924bbe736c4c85da782fc9dfd8059e0e2824c3e890b345ce2add79127b86', 'wm2-EdrLEo', 'Företags', 'Ägare', 0, 1, 0, 77, 0, '0', '8870be4c-ad1e-11e4-b658-0c8bfd7a8af4');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
