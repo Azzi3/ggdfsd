@@ -43,8 +43,8 @@ $companies = $companyObj->getAll();
 							$counter++;
 						} ?></td>
 						<td>
-							<a href="btn" title="">Ändra</a>
-							<a href="btn btn-danger" title="">Ta bort</a>
+							<a title=""><button class="btn" >Ändra</button></a>
+							<a class="btn btn-danger" title="">Ta bort</a>
 						</td>
 					</tr>
 					<?php } ?>
