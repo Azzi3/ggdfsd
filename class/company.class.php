@@ -48,6 +48,7 @@ class Company extends Database{
 
 	}
 
+
 	public function save($items = array()) {
 		// Förbereder mysql kommando
 		$str = " UPDATE $this->tbl SET name=:name,
@@ -57,7 +58,14 @@ class Company extends Database{
 			website_url=:website_url,
 			description=:description
 			WHERE id = :id";
-
+		// Exekverar mysql kommando
+		/*$statement->execute(array('id' => $this->id,
+		'name' => $this->name,
+		'description' => $this->description,
+		'spots' => $this->spots,
+		'company' => $this->company,
+		'estimated_time' => $this->estimated_time
+		));*/
 		$this->update($str, $items);
 	}
 
@@ -70,10 +78,6 @@ class Company extends Database{
 
 		$this->delete($str, $arr);		
 	}
-
-
-
-
 
 	public function getTags($id) {
 

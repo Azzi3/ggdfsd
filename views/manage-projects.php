@@ -42,9 +42,7 @@ if(isset($_POST['project'])){
         $liaProject->create($project, $tags);
     }
     
-
-    redirect($path.'/projects/');
-
+    redirect($path.'projects/');
 }
 
 
