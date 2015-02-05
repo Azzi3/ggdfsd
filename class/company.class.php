@@ -3,6 +3,7 @@
 class Company extends Database{
 
 	private $tbl = 'company';
+	private $tbl_tags = 'company_tag';
 	private $tbl_contact = 'contact_person';
 
 	public function getAll(){
