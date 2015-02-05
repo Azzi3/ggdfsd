@@ -2,11 +2,18 @@
 $newCompany = new Company();
 $companyTag = new CompanyTag();
 
+//default values for form
+
+$items = array_fill_keys(
+  array('name', 'street_address', 'zip_code', 'city', 'website_url', 'description'), '');
+$contact = array_fill_keys(
+  array('name', 'phone', 'email'), '');
+
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-
-    $items = $liaProject->getFromId($id);
-    $usedTags = $projectTag->getAllFromProjectId($id);
+    $items = $newCompany->getFromId($id);
+    $usedTags = $companyTag->getAllFromCompanyId($id);
+    $contact = $newCompany->getContact($items['id_contact_person'])[0];
 
     $buttonText = 'Spara';
 }else{
@@ -22,10 +29,14 @@ if(isset($_POST['company'])){
     }else{
         $tags = array();
     }
+    if($id > 0){
+        $newCompany->updateCompany($company, $tags, $id);
+    }
+    else{
+        $newCompany->createCompanyAndContact($company, $tags);
+    }
 
-    $newCompany->createCompanyAndContact($company, $tags);
-
-    redirect(CURRENT_PATH);
+    redirect($path.'company-list/');
 
 }
 
@@ -48,42 +59,43 @@ if(isset($_POST['company'])){
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
                     <label for="contactPersonName">Namn:</label>
-                    <input type="text" class="form-control" id="contact_name" name="company[contact_name]">
+                    <input type="text" class="form-control" id="contact_name" value="<?php echo $contact['name']; ?>" name="company[contact_name]" required>
                 </div>
                 <div class="form-group">
                     <label for="contactPersonTel">Telefonnummer:</label>
-                    <input type="text" class="form-control" id="contact_phone" name="company[contact_phone]">
+                    <input type="number" class="form-control" id="contact_phone" value="<?php echo $contact['phone']; ?>" name="company[contact_phone]" required>
                 </div>
                 <div class="form-group">
                     <label for="contactPersonEmail">E-post:</label>
-                    <input type="text" class="form-control" id="contact_email" name="company[contact_email]">
+                    <input type="email" class="form-control" id="contact_email" value="<?php echo $contact['email']; ?>" name="company[contact_email]" required>
                 </div>
 
                 <legend>Företagsinfo</legend>
                 <div class="form-group">
                     <label for="companyName">Företagsnamn</label>
-                    <input type="text" class="form-control" id="name" name="company[name]">
+                    <input type="text" class="form-control" id="name" value="<?php echo $items['name'] ?>" name="company[name]" required>
                 </div>
                 <div class="form-group">
                     <label for="companyAddress">Gatuadress</label>
-                    <input type="text" class="form-control" id="street_address" name="company[street_address]">
+                    <input type="text" class="form-control" id="street_address" value="<?php echo $items['street_address'] ?>" name="company[street_address]" required>
                 </div>
                 <div class="form-group">
                     <label for="companyZipCode">Postnummer</label>
-                    <input type="text" class="form-control" id="zip_code" name="company[zip_code]">
+                    <input type="number" class="form-control" value="<?php echo $items['zip_code'] ?>" id="zip_code" name="company[zip_code]">
                 </div>
                 <div class="form-group">
                     <label for="companyCity">Postort</label>
-                    <input type="text" class="form-control" id="city" name="company[city]">
+                    <input type="text" class="form-control" id="city" value="<?php echo $items['city'] ?>" name="company[city]" required>
                 </div>
 
                 <div class="form-group">
                     <label for="companyURL">Webbadress:</label>
-                    <input type="text" class="form-control" id="website_url" name="company[website_url]">
+                    <input type="text" class="form-control" id="website_url" value="<?php echo $items['website_url'] ?>" name="company[website_url]">
                 </div>
                 <div class="form-group">
                     <label for="companyDescription">Företagsbeskrivning:</label>
-                    <textarea id="description" class="form-control" rows="3" name="company[description]"></textarea>
+                    <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?>
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="checkbox">Företagstaggar</label>
