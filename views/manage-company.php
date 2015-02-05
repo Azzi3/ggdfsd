@@ -29,10 +29,14 @@ if(isset($_POST['company'])){
     }else{
         $tags = array();
     }
+    if($id > 0){
+        $newCompany->updateCompany($company, $tags, $id);
+    }
+    else{
+        $newCompany->createCompanyAndContact($company, $tags);
+    }
 
-    $newCompany->createCompanyAndContact($company, $tags);
-
-    redirect(CURRENT_PATH);
+    redirect($path.'company-list/');
 
 }
 
