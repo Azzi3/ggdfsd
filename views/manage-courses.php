@@ -75,12 +75,12 @@ if(isset($_POST['course'])){
           
           <div class="form-group">
             <label for="courseStart">Startdatum</label>
-            <input type="text" name="course[course_start]" value="<?php echo $items['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" required>
+            <input type="date" name="course[course_start]" value="<?php echo $items['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" required>
           </div>
           
           <div class="form-group">
             <label for="courseEnd">Slutdatum</label>
-            <input type="text" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" required>
+            <input type="date" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" required>
           </div>
           
           <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
