@@ -60,11 +60,13 @@ if(isset($_GET['deleteid'])){
 								echo ", ";
 							};
 							$counter++;
-						} ?>
-					</td>
-					<td>
-						<a id="deleteBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
-					</td>
+
+						} ?></td>
+						<td>
+							<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
+													<a id="deleteBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
+
+						</td>
 				</tr>
 					<?php } ?>
 			</tbody>
