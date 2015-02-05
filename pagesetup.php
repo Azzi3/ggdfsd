@@ -37,6 +37,11 @@ else if($curPage == 'manage-courses') {
 	$subTitle = "Hantera kurser";
 }
 
+else if($curPage == 'list-courses') {
+	$pageName = "list-courses";
+	$subTitle = "Kurslista";
+}
+
 else{
 	$pageName = "404";
 	$subTitle = "404 (Page not found)";

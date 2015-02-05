@@ -39,25 +39,23 @@ class Course extends Database{
 
   }
 
-  // public function updateProject($item, $tags, $id){
+  public function updateCourse($item, $id){
 
-  //   $str = " UPDATE $this->tbl SET name = :name,
-  //   description = :description,
-  //   spots = :spots,
-  //   company = :company,
-  //   estimated_time = :estimated_time 
-  //   WHERE id = :id ";
-
-
-  //   $arr = array('name'=>$item['name'],
-  //         'description'=>$item['description'],
-  //         'spots'=>$item['spots'],
-  //         'company'=>$item['company'],
-  //         'estimated_time'=>$item['estimated_time'],
-  //         'id'=>$id);
+    $str = " UPDATE $this->tbl SET name = :name,
+    description = :description,
+    course_start = :course_start,
+    course_end = :course_end 
+    WHERE id = :id ";
 
 
-  //   $this->update($str, $arr);
+    $arr = array('name'=>$item['name'],
+          'description'=>$item['description'],
+          'course_start'=>$item['course_start'],
+          'course_end'=>$item['course_end'],
+          'id'=>$id);
+
+
+    $this->update($str, $arr);
 
   //   $str = " DELETE FROM project_tag WHERE project_id = :projectId ";
   //   $arr = array('projectId'=>$id);
@@ -71,7 +69,7 @@ class Course extends Database{
 
   //     $this->insert($str, $arr);
   //   }
-  // }
+  }
 
   // public function save($items = array()) {
   //   // Förbereder mysql kommando

@@ -18,8 +18,8 @@ $items = array('name'=>'',
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 
-    $items = $liacourse->getFromId($id);
-    $usedTags = $courseTag->getAllFromCourseId($id);
+    $items = $course->getFromId($id);
+    //$usedTags = $courseTag->getAllFromCourseId($id);
 
     $buttonText = 'Spara';
 }else{
@@ -38,14 +38,14 @@ if(isset($_POST['course'])){
     }
 
     if($id > 0){
-        $course->updateCourse($courseItems, $tags, $id);
+        $course->updateCourse($courseItems, $id);
     }
     else{
         $course->create($courseItems);
     }
     
 
-    redirect(CURRENT_PATH);
+    redirect($path.'list-courses/');
 
 }
 ?>
