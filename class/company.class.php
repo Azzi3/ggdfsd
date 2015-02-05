@@ -3,11 +3,8 @@
 class Company extends Database{
 
 	private $tbl = 'company';
-	private $tbl_tags = 'company_tag';
-
 	private $tbl_contact = 'contact_person';
 	private $tbl_tags = 'company_tag';
-
 
 	public function getAll(){
 		$str = " SELECT * FROM $this->tbl ";
