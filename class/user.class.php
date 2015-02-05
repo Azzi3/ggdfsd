@@ -47,7 +47,7 @@ class User extends Database{
 		$newToken = randomStr();
 		$newPassword = cryptPassword($password, $newToken);
 
-		$str = " UPDATE $this->tbl SET token = :newToken, password = :newPassword WHERE id = :id ";
+		$str = " UPDATE $this->tbl SET token = :newToken, password = :newPassword, online = 1 WHERE id = :id ";
 		$arr = array('newToken'=>$newToken, 'newPassword'=>$newPassword, 'id'=>$id);
 		$this->update($str, $arr);
 	}
@@ -97,6 +97,13 @@ class User extends Database{
 			return false;
 		}
 
+	}
+
+	public function logout($guid){
+
+		$str = " UPDATE $this->tbl SET online = 0 WHERE guid = :guid";
+		$arr = array('guid'=>$guid);
+		$this->update($str, $arr);
 	}
 
 

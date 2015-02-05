@@ -15,9 +15,18 @@
 
 $user = new User();
 $session = new Session();
-$signedUser = null;
+
 if($user->getUserByGuid($session->getSession('guid'))){
-	$signedUser = $user->getUserByGuid($session->getSession('guid'));
+
+if(isset($_GET['logout'])){
+	$user->logout($session->getSession('guid'));
+	$session->killSession('guid');
+	redirect($path);
 }
 
+
+	$signedUser = $user->getUserByGuid($session->getSession('guid'));?>
+	<a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut <?php echo $signedUser['firstname'].' '.$signedUser['lastname']; ?></a>
+<?php 
+}
 ?>
