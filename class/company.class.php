@@ -6,6 +6,7 @@ class Company extends Database{
 	private $tbl_tags = 'company_tag';
 
 	private $tbl_contact = 'contact_person';
+	private $tbl_tags = 'company_tag';
 
 
 	public function getAll(){
@@ -15,7 +16,7 @@ class Company extends Database{
 
 	}
 
-	public function createCompanyAndContact($item){
+	public function createCompanyAndContact($item, $tags){
 
 		$str = " INSERT INTO $this->tbl_contact (name, email, phone)
 		VALUES(:contact_name, :contact_email, :contact_phone) ";
@@ -36,17 +37,16 @@ class Company extends Database{
 					'description'=>$item['description'],
 					'id_contact_person'=>$lastContactId);
 		
-		$this->insert($str, $arr);
+		$lastCompanyId = $this->insert($str, $arr);
 
+		foreach ($tags as $value => $key) {
 
-		/*foreach ($tags as $value => $key) {
-
-			$str = " INSERT INTO project_tags (project_id, tag_id)
-			values(:projectId, :tagId) ";
-			$arr = array('projectId' => $lastProjectId, 'tagId'=>$key);
+			$str = " INSERT INTO $this->tbl_tags (company_id, tag_id)
+			VALUES(:companyId, :tagId) ";
+			$arr = array('companyId' => $lastCompanyId, 'tagId'=>$key);
 
 			$this->insert($str, $arr);
-		}*/
+		}
 
 	}
 
