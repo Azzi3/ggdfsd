@@ -22,7 +22,7 @@ $key = new Key();
 	$validKey = $key->checkValidKey($secret);
 
 	if($validKey){
-		$session->setSession('secreyKey',$validKey);
+		$session->setSession('secretKey',$validKey);
 		redirect(CURRENT_PATH.'register');
 	}
 	else{
