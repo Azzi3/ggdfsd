@@ -2,7 +2,7 @@
 <?php
 //open the object/class....
 $course = new Course();
-//$courseTag = new CourseTag();
+$courseTag = new CourseTag();
 
 
 //default values for form
@@ -19,7 +19,7 @@ if(isset($_GET['id'])){
     $id = $_GET['id'];
 
     $items = $course->getFromId($id);
-    //$usedTags = $courseTag->getAllFromCourseId($id);
+    $usedTags = $courseTag->getAllFromCourseId($id);
 
     $buttonText = 'Spara';
 }else{
@@ -38,10 +38,10 @@ if(isset($_POST['course'])){
     }
 
     if($id > 0){
-        $course->updateCourse($courseItems, $id);
+        $course->updateCourse($courseItems, $tags, $id);
     }
     else{
-        $course->create($courseItems);
+        $course->create($courseItems, $tags);
     }
     
 
@@ -65,24 +65,40 @@ if(isset($_POST['course'])){
 
           <div class="form-group">
             <label for="name">Namn</label>
-            <input type="text" name="course[name]" value="<?php echo $items['name']; ?>" class="form-control" id="name" placeholder="Namn" required>
+            <input type="text" name="course[name]" value="<?php echo $items['name']; ?>" class="form-control" id="name" pattern="^([^0-9]*)$" placeholder="Namn" required>
           </div>
           
           <div class="form-group">
             <label for="description">Beskriving</label>
-            <textarea id="description" name="course[description]" class="form-control" rows="3"><?php echo $items['description']; ?></textarea>
+            <textarea id="description" name="course[description]" class="form-control" rows="3" required> <?php echo $items['description']; ?></textarea>
           </div>
           
           <div class="form-group">
             <label for="courseStart">Startdatum</label>
-            <input type="text" name="course[course_start]" value="<?php echo $items['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" required>
+            <input type="date" name="course[course_start]" value="<?php echo $items['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
           </div>
           
           <div class="form-group">
             <label for="courseEnd">Slutdatum</label>
-            <input type="text" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" required>
+            <input type="date" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
           </div>
           
+          <div class="form-group">
+            <label for="checkbox">Företagstaggar</label>
+          </div>
+          
+          <div class="checkbox">
+          
+            <?php 
+              foreach ($courseTag->getAll() as $item) :
+                $tag = $courseTag->checkIfTagIsUsed($id, $item['id']);
+            ?>
+              <label>
+                <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
+              </label>
+            <?php endforeach; ?>
+          
+          </div>
           <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
         
         </form>
