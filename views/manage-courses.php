@@ -9,7 +9,8 @@ $courseTag = new CourseTag();
 $items = array('name'=>'',
                'description'=>'',
                'course_start'=>'',
-               'course_end'=>''
+               'course_end'=>'',
+               'id'=>''
                );
                 
 
@@ -27,7 +28,17 @@ if(isset($_GET['id'])){
     $buttonText = 'Skapa';
 }
 
-if(isset($_POST['course'])){  
+
+
+if($session->getSession('form'))
+  $formFiller = array_merge($items, $session->getSession('form'));
+else{
+  $formFiller = $items;
+}
+
+
+
+if(isset($_POST['course'])){
   $form = $_POST['course'];
   $session->setSession('form',$form);
   $error = array();
@@ -59,10 +70,17 @@ if(isset($_POST['course'])){
     else{
         $course->create($courseItems, $tags);
     }
-       redirect($path.'list-courses/');
+      redirect($path.'list-courses/');
+
+       
   }
+
+  if(isset($_GET['id'])){
+      redirect(CURRENT_PATH.'?id='.$_GET['id']);
+    }else{
+      redirect(CURRENT_PATH);
+    }
   
-  redirect(CURRENT_PATH);
 
 }
 ?>
@@ -96,22 +114,22 @@ if(isset($_POST['course'])){
 
           <div class="form-group">
             <label for="name">Namn</label>
-            <input type="text" name="course[name]" value="<?php echo $items['name']; ?>" class="form-control" id="name" pattern="^([^0-9]*)$" placeholder="Namn" required>
+            <input type="text" name="course[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" pattern="^([^0-9]*)$" placeholder="Namn" required>
           </div>
           
           <div class="form-group">
             <label for="description">Beskriving</label>
-            <textarea id="description" name="course[description]" class="form-control" rows="3" required><?php echo $items['description']; ?></textarea>
+            <textarea id="description" name="course[description]" class="form-control" rows="3" required><?php echo $formFiller['description']; ?></textarea>
           </div>
           
           <div class="form-group">
             <label for="courseStart">Startdatum</label>
-            <input type="date" name="course[course_start]" value="<?php echo $items['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
+            <input type="date" name="course[course_start]" value="<?php echo $formFiller['course_start']; ?>" class="form-control" id="courseStart" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
           </div>
           
           <div class="form-group">
             <label for="courseEnd">Slutdatum</label>
-            <input type="date" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
+            <input type="date" name="course[course_end]" value="<?php echo $formFiller['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
           </div>
           
           <div class="form-group">
@@ -136,3 +154,7 @@ if(isset($_POST['course'])){
     </div>
 </body>
 </html>
+
+<?php
+//kill the form session
+$session->killSession('form'); ?>
