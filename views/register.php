@@ -1,14 +1,15 @@
 <?php
-
+$key = new Key();
 if(isset($_GET['key'])){
-	$session->setSession('secreyKey') = $_GET['key'];
+	$validKey = $key->checkValidKey($_GET['key']);
+	$session->setSession('secretKey',$validKey);
 }
 
 
-$validKey = $session->getSession('secreyKey');
+$validKey = $session->getSession('secretKey');
 
 if(!$validKey){
-	$session->killSession('secreyKey');
+	$session->killSession('secretKey');
 	redirect(PATH);
 }
 
@@ -75,7 +76,7 @@ if(isset($_POST['register'])){
 
 		$session->killSession('error');
 		$session->killSession('form');
-		$session->killSession('secreyKey');
+		$session->killSession('secretKey');
 		$session->setSession('success','Registreringen lyckades, du kan nu logga in med dina uppgifter.');
 		redirect(PATH);
 	}
