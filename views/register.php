@@ -1,7 +1,14 @@
 <?php
+
+if(isset($_GET['key'])){
+	$session->setSession('secreyKey') = $_GET['key'];
+}
+
+
 $validKey = $session->getSession('secreyKey');
 
 if(!$validKey){
+	$session->killSession('secreyKey');
 	redirect(PATH);
 }
 
