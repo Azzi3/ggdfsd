@@ -20,7 +20,7 @@ class Company extends Database{
 	}
 
 
-	public function createCompanyAndContact($item, $tags){
+	public function createCompanyAndContact($item, $tags, $image){
 
 		$str = " INSERT INTO $this->tbl_contact (name, email, phone)
 		VALUES(:contact_name, :contact_email, :contact_phone) ";
@@ -31,14 +31,15 @@ class Company extends Database{
 
 		$lastContactId = $this->insert($str, $arr);	
 
-		$str = " INSERT INTO $this->tbl (name, street_address, zip_code, city, website_url, description, id_contact_person)
-		VALUES(:name, :street_address, :zip_code, :city, :website_url, :description, :id_contact_person) ";
+		$str = " INSERT INTO $this->tbl (name, street_address, zip_code, city, website_url, description, image, id_contact_person)
+		VALUES(:name, :street_address, :zip_code, :city, :website_url, :description, :image, :id_contact_person) ";
 		$arr = array('name'=>$item['name'],
 					'street_address'=>$item['street_address'],
 					'zip_code'=>$item['zip_code'],
 					'city'=>$item['city'],
 					'website_url'=>$item['website_url'],
 					'description'=>$item['description'],
+					'image'=>$image,
 					'id_contact_person'=>$lastContactId);
 		
 		$lastCompanyId = $this->insert($str, $arr);

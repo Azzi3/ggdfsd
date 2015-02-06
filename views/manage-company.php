@@ -2,10 +2,17 @@
 $newCompany = new Company();
 $companyTag = new CompanyTag();
 
+if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
+     empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0)
+{
+  $errors = array();
+  $errors[] = 'The file is way too large to upload buddy.';
+  $session->setSession('error',$errors);
+}
 //default values for form
 
 $items = array_fill_keys(
-  array('name', 'street_address', 'zip_code', 'city', 'website_url', 'description'), '');
+  array('name', 'street_address', 'zip_code', 'city', 'website_url', 'description', 'file'), '');
 $contact = array_fill_keys(
   array('name', 'phone', 'email'), '');
 
@@ -23,6 +30,46 @@ if(isset($_GET['id'])){
 
 if(isset($_POST['company'])){
     $company = $_POST['company'];
+    if (isset($_FILES['image']['name'])){
+        $image = $_FILES['image']['name'];
+        $errors = array();
+        $maxsize = 2097152;
+        $acceptable = array(
+            'JPEG',
+            'JPG',
+            'GIF',
+            'PNG' ,
+            'jpeg',
+            'jpg',
+            'gif',
+            'png'
+        );
+        $ext = pathinfo($image, PATHINFO_EXTENSION);
+
+        if(($_FILES['image']['size'] >= $maxsize) || ($_FILES["image"]["size"] == 0)) {
+            $errors[] = 'File too large. File must be less than 2 megabytes.';
+        }
+
+        if(!in_array($ext,$acceptable)) {
+            $errors[] = 'Invalid file type. Only PDF, JPG, GIF and PNG types are accepted.';
+        }
+
+        if(count($errors) > 0){
+            $session->setSession('error',$errors);
+            redirect(PATH.'manage-company/');
+        } else {
+            $companyName = $company['name'];
+            if(!is_dir('/public/images/' . $companyName)){
+                $fileTmp = $_FILES['image']['tmp_name'];
+                $newDir = mkdir(ROOT_PATH . '/public/images/' . $companyName .'/');
+                $path = ROOT_PATH . '/public/images/' . $companyName .'/';
+                move_uploaded_file($fileTmp, $path.$image);
+
+                $session->killSession('error');
+            }
+        }
+  
+    }
 
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
@@ -33,10 +80,10 @@ if(isset($_POST['company'])){
         $newCompany->updateCompany($company, $tags, $id);
     }
     else{
-        $newCompany->createCompanyAndContact($company, $tags);
+        $newCompany->createCompanyAndContact($company, $tags, $image);
     }
 
-    redirect($path.'company-list/');
+    redirect(PATH.'company-list/');
 
 }
 
@@ -55,7 +102,19 @@ if(isset($_POST['company'])){
     <div class="table-responsive">
 
         <div class="container">
-            <form class="col-md-4" method="POST" action="">
+            <form class="col-md-4" method="POST" action="" enctype="multipart/form-data">
+                <?php
+                //show error if error-session is active
+                if($session->getSession('error')){
+                    echo '<div class="alert alert-danger" role="alert">';
+                    foreach ($session->getSession('error') as $item) {
+                        echo '<li>'.$item.'</li>';
+                    }
+                    echo '</div>';
+                    //kill session when 'echoed'.
+                    $session->killSession('error');
+                }
+                ?>
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
                     <label for="contactPersonName">Namn:</label>
@@ -95,6 +154,11 @@ if(isset($_POST['company'])){
                 <div class="form-group">
                     <label for="companyDescription">Företagsbeskrivning:</label>
                     <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?>
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="companyDescription">Bild:</label>
+                    <input type="file" id="image" class="form-control" rows="3" name="image" accepted="image/jpeg, image/jpg, image/gif, image/png">
                     </textarea>
                 </div>
                 <div class="form-group">
