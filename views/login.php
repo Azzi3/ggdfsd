@@ -57,11 +57,11 @@ if($session->getSession('error')){
 ?>
 	<div class="form-group">
 		<label for="mail">Epostadress</label>
-		<input type="text" class="form-control" id="mail" name="loginform[email]" placeholder="Epostadress">
+		<input type="text" class="form-control" id="mail" name="loginform[email]" placeholder="Epostadress" required>
 	</div>
 	<div class="form-group">
 		<label for="password">Lösenord</label>
-		<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord">
+		<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord" required>
 	</div>
 	<button type="submit" class="btn">Logga in</button>
 </form>
@@ -77,7 +77,7 @@ if($session->getSession('errorKey')){
 ?>
 	<div class="form-group">
 		<label for="mail">Registrera dig med din nyckel</label>
-		<input type="text" class="form-control" id="mail" name="register[secret]" placeholder="Nyckel">
+		<input type="text" class="form-control" id="mail" name="register[secret]" placeholder="Nyckel" required>
 	</div>
 	<button type="submit" class="btn">Registrera</button>
 </form>

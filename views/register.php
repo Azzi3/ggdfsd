@@ -101,28 +101,28 @@ if($session->getSession('error')){
 ?>
 	<div class="form-group">
 		<label for="mail">Epostadress</label>
-		<input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="register[email]" placeholder="Epostadress">
+		<input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="register[email]" placeholder="Epostadress" required>
 	</div>
 	<div class="form-group">
 		<label for="pword">Lösenord</label>
-		<input type="password" class="form-control" id="pword" name="register[password]" placeholder="Lösenord">
+		<input type="password" class="form-control" id="pword" name="register[password]" placeholder="Lösenord" required>
 	</div>
 	<div class="form-group">
 		<label for="pword2">Validera lösenord</label>
-		<input type="password" class="form-control" id="pword2" name="register[password2]" placeholder="Validera lösenord">
+		<input type="password" class="form-control" id="pword2" name="register[password2]" placeholder="Validera lösenord" required>
 	</div>
 	<br>
 	<div class="form-group">
 		<label for="firstname">Förnamn</label>
-		<input type="text" class="form-control" value="<?php echo $formFiller['firstname']; ?>" id="firstname" name="register[firstname]" placeholder="Förnamn">
+		<input type="text" class="form-control" value="<?php echo $formFiller['firstname']; ?>" id="firstname" name="register[firstname]" placeholder="Förnamn" required>
 	</div>
 	<div class="form-group">
 		<label for="lastname">Efternamn</label>
-		<input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="register[lastname]" placeholder="Efternamn">
+		<input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="register[lastname]" placeholder="Efternamn" required>
 	</div>
 	<div class="form-group">
 		<label for="region">Välj kommun</label>
-		<select class="form-control" name="register[municipality]" id="region">
+		<select class="form-control" name="register[municipality]" id="region" required>
 			<option value="">-Välj kommun-</option>
 			<?php foreach ($municipality as $item) {
 				$selected = '';
