@@ -59,7 +59,7 @@ if(isset($_POST['company'])){
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
                     <label for="contactPersonName">Namn:</label>
-                    <input type="text" class="form-control" id="contact_name" value="<?php echo $contact['name']; ?>" name="company[contact_name]" required>
+                    <input type="text" class="form-control" id="contact_name" value="<?php echo $contact['name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
                 </div>
                 <div class="form-group">
                     <label for="contactPersonTel">Telefonnummer:</label>
