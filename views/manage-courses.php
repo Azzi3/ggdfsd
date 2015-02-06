@@ -2,7 +2,7 @@
 <?php
 //open the object/class....
 $course = new Course();
-//$courseTag = new CourseTag();
+$courseTag = new CourseTag();
 
 
 //default values for form
@@ -19,7 +19,7 @@ if(isset($_GET['id'])){
     $id = $_GET['id'];
 
     $items = $course->getFromId($id);
-    //$usedTags = $courseTag->getAllFromCourseId($id);
+    $usedTags = $courseTag->getAllFromCourseId($id);
 
     $buttonText = 'Spara';
 }else{
@@ -38,10 +38,10 @@ if(isset($_POST['course'])){
     }
 
     if($id > 0){
-        $course->updateCourse($courseItems, $id);
+        $course->updateCourse($courseItems, $tags, $id);
     }
     else{
-        $course->create($courseItems);
+        $course->create($courseItems, $tags);
     }
     
 
@@ -83,6 +83,22 @@ if(isset($_POST['course'])){
             <input type="date" name="course[course_end]" value="<?php echo $items['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
           </div>
           
+          <div class="form-group">
+            <label for="checkbox">Företagstaggar</label>
+          </div>
+          
+          <div class="checkbox">
+          
+            <?php 
+              foreach ($courseTag->getAll() as $item) :
+                $tag = $courseTag->checkIfTagIsUsed($id, $item['id']);
+            ?>
+              <label>
+                <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
+              </label>
+            <?php endforeach; ?>
+          
+          </div>
           <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
         
         </form>
