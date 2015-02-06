@@ -27,8 +27,24 @@ if(isset($_GET['id'])){
     $buttonText = 'Skapa';
 }
 
-//insert function
-if(isset($_POST['course'])){
+if(isset($_POST['course'])){  
+  $form = $_POST['course'];
+  $session->setSession('form',$form);
+  $error = array();
+
+  if(strlen($form['name']) < 2 || strlen($form['name']) > 50){
+    $error[] .= 'Ett namn måste vara mellan 2 och 50 tecken.';
+  }
+
+  if(strlen($form['description']) < 2 || strlen($form['description']) > 300){
+    $error[] .= 'En beskrivning måste vara mellan 2 och 300 tecken.';
+  }
+  
+  if(count($error) > 0){
+      $session->setSession('error',$error);
+  }  
+  else {
+ 
     $courseItems = $_POST['course'];
 
     if(isset($_POST['tag'])){
@@ -43,9 +59,10 @@ if(isset($_POST['course'])){
     else{
         $course->create($courseItems, $tags);
     }
-    
-
-    redirect($path.'list-courses/');
+       redirect($path.'list-courses/');
+  }
+  
+  redirect(CURRENT_PATH);
 
 }
 ?>
@@ -63,6 +80,20 @@ if(isset($_POST['course'])){
     <div class="container">  
         <form method="POST" action="">
 
+          <?php
+            //show error if error-session is active
+            if($session->getSession('error')){
+              echo '<div class="alert alert-danger" role="alert">';
+              foreach ($session->getSession('error') as $item) {
+                echo '<li>'.$item.'</li>';
+              }
+              echo '</div>';
+
+              //kill session when 'echoed'.
+              $session->killSession('error');
+            }
+          ?>
+
           <div class="form-group">
             <label for="name">Namn</label>
             <input type="text" name="course[name]" value="<?php echo $items['name']; ?>" class="form-control" id="name" pattern="^([^0-9]*)$" placeholder="Namn" required>
@@ -70,7 +101,7 @@ if(isset($_POST['course'])){
           
           <div class="form-group">
             <label for="description">Beskriving</label>
-            <textarea id="description" name="course[description]" class="form-control" rows="3" required> <?php echo $items['description']; ?></textarea>
+            <textarea id="description" name="course[description]" class="form-control" rows="3" required><?php echo $items['description']; ?></textarea>
           </div>
           
           <div class="form-group">
