@@ -37,6 +37,11 @@ else if($curPage == 'manage-courses') {
 	$subTitle = "Hantera kurser";
 }
 
+else if($curPage == 'register') {
+	$pageName = "register";
+	$subTitle = "Registrera";
+}
+
 else if($curPage == 'list-courses') {
 	$pageName = "list-courses";
 	$subTitle = "Kurslista";
