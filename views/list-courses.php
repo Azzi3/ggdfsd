@@ -1,9 +1,9 @@
 <?php
-  $course = new Course();
-  $courses = $course->getAll();
+  $courseObj = new Course();
+  $courses = $courseObj->getAll();
   
   if(isset($_GET['deleteid'])){
-    $course->deleteCourseAndTag($_GET['deleteid']);
+    $courseObj->deleteCourseAndTag($_GET['deleteid']);
     redirect(CURRENT_PATH);
   }
 ?>
@@ -43,6 +43,7 @@
           <th>Beskrivning</th>
           <th>Startdatum</th>
           <th>Slutdatum</th>
+          <th>Taggar</th>
         </tr>
       </thead>
 
@@ -54,7 +55,22 @@
             <td style="max-width: 10em"><?php echo $course['description'] ?></td>
             <td><?php echo $course['course_start'] ?></td>
             <td><?php echo $course['course_end'] ?></td>
-            
+            <td>
+              <?php
+                $counter = 0;
+                $courseTags = $courseObj->getTags($course['id']);
+                
+                foreach ($courseTags as $courseTag) {
+                  echo $courseTag['name']; if ($counter != count($courseTags) - 1){
+                    echo ", ";
+                  };
+                  $counter++;
+
+                } 
+              ?>
+            </td>      
+      
+
             <td>
               <a href="<?php echo $path; ?>manage-courses?id=<?php echo $course['id']; ?>"><button class="btn">Ändra</button></a>
               <a id="deleteCourseBtn" data-courseid="<?php echo $course['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
