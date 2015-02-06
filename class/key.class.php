@@ -26,6 +26,26 @@ class Key extends Database{
 
 	}
 
+	public function checkValidKey($key){
+		$str = " SELECT * FROM $this->tbl WHERE key_value = :key ";
+		$arr = array('key'=>$key);
+
+		$result = $this->select($str, $arr);
+
+		if($result){
+			return $result;
+		}
+
+		return false;
+	}
+
+	public function removeKey($key){
+		$str = " DELETE FROM $this->tbl WHERE key_value = :key ";
+		$arr = array('key'=>$key);
+
+		$this->delete($str, $arr);
+	}
+
 
 
 }

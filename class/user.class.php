@@ -24,7 +24,7 @@ class User extends Database{
 		$cryptedPassword = cryptPassword($cleanPassword, $token);
 
 		$str = " INSERT INTO $this->tbl (email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id, guid)
-		VALUES (:email, :password, :token, :firstname, :lastname, :course_leader, :company_owner, :student, :kommunId, UUID()) ";
+		VALUES (:email, :password, :token, :firstname, :lastname, :course_leader, :company_owner, :student, :municipalityId, UUID()) ";
 
 		$arr = array('email'=>$items['email'],
 			'password'=>$cryptedPassword,
@@ -34,7 +34,7 @@ class User extends Database{
 			'course_leader'=>$items['course_leader'],
 			'company_owner'=>$items['company_owner'],
 			'student'=>$items['student'],
-			'kommunId'=>$items['kommunId']);
+			'municipalityId'=>$items['municipality']);
 
 		$this->insert($str, $arr);
 
@@ -65,6 +65,17 @@ class User extends Database{
 		$arr = array('mail'=>$items['oldmail'], 'pword'=>$newPassword);
 
 		return $this->select($str, $arr);
+	}
+
+	public function checkUniqueEmail($email){
+		$str = " SELECT email FROM $this->tbl WHERE email = :email ";
+		$arr = array('email'=>$email);
+
+		if($this->select($str, $arr)){
+			return true;
+		}
+
+		return false;
 	}
 
 
