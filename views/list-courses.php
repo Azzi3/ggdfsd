@@ -2,9 +2,10 @@
   $course = new Course();
   $courses = $course->getAll();
   
-  // if(isset($_GET['deleteid'])){
-  //   $liaProject->deleteProjectAndTag($_GET['deleteid']);
-  //   redirect(CURRENT_PATH);
+  if(isset($_GET['deleteid'])){
+    $course->deleteCourseAndTag($_GET['deleteid']);
+    redirect(CURRENT_PATH);
+  }
 ?>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -22,6 +23,7 @@
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="jumbotron">
 
@@ -55,7 +57,7 @@
             
             <td>
               <a href="<?php echo $path; ?>manage-courses?id=<?php echo $course['id']; ?>"><button class="btn">Ändra</button></a>
-              <a id="deleteCourseBtn" data-projectid="<?php echo $course['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
+              <a id="deleteCourseBtn" data-courseid="<?php echo $course['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
             </td>
           </tr>
         <?php } ?>

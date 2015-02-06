@@ -86,16 +86,17 @@ class Course extends Database{
 
 
 
-  // public function deleteProjectAndTag($id){
-  //   // ta bort mellantabell rader 
-  //   // ta bort tagger med projekt 
-  //   $str = " DELETE FROM $this->tbl_tags WHERE project_id = :id ";
-  //   $arr = array('id'=>$id);
-  //   $this->delete($str, $arr);    
-  //   $str = "DELETE FROM $this->tbl WHERE id = :id";
-  //    $arr = array('id'=>$id);
-  //   $this->delete($str, $arr);    
-  // }
+  public function deleteCourseAndTag($id){
+    // ta bort mellantabell rader 
+    // ta bort tagger med projekt 
+    // $str = " DELETE FROM $this->tbl_tags WHERE project_id = :id ";
+    // $arr = array('id'=>$id);
+    // $this->delete($str, $arr);    
+    
+    $str = "DELETE FROM $this->tbl WHERE id = :id";
+    $arr = array('id'=>$id);
+    $this->delete($str, $arr);    
+  }
 
 
 
