@@ -70,7 +70,7 @@ if(isset($_POST['course'])){
           
           <div class="form-group">
             <label for="description">Beskriving</label>
-            <textarea id="description" name="course[description]" class="form-control" rows="3"><?php echo $items['description']; ?></textarea>
+            <textarea id="description" name="course[description]" class="form-control" rows="3" required> <?php echo $items['description']; ?></textarea>
           </div>
           
           <div class="form-group">
