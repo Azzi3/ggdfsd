@@ -8,7 +8,13 @@
 	<link rel="stylesheet" href="<?php echo $path; ?>assets/css/bootstrap.min.css">
 	<script src="<?php echo $path; ?>assets/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $path; ?>assets/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<?php echo $path; ?>assets/js/jquery.required.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $path; ?>assets/js/main.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css" media="screen">
+		.ui-state-error{
+			border: 1px solid red !important;
+		}
+	</style>
 </head>
 <body>
 <?php

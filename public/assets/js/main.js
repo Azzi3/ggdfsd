@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$('form').h5Validate();
 	
 	$(document).on('click', '#deleteProjectBtn', function (e) {
 		var id = $(this).data('projectid');
