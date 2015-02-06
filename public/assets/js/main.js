@@ -16,4 +16,17 @@ $(document).ready(function() {
 			location.href = url;
 		});
 	});
+
+	/**
+	*
+	*
+	*/
+	$(document).on('click', '#deleteCourseBtn', function (e) {
+		var id = $(this).data('courseid');
+		$(document).on('click', '#reallyDelete', function (e) {
+			var url = location.origin + location.pathname + '?deleteid='+ id;
+			location.href = url;
+		});
+	});
+
 });
