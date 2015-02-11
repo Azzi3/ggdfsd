@@ -23,7 +23,7 @@ class User extends Database{
 
 		$cryptedPassword = cryptPassword($cleanPassword, $token);
 
-		$str = " INSERT INTO $this->tbl (email, password, token, firstname, lastname, course_leader, company_owner, student, kommun_id, guid)
+		$str = " INSERT INTO $this->tbl (email, password, token, firstname, lastname, course_leader, company_owner, student, municipality, guid)
 		VALUES (:email, :password, :token, :firstname, :lastname, :course_leader, :company_owner, :student, :municipalityId, UUID()) ";
 
 		$arr = array('email'=>$items['email'],

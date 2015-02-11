@@ -1,4 +1,17 @@
 <?php
+$user = new User();
+$session = new Session();
+
+if($user->getUserByGuid($session->getSession('guid'))) {
+
+	if(isset($_GET['logout'])){
+		$user->logout($session->getSession('guid'));
+		$session->killSession('guid');
+		redirect($path);
+	}
+		$signedUser = $user->getUserByGuid($session->getSession('guid'));
+
+}
 
 //If nothing is in URL, load main(.php).
 if($curPage == ""){
@@ -30,6 +43,11 @@ else if($curPage == 'company-profile'){
 else if($curPage == 'generate-key' && $signedUser['course_leader'] == 1){
 	$pageName = "generate-key";
 	$subTitle = "Generera nyckel";
+}
+
+else if($curPage == 'manage-user') {
+	$pageName = "manage-users";
+	$subTitle = "Hantera dina uppgifter";
 }
 
 else if($curPage == 'manage-courses') {
