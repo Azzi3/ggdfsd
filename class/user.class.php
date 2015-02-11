@@ -67,9 +67,16 @@ class User extends Database{
 		return $this->select($str, $arr);
 	}
 
-	public function checkUniqueEmail($email){
-		$str = " SELECT email FROM $this->tbl WHERE email = :email ";
-		$arr = array('email'=>$email);
+	public function checkUniqueEmail($email, $guid = false){
+
+		if($guid){
+			$str = " SELECT email FROM $this->tbl WHERE email = :email AND guid != :guid ";
+			$arr = array('email'=>$email, 'guid'=>$guid);
+
+		}else{
+			$str = " SELECT email FROM $this->tbl WHERE email = :email ";
+			$arr = array('email'=>$email);
+		}
 
 		if($this->select($str, $arr)){
 			return true;
@@ -107,6 +114,36 @@ class User extends Database{
 		}else{
 			return false;
 		}
+
+	}
+
+	public function updateUser($items = array()){
+
+		$token = randomStr();
+		$cleanPassword = $items['password'];
+
+		$cryptedPassword = cryptPassword($cleanPassword, $token);
+
+		$str = " UPDATE $this->tbl SET email = :email,
+										password = :password,
+										token = :token,
+										firstname = :firstname,
+										lastname = :lastname,
+										municipality = :municipalityId
+										WHERE guid = :guid ";
+
+		$arr = array('email'=>$items['email'],
+			'password'=>$cryptedPassword,
+			'token'=>$token,
+			'firstname'=>$items['firstname'],
+			'lastname'=>$items['lastname'],
+			'municipalityId'=>$items['municipality'],
+			'guid'=>$items['guid']);
+
+		//print_r($arr);
+		//die();
+
+		$this->update($str, $arr);
 
 	}
 
