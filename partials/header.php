@@ -6,6 +6,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 	<title>Lia projekt<?php echo $title; ?></title>
 	<link rel="stylesheet" href="<?php echo $path; ?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo $path; ?>assets/css/custom.css">
 	<script src="<?php echo $path; ?>assets/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $path; ?>assets/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $path; ?>assets/js/jquery.required.js" type="text/javascript" charset="utf-8"></script>
