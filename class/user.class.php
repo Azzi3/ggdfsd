@@ -67,9 +67,16 @@ class User extends Database{
 		return $this->select($str, $arr);
 	}
 
-	public function checkUniqueEmail($email){
-		$str = " SELECT email FROM $this->tbl WHERE email = :email ";
-		$arr = array('email'=>$email);
+	public function checkUniqueEmail($email, $guid = false){
+
+		if($guid){
+			$str = " SELECT email FROM $this->tbl WHERE email = :email AND guid != :guid ";
+			$arr = array('email'=>$email, 'guid'=>$guid);
+		}
+		else{
+			$str = " SELECT email FROM $this->tbl WHERE email = :email ";
+			$arr = array('email'=>$email);
+		}
 
 		if($this->select($str, $arr)){
 			return true;
