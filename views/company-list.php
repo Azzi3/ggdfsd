@@ -28,8 +28,7 @@ if(isset($_GET['deleteid'])){
 
         <h1>Företagslista</h1>
         <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        <a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-company" role="button">Hantera Företag</a>
-
+        
     </div>
 </div>
 
