@@ -25,8 +25,7 @@ $students = $studentObj->getAll();
 
         <h1>Studentlista</h1>
         <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        <a class="btn btn-warning pull-right" href="" role="button">Hantera Studenter</a>
-
+        
     </div>
 </div>
 
