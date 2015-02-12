@@ -70,6 +70,13 @@ else if($curPage == 'student-profile'){
 	$subtitle = "Studentprofil";
 }
 
+
+else if($curPage == 'list-student'){
+	$pageName = "list-student";
+	$subtitle = "List students";
+}
+
+
 else{
 	$pageName = "404";
 	$subTitle = "404 (Page not found)";
