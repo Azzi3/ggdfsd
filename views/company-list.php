@@ -39,8 +39,11 @@ if(isset($_GET['deleteid'])){
 			<thead>
 				<tr>
 					<th>Företag</th>
+					<th>Adress</th>
 					<th>Kontaktperson</th>
 					<th>Stad</th>
+					<th>Hemsida</th>
+					<th>Beskrivning</th>
 					<th>Taggar</th>
 				</tr>
 			</thead>
