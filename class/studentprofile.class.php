@@ -77,12 +77,22 @@ class StudentProfile extends Database{
 
 			$this->insert($str, $arr);
 		}
-
-
-
 	}
 
+	public function getTags($id) {
 
+    $str = " SELECT *
+        FROM student_tag
+          INNER JOIN user
+            ON student_tag.user_id = user.id
+          INNER JOIN tag
+            ON student_tag.tag_id = tag.id
+        WHERE user.id = :id ";
+
+    $arr = array('id' => $id);
+
+    return $this->selectAll($str, $arr);
+  }
 
 }
 
