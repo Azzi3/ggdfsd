@@ -8,7 +8,7 @@ class Database{
 
 	public function __construct(){
 	    try{
-	    	$conn = new PDO("mysql:host=".DB_HOST.";dbname=".DB_DATABASE, DB_USERNAME, DB_PASSWORD);
+	    	$conn = new PDO("mysql:host=".DB_HOST.";dbname=".DB_DATABASE.";charset=utf8", DB_USERNAME, DB_PASSWORD);
 	    	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	    	$this->conn = $conn;
 	    }

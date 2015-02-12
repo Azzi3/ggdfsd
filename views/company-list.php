@@ -1,8 +1,34 @@
+<?php
+$companyObj = new Company();
+$companies = $companyObj->getAll();
+if(isset($_GET['deleteid'])){
+	$getCmpName = $companyObj->getFromId($_GET['deleteid']);
+	$companyName = $getCmpName['name'];
+	$companyObj->deleteCompanyAndTag($_GET['deleteid'], $companyName);
+	redirect(CURRENT_PATH);
+}?>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort</h4>
+			</div>
+		
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button id="reallyDelete" type="button" class="btn btn-danger">Tabort</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="container">
     <div class="jumbotron">
 
         <h1>Företagslista</h1>
         <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
+        <a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-company" role="button">Hantera Företag</a>
 
     </div>
 </div>
@@ -20,25 +46,28 @@
 			</thead>
 
 			<tbody>
-				<?php foreach ($projects as $project){  ?>
+				<?php foreach ($companies as $company){  ?>
 				<tr>
-					<td><?php echo $project['name'] ?></td>
-					<td style="max-width: 10em"><?php echo $project['description'] ?></td>
-					<td><?php echo $project['company'] ?></td>
-						<td><?php echo $project['spots'] ?></td>
-						<td><?php echo $project['estimated_time'] ?></td>
+					<td><?php echo $company['name'] ?></td>
+					<td style="max-width: 10em"><?php echo $company['street_address'] ?></td>
+					<td><?php echo $company['zip_code'] ?></td>
+						<td><?php echo $company['city'] ?></td>
+						<td><?php echo $company['website_url'] ?></td>
+						<td><?php echo $company['description'] ?></td>
 						<td><?php
 						$counter = 0;
-						$projectTags = $liaProject->getTags($project['id']);
-						foreach ($projectTags as $projectTag) {
-							echo $projectTag['name']; if ($counter != count($projectTags) - 1){
+						$companyTags = $companyObj->getTags($company['id']);
+						foreach ($companyTags as $companyTag) {
+							echo $companyTag['name']; if ($counter != count($companyTags) - 1){
 								echo ", ";
 							};
 							$counter++;
 						} ?></td>
 						<td>
-							<a href="btn" title="">Ändra</a>
-							<a href="btn btn-danger" title="">Ta bort</a>
+						<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $company['id']) : ?>
+						<a href="<?php echo $path; ?>manage-company?id=<?php echo $company['id']; ?>"><button class="btn">Ändra</button></a>
+							<a id="deleteCompanyBtn" data-companyid="<?php echo $company['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+						<?php endif; ?>
 						</td>
 					</tr>
 					<?php } ?>

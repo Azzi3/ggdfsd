@@ -1,12 +1,10 @@
 <?php
 $liaProject = new LiaProject();
 $projects = $liaProject->getAll();
-
-if(isset($_GET['id'])){
-	echo $_GET['id'];
-}
-
-?>
+if(isset($_GET['deleteid'])){
+	$liaProject->deleteProjectAndTag($_GET['deleteid']);
+	redirect(CURRENT_PATH);
+}?>
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -62,11 +60,13 @@ if(isset($_GET['id'])){
 								echo ", ";
 							};
 							$counter++;
-						} ?>
-					</td>
-					<td>
-						<a id="deleteBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
-					</td>
+
+						} ?></td>
+						<td>
+							<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
+							<a id="deleteProjectBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
+
+						</td>
 				</tr>
 					<?php } ?>
 			</tbody>
