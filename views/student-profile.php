@@ -19,7 +19,11 @@
 
   <div class="row">
     <div class="jumbotron">
-      
+
+      <?php if($session->getSession('guid') == $userInfo['guid']) : ?>
+        <a class="edit-anchor" href="<?php echo $path; ?>manage-user"> <i class="glyphicon glyphicon-pencil pull-right"></i></a>
+      <?php endif; ?>
+
       <div class="row">
         <div class="col-md-3 text-center">
           
@@ -28,7 +32,7 @@
           </a>
           
           <h3 class="text-center"> <?php echo $userInfo['firstname'] . " " . $userInfo['lastname']; ?> </h3>
-      
+          <h4><?php echo $userCounty['name']; ?></h4>
         </div>
       </div>
       
@@ -42,7 +46,6 @@
       
       <ul>
         <li>Telefon: <?php echo $studentProfileInfo['phone']; ?> </li>
-        <li>Stad: <?php echo $userCounty['name']; ?> </li>
         <li>Email: <?php echo $userInfo['email']; ?> </li>
         <li>Hemsida: <?php echo $studentProfileInfo['website']; ?> </li>
       </ul>
