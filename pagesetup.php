@@ -65,7 +65,7 @@ else if($curPage == 'list-courses') {
 	$subTitle = "Kurslista";
 }
 
-else if($curPage == 'student-profile'){
+else if($curPage == 'student-profile' && $signedUser){
 	$pageName = "student-profile";
 	$subtitle = "Studentprofil";
 }
