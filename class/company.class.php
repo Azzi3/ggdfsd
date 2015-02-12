@@ -137,7 +137,7 @@ class Company extends Database{
 		$this->delete($str, $arr);
 		
 		//REMOVES IMAGE
-		$imageDirectory = ROOT_PATH . '/images/' . $companyName;
+		$imageDirectory = PUBLIC_ROOT . '/images/' . '/company/' . $companyName;
 		$path = $imageDirectory . '/*';
 		$files = glob($path);
 		foreach($files as $file){
