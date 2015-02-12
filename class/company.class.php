@@ -55,13 +55,14 @@ class Company extends Database{
 
 	}
 
-	public function updateCompany($item, $tags, $id){
+	public function updateCompany($item, $tags, $id, $image){
 
 		$str = " UPDATE $this->tbl SET name = :name,
 		street_address = :street_address,
 		zip_code = :zip_code,
 		city = :city,
 		website_url = :website_url,
+		image = :image,
 		description = :description
 		WHERE id = :id ";
 
@@ -71,6 +72,7 @@ class Company extends Database{
 					'zip_code'=>$item['zip_code'],
 					'city'=>$item['city'],
 					'website_url'=>$item['website_url'],
+					'image'=>$image,
 					'description'=>$item['website_url'],
 					'id'=>$id);
 
@@ -124,7 +126,7 @@ class Company extends Database{
 
 
 
-	public function deleteCompanyAndTag($id){
+	public function deleteCompanyAndTag($id, $companyName){
 			// ta bort mellantabell rader 
 		// ta bort tagger med projekt 
 		$str = " DELETE FROM $this->tbl_tags WHERE company_id = :id ";
@@ -132,7 +134,18 @@ class Company extends Database{
 		$this->delete($str, $arr);		
 		$str = "DELETE FROM $this->tbl WHERE id = :id";
 		 $arr = array('id'=>$id);
-		$this->delete($str, $arr);		
+		$this->delete($str, $arr);
+		
+		//REMOVES IMAGE
+		$imageDirectory = ROOT_PATH . '/images/' . $companyName;
+		$path = $imageDirectory . '/*';
+		$files = glob($path);
+		foreach($files as $file){
+			if(is_file($file))
+				unlink($file);
+			}
+		//REMOVES DIRECTORY
+		rmdir($imageDirectory);	
 	}
 
 	public function getTags($id) {
