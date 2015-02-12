@@ -33,7 +33,7 @@ if(isset($_GET['id'])){
 
 if(isset($_POST['company'])){
     $company = $_POST['company'];
-    if (isset($_FILES['image']['name'])){
+    if (!empty($_FILES['image']['name'])){
         $image = $_FILES['image']['name'];
         $errors = array();
         $maxsize = 2097152;
@@ -171,12 +171,11 @@ if(isset($_POST['company'])){
                 </div>
                 <div class="form-group">
                     <label for="companyDescription">Företagsbeskrivning:</label>
-                    <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?>
-                    </textarea>
+                    <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?></textarea>
                 </div>
                 <div class="form-group">
                     <?php if (isset($items['image'])){ ?>
-                        <img src="<?php echo '/images/' . $items['name'] .'/' . $items['image']; ?>" alt=""/> <?php 
+                        <img src="<?php echo PUBLIC_ROOT. '/images/' . $items['name'] .'/' . $items['image']; ?>" alt=""/> <?php 
                     } ?>
                     <label for="companyDescription">Bild:</label>
                     <input type="file" id="image" class="form-control" rows="3" name="image" accepted="image/jpeg, image/jpg, image/gif, image/png">
