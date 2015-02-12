@@ -8,20 +8,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">LIA Banken</a>
+      <a class="navbar-brand" href="<?php echo $path; ?>">LIA Banken</a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo $path; ?>projects">LIA-Projekt</a></li>
-        <li><a href="<?php echo $path; ?>list-courses">LIA-Kurser</a></li>
-        <li><a href="<?php echo $path; ?>company-list">Företag</a></li>
-        <li><a href="#">Elever</a></li>
-        <li><a href="#">Profil</a></li>
-        <li><a href="#">Logga ut</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+    
+    <?php if($signedUser) : ?>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">    
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="<?php echo $path; ?>student-profile">Profil</a></li>
+          <li><a href="<?php echo $path; ?>projects">LIA-Projekt</a></li>
+          <li><a href="<?php echo $path; ?>list-courses">LIA-Kurser</a></li>
+          <li><a href="<?php echo $path; ?>company-list">Företag</a></li>
+          <li><a href="#">Elever</a></li>
+          <li><a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    <?php endif; ?>
   </div><!-- /.container-fluid -->
 </nav>
