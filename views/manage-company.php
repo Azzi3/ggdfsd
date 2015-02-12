@@ -27,8 +27,9 @@ if(isset($_GET['id'])){
     $id = 0;
     $buttonText = 'Skapa';
 }
-
-if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
+if(isset($_GET['id'])){
+    if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
+}
 
 if(isset($_POST['company'])){
     $company = $_POST['company'];
