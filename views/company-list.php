@@ -2,7 +2,9 @@
 $companyObj = new Company();
 $companies = $companyObj->getAll();
 if(isset($_GET['deleteid'])){
-	$companyObj->deleteCompanyAndTag($_GET['deleteid']);
+	$getCmpName = $companyObj->getFromId($_GET['deleteid']);
+	$companyName = $getCmpName['name'];
+	$companyObj->deleteCompanyAndTag($_GET['deleteid'], $companyName);
 	redirect(CURRENT_PATH);
 }?>
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -62,8 +64,10 @@ if(isset($_GET['deleteid'])){
 							$counter++;
 						} ?></td>
 						<td>
+						<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $company['id']) : ?>
 						<a href="<?php echo $path; ?>manage-company?id=<?php echo $company['id']; ?>"><button class="btn">Ändra</button></a>
 							<a id="deleteCompanyBtn" data-companyid="<?php echo $company['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+						<?php endif; ?>
 						</td>
 					</tr>
 					<?php } ?>

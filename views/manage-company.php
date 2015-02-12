@@ -28,6 +28,8 @@ if(isset($_GET['id'])){
     $buttonText = 'Skapa';
 }
 
+if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
+
 if(isset($_POST['company'])){
     $company = $_POST['company'];
     if (isset($_FILES['image']['name'])){
@@ -59,12 +61,27 @@ if(isset($_POST['company'])){
             redirect(PATH.'manage-company/');
         } else {
             $companyName = $company['name'];
-            if(!is_dir('/public/images/' . $companyName)){
+            $imageDirectory = ROOT_PATH . '/images/' . $companyName;
+            //CHECKS IF THERE IS A DIRECTORY (IF THE COMPANY HAS AN IMAGE ALREADY)
+            if(!is_dir($imageDirectory)){
+                //SETS UP THE NEW FILE DIRECTORY & UPLOADS THE IMAGE
                 $fileTmp = $_FILES['image']['tmp_name'];
-                $newDir = mkdir(ROOT_PATH . '/public/images/' . $companyName .'/');
-                $path = ROOT_PATH . '/public/images/' . $companyName .'/';
+                $newDir = mkdir(ROOT_PATH . '/images/' . $companyName .'/');
+                $path = ROOT_PATH . '/images/' . $companyName .'/';
                 move_uploaded_file($fileTmp, $path.$image);
-
+                $session->killSession('error');
+            } else {
+                //DELETES ALL FILES IN THE IMAGE DIRECTORY 
+                $path = $imageDirectory . '/*';
+                $files = glob($path);
+                foreach($files as $file){
+                    if(is_file($file))
+                        unlink($file);
+                }
+                //UPLOADS THE NEW IMAGE
+                $fileTmp = $_FILES['image']['tmp_name'];
+                $path = ROOT_PATH . '/images/' . $companyName .'/';
+                move_uploaded_file($fileTmp, $path.$image);
                 $session->killSession('error');
             }
         }
@@ -77,7 +94,7 @@ if(isset($_POST['company'])){
         $tags = array();
     }
     if($id > 0){
-        $newCompany->updateCompany($company, $tags, $id);
+        $newCompany->updateCompany($company, $tags, $id, $image);
     }
     else{
         $newCompany->createCompanyAndContact($company, $tags, $image);
@@ -157,6 +174,7 @@ if(isset($_POST['company'])){
                     </textarea>
                 </div>
                 <div class="form-group">
+                    <img src="<?php echo '/images/' . $items['name'] .'/' . $items['image']; ?>" alt=""/>
                     <label for="companyDescription">Bild:</label>
                     <input type="file" id="image" class="form-control" rows="3" name="image" accepted="image/jpeg, image/jpg, image/gif, image/png">
                     </textarea>

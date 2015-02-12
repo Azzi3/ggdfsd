@@ -69,6 +69,10 @@ else if($curPage == 'student-profile'){
 	$pageName = "student-profile";
 	$subtitle = "Studentprofil";
 }
+else if($curPage == 'manage-applications'){
+	$pageName = "manage-applications";
+	$subtitle = "Ansökningar";
+}
 
 
 else if($curPage == 'list-student'){
