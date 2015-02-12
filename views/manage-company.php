@@ -62,13 +62,13 @@ if(isset($_POST['company'])){
             redirect(PATH.'manage-company/');
         } else {
             $companyName = $company['name'];
-            $imageDirectory = ROOT_PATH . '/images/' . $companyName;
+            $imageDirectory = PUBLIC_ROOT . '/images/' . '/company/' . $companyName;
             //CHECKS IF THERE IS A DIRECTORY (IF THE COMPANY HAS AN IMAGE ALREADY)
             if(!is_dir($imageDirectory)){
                 //SETS UP THE NEW FILE DIRECTORY & UPLOADS THE IMAGE
                 $fileTmp = $_FILES['image']['tmp_name'];
-                $newDir = mkdir(ROOT_PATH . '/images/' . $companyName .'/');
-                $path = ROOT_PATH . '/images/' . $companyName .'/';
+                $newDir = mkdir(PUBLIC_ROOT . '/images/' . '/company/' . $companyName .'/');
+                $path = PUBLIC_ROOT . '/images/' . '/company/' . $companyName .'/';
                 move_uploaded_file($fileTmp, $path.$image);
                 $session->killSession('error');
             } else {
@@ -81,7 +81,7 @@ if(isset($_POST['company'])){
                 }
                 //UPLOADS THE NEW IMAGE
                 $fileTmp = $_FILES['image']['tmp_name'];
-                $path = ROOT_PATH . '/images/' . $companyName .'/';
+                $path = PUBLIC_ROOT . '/images/' . '/company/' . $companyName .'/';
                 move_uploaded_file($fileTmp, $path.$image);
                 $session->killSession('error');
             }
@@ -175,7 +175,9 @@ if(isset($_POST['company'])){
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <img src="<?php echo '/images/' . $items['name'] .'/' . $items['image']; ?>" alt=""/>
+                    <?php if (isset($items['image'])){ ?>
+                        <img src="<?php echo '/images/' . $items['name'] .'/' . $items['image']; ?>" alt=""/> <?php 
+                    } ?>
                     <label for="companyDescription">Bild:</label>
                     <input type="file" id="image" class="form-control" rows="3" name="image" accepted="image/jpeg, image/jpg, image/gif, image/png">
                     </textarea>
