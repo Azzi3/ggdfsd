@@ -18,7 +18,7 @@
           <li><a href="<?php echo $path; ?>projects">LIA-Projekt</a></li>
           <li><a href="<?php echo $path; ?>list-courses">LIA-Kurser</a></li>
           <li><a href="<?php echo $path; ?>company-list">Företag</a></li>
-          <li><a href="#">Elever</a></li>
+          <li><a href="<?php echo $path; ?>list-student">Elever</a></li>
           
           <?php if($signedUser['course_leader'] == 1) : ?>
           <li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>
@@ -29,9 +29,10 @@
           <li><a href="<?php echo $path; ?>student-profile">Profil</a></li>
 		  <?php endif; ?>
 		  
-		  <?php if($signedUser['company'] == 1) : ?>
-          <li><a href="<?php echo $path; ?>company_owner">Profil</a></li>
+		  <?php if($signedUser['company_owner'] == 1) : ?>
+          <li><a href="<?php echo $path; ?>company-profile">Profil</a></li>
 		  <?php endif; ?>
+		  
           <li><a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
