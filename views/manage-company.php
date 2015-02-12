@@ -28,6 +28,8 @@ if(isset($_GET['id'])){
     $buttonText = 'Skapa';
 }
 
+if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
+
 if(isset($_POST['company'])){
     $company = $_POST['company'];
     if (isset($_FILES['image']['name'])){
