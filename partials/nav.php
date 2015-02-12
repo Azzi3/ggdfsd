@@ -24,5 +24,6 @@
         </ul>
       </div><!-- /.navbar-collapse -->
     <?php endif; ?>
+
   </div><!-- /.container-fluid -->
 </nav>
