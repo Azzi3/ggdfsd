@@ -20,6 +20,10 @@
           <li><a href="<?php echo $path; ?>list-courses">LIA-Kurser</a></li>
           <li><a href="<?php echo $path; ?>company-list">Företag</a></li>
           <li><a href="#">Elever</a></li>
+          <?php if($signedUser['course_leader'] == 1) : ?>
+          <li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>
+          <?php endif; ?>
+          <li><a href="<?php echo $path; ?>manage-user">Redigera uppgifter</a></li>
           <li><a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
