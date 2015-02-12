@@ -1,3 +1,12 @@
+<?php 
+  if(isset($_GET['uid'])){
+    $userInfo = $user->getUserByGuid($_GET['uid']);
+  } else {
+    $userInfo = $signedUser;
+  }
+
+
+?>
 <div class="container">
 
   <div class="row">
@@ -5,7 +14,7 @@
 
       <div id="profile-img"></div>
 
-      <h2>Namn Efternamn</h2>
+      <h2> <?php echo $userInfo['firstname']; ?> </h2>
 
     </div>
   </div>
@@ -24,4 +33,3 @@
   </div>
 
 </div>
-<?php print_r($signedUser); ?>
