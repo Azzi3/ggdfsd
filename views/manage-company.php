@@ -171,8 +171,7 @@ if(isset($_POST['company'])){
                 </div>
                 <div class="form-group">
                     <label for="companyDescription">Företagsbeskrivning:</label>
-                    <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?>
-                    </textarea>
+                    <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?></textarea>
                 </div>
                 <div class="form-group">
                     <?php if (isset($items['image'])){ ?>
