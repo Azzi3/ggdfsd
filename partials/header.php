@@ -37,5 +37,3 @@
 	include("nav.php");
 
 ?>
-
-
