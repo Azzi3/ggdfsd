@@ -74,6 +74,13 @@ else if($curPage == 'manage-applications'){
 	$subtitle = "Ansökningar";
 }
 
+
+else if($curPage == 'list-student'){
+	$pageName = "list-student";
+	$subtitle = "List students";
+}
+
+
 else{
 	$pageName = "404";
 	$subTitle = "404 (Page not found)";
