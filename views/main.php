@@ -1,6 +1,17 @@
 <?php
+if($signedUser){
+	require_once('../partials/signedin-header.php');
+}
+
+
+
 if($signedUser['course_leader'] == 1){
 	require_once('../partials/leader-header.php');
+}else if($signedUser['student'] == 1){
+	require_once('../partials/student-header.php');
+}
+else{
+	//null
 }
 ?>
 
