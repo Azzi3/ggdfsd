@@ -12,12 +12,12 @@ if(isset($_GET['deleteid'])){
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort</h4>
+				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort?</h4>
 			</div>
 		
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="reallyDelete" type="button" class="btn btn-danger">Tabort</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+				<button id="reallyDelete" type="button" class="btn btn-danger">Ta bort</button>
 			</div>
 		</div>
 	</div>
