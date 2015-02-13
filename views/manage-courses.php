@@ -17,7 +17,6 @@ $items = array('name'=>'',
 //fetch ID (it's an edit)
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-
     $items = $course->getFromId($id);
     //$usedTags = $courseTag->getAllFromCourseId($id);
 
@@ -30,25 +29,43 @@ if(isset($_GET['id'])){
 //insert function
 if(isset($_POST['course'])){
     $courseItems = $_POST['course'];
+    $session->setSession('form',$courseItems);
+    $error = array();
+    if(strlen($courseItems['name']) < 2 || strlen($courseItems['name']) > 40){
+        $error[] .= 'Namnet måste vara mellan 2 och 40 tecken.';
+    }
+    if(strlen($courseItems['description']) < 2 || strlen($courseItems['description']) > 400){
+        $error[] .= 'Beskrivingen måste mellan 2 och 400 tecken.';
+    }
+    if(!is_numeric($courseItems['course_start'])){
+        $error[] .= 'Felaktigt datum.';
+    }
+    if(!is_numeric($courseItems['course_end']) || $courseItems['course_end'] < $courseItems['course_start']){
+        $error[] .= 'Felaktigt datum.';
+    }
 
-    if(isset($_POST['tag'])){
-        $tags = $_POST['tag'];
+    if(count($error) > 0){
+        $session->setSession('error',$error);
     }else{
-        $tags = array();
-    }
 
-    if($id > 0){
-        $course->updateCourse($courseItems, $id);
-    }
-    else{
-        $course->create($courseItems);
-    }
-    
 
-    redirect($path.'list-courses/');
+        if(isset($_POST['tag'])){
+            $tags = $_POST['tag'];
+        }else{
+            $tags = array();
+        }
 
-}
-?>
+        if($id > 0){
+            $liaProject->updateProject($project, $tags, $id);
+        }
+        else{
+            $liaProject->create($project, $tags);
+        }
+        $session->killSession('error');
+        $session->killSession('projects');
+        redirect($path.'projects/');
+    }
+} ?>
 
 <div class="container">
     <div class="jumbotron">
