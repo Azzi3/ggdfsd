@@ -60,9 +60,9 @@ else if($curPage == 'register') {
 	$subTitle = "Registrera";
 }
 
-else if($curPage == 'list-courses') {
-	$pageName = "list-courses";
-	$subTitle = "Kurslista";
+else if($curPage == 'course-list') {
+	$pageName = "course-list";
+	$subTitle = "Kurser";
 }
 
 else if($curPage == 'student-profile' && $signedUser){

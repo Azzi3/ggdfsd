@@ -4,7 +4,11 @@ $projects = $liaProject->getAll();
 if(isset($_GET['deleteid'])){
 	$liaProject->deleteProjectAndTag($_GET['deleteid']);
 	redirect(CURRENT_PATH);
-}?>
+}
+
+
+
+?>
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
