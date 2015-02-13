@@ -22,7 +22,53 @@ if(isset($_GET['id'])){
 }
 
 if(isset($_POST['company'])){
-    $company = $_POST['company'];
+    $form = $_POST['company'];
+    $session->setSession('company',$form);
+    $error = array();
+
+    if(strlen($form['contactPersonName']) < 2 || strlen($form['contactPersonName']) > 40){
+        $error[] .= 'Namnet måste vara mellan 2 och 40 tecken.';
+    }
+
+    if(!is_numeric($form['contactPersonTel'])){
+        $error[] .= 'Telefonnumret är inte giltig.';
+    }
+
+    if(!filter_var($form['contactPersonEmail'], FILTER_VALIDATE_EMAIL)){
+        $error[] .= 'E-post adressen är inte giltig.';
+    }
+
+    if(strlen($form['companyName']) < 2 || strlen($form['companyName']) > 40){
+        $error[] .= 'Namnet måste vara mellan 2 och 40 tecken.';
+    }
+
+    if(strlen($form['street_address']) < 2 || strlen($form['street_address']) > 40){
+        $error[] .= 'Adressen måste vara mellan 2 och 40 tecken.';
+    }
+
+    if(!is_numeric($form['zip_code'])){
+        $error[] .= 'Postnumret är inte giltig.';
+    }
+
+    if(strlen($form['city']) < 2 || strlen($form['city']) > 40){
+        $error[] .= 'Stadens namn måste vara mellan 2 och 40 tecken.';
+    }
+
+    if(!filter_var($form['website_url'], FILTER_VALIDATE_URL)){
+        $error[] .= 'Webbadressen är inte giltig.';
+    }
+
+    if(strlen($form['description']) < 2 || strlen($form['description']) > 1000){
+        $error[] .= 'Beskrivningen måste vara mellan 2 och 1000 tecken.';
+    }
+
+
+    
+
+
+      if(count($error) > 0){
+        $session->setSession('error',$error);
+    }
 
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
@@ -81,16 +127,16 @@ if(isset($_POST['company'])){
                 </div>
                 <div class="form-group">
                     <label for="companyZipCode">Postnummer</label>
-                    <input type="number" class="form-control" value="<?php echo $items['zip_code'] ?>" id="zip_code" name="company[zip_code]">
+                    <input type="number" class="form-control" value="<?php echo $items['zip_code'] ?>" id="zip_code" name="company[zip_code]" required>
                 </div>
                 <div class="form-group">
                     <label for="companyCity">Postort</label>
-                    <input type="text" class="form-control" id="city" value="<?php echo $items['city'] ?>" name="company[city]" required>
+                    <input type="text" class="form-control" id="city" value="<?php echo $items['city'] ?>" name="company[city]">
                 </div>
 
                 <div class="form-group">
                     <label for="companyURL">Webbadress:</label>
-                    <input type="text" class="form-control" id="website_url" value="<?php echo $items['website_url'] ?>" name="company[website_url]">
+                    <input type="url" class="form-control" id="website_url" value="<?php echo $items['website_url'] ?>" name="company[website_url]">
                 </div>
                 <div class="form-group">
                     <label for="companyDescription">Företagsbeskrivning:</label>
