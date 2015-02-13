@@ -1,3 +1,5 @@
+
+/*----------------------- Student profile ----------------------*/
 .profile-img {
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -8,3 +10,13 @@
 .edit-anchor{
   font-size: 30px;
 }
+
+.info-list{
+  list-style: none;
+}
+
+.description{
+  padding: 0 50px;
+}
+
+/*-----------------------  ----------------------*/
