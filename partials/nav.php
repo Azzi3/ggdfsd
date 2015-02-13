@@ -21,29 +21,26 @@
           <li><a href="<?php echo $path; ?>projects">LIA-Projekt</a></li>
           <li><a href="<?php echo $path; ?>course-list">LIA-Kurser</a></li>
           <li><a href="<?php echo $path; ?>company-list">Företag</a></li>
-          <li><a href="<?php echo $path; ?>student-list">Elever</a></li>
+          <li><a href="<?php echo $path; ?>list-student">Elever</a></li>
            
           <li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
           	
-            <?php if($signedUser['student'] == 1) : ?>
-            <?php echo $signedUser['firstname'] . " " . $signedUser['lastname']?><span class="caret"></span></a>
-            <?php endif; ?>
-
-            <?php if($signedUser['course_leader'] == 1) : ?>
-            <?php echo $signedUser['firstname'] . " " . $signedUser['lastname']?><span class="caret"></span></a>
-            <?php endif; ?>
-            
-            <?php if($signedUser['company_owner'] == 1) : 
-              if($signedUser['company_id'] != 0){
-                $companyName = $company->getFromId($signedUser['company_id'])['name'];
-                }else {
-                  $companyName = 'Company name!';
-                }
-                echo $companyName;
-                ?>
-                <span class="caret"></span></a>
-            <?php endif; ?>
+          	<?php if($signedUser['student'] == 1) : ?>
+          	<?php echo $signedUser['firstname']?><span class="caret"></span></a>
+          	<?php endif; ?>
+          	
+          	<?php if($signedUser['company_owner'] == 1) : 
+	        if($signedUser['company_id'] != 0){
+		        $companyName = $company->getFromId($signedUser['company_id'])['name'];
+	        }else {
+		        $companyName = 'Inget';
+	        }
+	        echo $companyName;
+			?>
+          	 
+          	 <span class="caret"></span></a>
+          	<?php endif; ?>
           	
 		  	<ul class="dropdown-menu" role="menu">
           		<?php if($signedUser['student'] == 1) : ?>
