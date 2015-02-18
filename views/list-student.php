@@ -14,7 +14,7 @@ $students = $studentObj->getAll();
 		
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="reallyDelete" type="button" class="btn btn-danger">Tabort</button>
+				<button id="reallyDelete" type="button" class="btn btn-danger">Ta bort</button>
 			</div>
 		</div>
 	</div>

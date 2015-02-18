@@ -19,7 +19,7 @@ if(isset($_GET['deleteid'])){
 		
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="reallyDelete" type="button" class="btn btn-danger">Tabort</button>
+				<button id="reallyDelete" type="button" class="btn btn-danger">Ta bort</button>
 			</div>
 		</div>
 	</div>
@@ -68,7 +68,7 @@ if(isset($_GET['deleteid'])){
 						} ?></td>
 						<td>
 							<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
-							<a id="deleteProjectBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>
+							<a id="deleteProjectBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
 
 						</td>
 				</tr>
