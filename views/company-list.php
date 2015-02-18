@@ -33,6 +33,25 @@ if(isset($_GET['deleteid'])){
 </div>
 
 <div class="container">
+
+
+<?php
+
+	if(isset($_POST['search'])){
+
+		$serachVal = $_POST['search'];
+		$companies = $companyObj->searchResult($serachVal);
+
+	}
+
+?>
+
+
+<form action="" method="POST" accept-charset="utf-8">
+<input type="text" name="search" value="" placeholder="Sök företag"> <button type="submit">Sök</button>
+</form>
+
+
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>

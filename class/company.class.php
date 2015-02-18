@@ -19,6 +19,19 @@ class Company extends Database{
 		return $this->select($str, $arr);
 	}
 
+	public function searchResult($string){
+
+		$str = " SELECT * FROM $this->tbl WHERE
+		name LIKE :string
+		OR description LIKE :string 
+		OR city LIKE :string ";
+
+		$arr = array('string' => "%".$string."%");
+
+		return $this->selectAll($str, $arr);
+
+	}
+
 
 	public function createCompanyAndContact($item, $tags, $image){
 

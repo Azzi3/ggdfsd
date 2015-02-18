@@ -29,7 +29,27 @@ $students = $studentObj->getAll();
     </div>
 </div>
 
+
+
+<?php
+
+	if(isset($_POST['search'])){
+
+		$serachVal = $_POST['search'];
+		$students = $studentObj->searchResult($serachVal);
+
+	}
+
+?>
+
+
+
 <div class="container">
+
+<form action="" method="POST" accept-charset="utf-8">
+<input type="text" name="search" value="" placeholder="Sök student"> <button type="submit">Sök</button>
+</form>
+
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>
