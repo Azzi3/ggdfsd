@@ -21,7 +21,7 @@ class LiaProject extends Database{
 
 	public function create($item, $tags){
 
-		$str = " INSERT INTO $this->tbl (name, description, spots, company, estimated_time)
+		$str = " INSERT INTO $this->tbl (name, description, spots, company_id, estimated_time)
 		VALUES(:name, :description, :spots, :company, :estimated_time) ";
 		$arr = array('name'=>$item['name'],
 					'description'=>$item['description'],
@@ -47,7 +47,7 @@ class LiaProject extends Database{
 		$str = " UPDATE $this->tbl SET name = :name,
 		description = :description,
 		spots = :spots,
-		company = :company,
+		company_id = :company,
 		estimated_time = :estimated_time 
 		WHERE id = :id ";
 
@@ -81,7 +81,7 @@ class LiaProject extends Database{
 		$str = " UPDATE $this->tbl SET name=:name,
 			description=:description,
 			spots=:spots,
-			company=:company,
+			company_id=:company,
 			estimated_time=:estimated_time
 			WHERE id = :id";
 
