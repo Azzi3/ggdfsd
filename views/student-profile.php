@@ -21,7 +21,7 @@
     <div class="jumbotron">
 
       <?php if($session->getSession('guid') == $userInfo['guid']) : ?>
-        <a class="edit-anchor" href="<?php echo $path; ?>manage-user"> <i class="glyphicon glyphicon-pencil pull-right"></i></a>
+        <a class="edit-anchor" href="<?php echo $path; ?>manage-user"><button class="btn pull-right">Redigera uppgifter</button></a>
       <?php endif; ?>
 
       <div class="row">
@@ -44,10 +44,18 @@
     <div class="col-md-4">
       <h3 class="text-center">Info</h3>  
       
+<<<<<<< HEAD
+      <ul class="info-list">
+        <li> <?php echo $studentProfileInfo['phone']; ?> </li>
+        <li> <?php echo $userInfo['email']; ?> </li>
+        <li> <a href="<?php echo $studentProfileInfo['website']; ?>" target="_blank"><?php echo $studentProfileInfo['website']; ?></a>  </li>
+        <li> <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['resume']; ?>" target="_blank"> <?php echo $studentProfileInfo['resume'] ?> </a> </li>
+=======
       <ul>
         <li>Telefon: <?php echo $studentProfileInfo['phone']; ?> </li>
         <li>Email: <?php echo $userInfo['email']; ?> </li>
         <li>Hemsida: <?php echo $studentProfileInfo['website']; ?> </li>
+>>>>>>> origin/master
       </ul>
 
     </div>
