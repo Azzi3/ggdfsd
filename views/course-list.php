@@ -20,7 +20,7 @@ if($signedUser['course_leader']){
 		
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="reallyDelete" type="button" class="btn btn-danger">Tabort</button>
+				<button id="reallyDelete" type="button" class="btn btn-danger">Ta bort</button>
 			</div>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ if($signedUser['course_leader']){
 							<?php 
 							if($signedUser['course_leader']){
 								echo $editBtn  = '<a href="'. $path . 'manage-courses?id='. $course['id'].'"><button class="btn">Ändra</button></a>';
-								echo $deleteBtn  = '<a id="deleteCourseBtn" data-courseid="'. $course['id']. '" class="btn" data-toggle="modal" data-target="#deleteModal" >Tabort</a>';
+								echo $deleteBtn  = '<a id="deleteCourseBtn" data-courseid="'. $course['id']. '" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>';
 							}
 							 ?>
 
