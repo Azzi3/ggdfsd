@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Databas: `lia-projekt`
 --
+DROP DATABASE `lia-projekt`;
 CREATE DATABASE IF NOT EXISTS `lia-projekt` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 USE `lia-projekt`;
 
