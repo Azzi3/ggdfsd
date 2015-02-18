@@ -19,6 +19,12 @@ if(isset($_GET['id'])){
     $items = $liaProject->getFromId($id);
     $usedTags = $projectTag->getAllFromProjectId($id);
 
+
+    if($signedUser['company_id'] != $items['company_id']){
+        redirect($path.'404');
+    }
+
+
     $buttonText = 'Spara';
 }else{
     $id = 0;
@@ -28,6 +34,7 @@ if(isset($_GET['id'])){
 //insert function
 if(isset($_POST['project'])){
     $project = $_POST['project'];
+    $project['company']=$signedUser['company_id'];
 
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
@@ -62,10 +69,6 @@ require_once('../partials/project-header.php');
             <label for="spots">Antal platser</label>
             <input type="number" name="project[spots]" value="<?php echo $items['spots']; ?>" class="form-control" id="spots" placeholder="Antal platser" required>
           </div>
-    	  <div class="form-group">
-    	    <label for="company">Företag</label>
-    	    <input type="text" name="project[company]" value="<?php echo $items['company']; ?>" class="form-control" id="company" placeholder="Företag" required>
-    	  </div>
     	  <div class="form-group">
     	    <label for="file">Uppskattad tid</label>
     	    <input class="form-control" name="project[estimated_time]"  value="<?php echo $items['estimated_time']; ?>" type="text" placeholder="Uppskattad tid" id="file" required>
