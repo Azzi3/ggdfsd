@@ -61,19 +61,13 @@ $students = $studentObj->getAll();
 			</thead>
 
 			<tbody>
-				<?php foreach ($students as $student){  ?>
+				<?php foreach ($students as $student) :  ?>
 				<tr>
-					<td><?php echo $student['firstname'] ?></td>
+					<td><a href="<?php echo $path.'student-profile?uid='.$student['guid']; ?>"><b><?php echo $student['firstname'] ?></b></a></td>
 					<td style="max-width: 10em"><?php echo $student['lastname'] ?></td>
 					<td><?php echo $student['email'] ?></td>
-					
-						<!-- Use later when manage is created-->
-					<td>
-						<a href="<?php echo $path; ?>manage-students?id=<?php echo $student['id']; ?>"><button class="btn">Ändra</button></a>
-							<a id="deleteStudentBtn" data-companyid="<?php echo $student['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
-					</td>
-					</tr>
-					<?php } ?>
+				</tr>
+					<?php endforeach; ?>
 				</tbody>
 
 			</div>
