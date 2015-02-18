@@ -31,10 +31,11 @@ USE `lia-projekt`;
 -- Definition for table application_form
 --
 CREATE TABLE IF NOT EXISTS application_form (
+  id INT(11) NOT NULL AUTO_INCREMENT,
   student_guid VARCHAR(255) NOT NULL DEFAULT '0',
   company_id INT(11) NOT NULL DEFAULT 0,
   approved TINYINT(1) DEFAULT NULL,
-  PRIMARY KEY (student_guid, company_id)
+  PRIMARY KEY (id)
 )
   ENGINE = INNODB
   CHARACTER SET utf8
