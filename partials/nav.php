@@ -27,7 +27,7 @@
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
           	
           	<?php if($signedUser['student'] == 1) : ?>
-          	<?php echo $signedUser['firstname']?><span class="caret"></span></a>
+          	<?php echo $signedUser['firstname']?>
           	<?php endif; ?>
           	
           	<?php if($signedUser['company_owner'] == 1) : 
@@ -38,24 +38,23 @@
 	        }
 	        echo $companyName;
 			?>
-          	 
-          	 <span class="caret"></span></a>
+          	  
           	<?php endif; ?>
-          	
+        <span class="caret"></span></a>
+
 		  	<ul class="dropdown-menu" role="menu">
-          		<?php if($signedUser['student'] == 1) : ?>
-          		<li><a href="<?php echo $path; ?>student-profile">Min profil</a></li>
+          <?php if($signedUser['student'] == 1) : ?>
+          <li><a href="<?php echo $path; ?>student-profile">Min profil</a></li>
 		  		<li><a href="<?php echo $path; ?>manage-applications">Mina ansökningar</a></li>
-		  		<?php endif; ?>
 		  
-		  		<?php if($signedUser['company_owner'] == 1) : ?>
+		  		<?php elseif($signedUser['company_owner'] == 1) : ?>
 		  		<li><a href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Profil</a></li>
 		  		<li><a href="<?php echo $path; ?>manage-applications">Ansökningar</a></li>
-		  		<?php endif; ?>
 		  		
-		  		<?php if($signedUser['course_leader'] == 1) : ?>
+		  		<?php elseif($signedUser['course_leader'] == 1) : ?>
 		  		<li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>
 		  		<?php endif; ?>
+
 		  		<li><a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut</a></li>
 		  	</ul>
 		  </li>		          
