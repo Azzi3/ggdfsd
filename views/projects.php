@@ -30,8 +30,9 @@ if(isset($_GET['deleteid'])){
 		<h1>Projekt!</h1>
 		<a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
 		<a class="btn btn-primary" href="<?php echo $path; ?>projects" role="button">Visa projekt</a>
-		<a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-projects" role="button">Lägg upp Projekt</a>
-
+			<?php if($signedUser['company_owner'] == 1) : ?>
+				<a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-projects" role="button">Lägg upp Projekt</a>
+			<?php endif;?>
 	</div>
 </div>
 <div class="container">
@@ -49,13 +50,17 @@ if(isset($_GET['deleteid'])){
 			</thead>
 
 			<tbody>
-				<?php foreach ($projects as $project){  ?>
+				<?php $company = new Company();
+				 foreach ($projects as $project){ 
+						$companyInfo = $company->getFromId($project['company_id']);
+
+					?>
 				<tr>
-					<td><?php echo $project['name'] ?></td>
-					<td style="max-width: 10em"><?php echo $project['description'] ?></td>
-					<td><?php echo $project['company'] ?></td>
-					<td><?php echo $project['spots'] ?></td>
-					<td><?php echo $project['estimated_time'] ?></td>
+					<td><?php echo $project['name']; ?></td>
+					<td style="max-width: 10em"><?php echo $project['description']; ?></td>
+					<td><?php echo $companyInfo['name']; ?></td>
+					<td><?php echo $project['spots']; ?></td>
+					<td><?php echo $project['estimated_time']; ?></td>
 					<td><?php
 						$counter = 0;
 						$projectTags = $liaProject->getTags($project['id']);
@@ -67,8 +72,10 @@ if(isset($_GET['deleteid'])){
 
 						} ?></td>
 						<td>
-							<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
-							<a id="deleteProjectBtn" data-projectid="<?php echo $project['id'] ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+							<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
+								<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
+								<a id="deleteCompanyBtn" data-companyid="<?php echo $project['company_id']; ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+							<?php endif; ?>
 
 						</td>
 				</tr>
