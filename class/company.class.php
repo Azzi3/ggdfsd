@@ -176,6 +176,21 @@ class Company extends Database{
 		return $this->selectAll($str, $arr);
 	}
 
+	
+	/**
+	* Get all the projects that belong to the company
+	*/
+	public function getProjects($id) {
+
+		$str = " SELECT *
+				FROM lia_project
+				WHERE company_id = :id ";
+
+		$arr = array('id' => $id);
+
+		return $this->selectAll($str, $arr);
+	}
+
 	public function getContact($contactId){
 		$str = "SELECT * 
 		FROM contact_person
