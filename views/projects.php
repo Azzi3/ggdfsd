@@ -74,7 +74,7 @@ if(isset($_GET['deleteid'])){
 						<td>
 							<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
 								<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
-								<a id="deleteCompanyBtn" data-companyid="<?php echo $project['company_id']; ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+								<a id="deleteProjectBtn" data-projectid="<?php echo $project['id']; ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
 							<?php endif; ?>
 
 						</td>
