@@ -177,11 +177,7 @@ CREATE TABLE IF NOT EXISTS project_tag (
   tag_id INT(11) NOT NULL,
   PRIMARY KEY (id),
   INDEX project_id (project_id),
-  INDEX tag_id (tag_id),
-  CONSTRAINT project_tag_ibfk_1 FOREIGN KEY (project_id)
-    REFERENCES lia_project(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT project_tag_ibfk_4 FOREIGN KEY (tag_id)
-    REFERENCES tag(id) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX tag_id (tag_id)
 )
 ENGINE = INNODB
 AUTO_INCREMENT = 26

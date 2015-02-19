@@ -2,7 +2,7 @@
 $liaProject = new LiaProject();
 $projects = $liaProject->getAll();
 if(isset($_GET['deleteid'])){
-	$liaProject->deleteProjectAndTag($_GET['deleteid']);
+	$liaProject->deleteProjectAndTag($_GET['deleteid'], $signedUser['company_id']);
 	redirect(CURRENT_PATH);
 }
 
@@ -14,11 +14,11 @@ if(isset($_GET['deleteid'])){
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort</h4>
+				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort </h4>
 			</div>
 		
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 				<button id="reallyDelete" type="button" class="btn btn-danger">Ta bort</button>
 			</div>
 		</div>
@@ -74,7 +74,7 @@ if(isset($_GET['deleteid'])){
 						<td>
 							<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
 								<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
-								<a id="deleteProjectBtn" data-projectid="<?php echo $project['id']; ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+								<a id="deleteProjectBtn" data-name="<?php echo $project['name'];  ?>" data-projectid="<?php echo $project['id']; ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
 							<?php endif; ?>
 
 						</td>
