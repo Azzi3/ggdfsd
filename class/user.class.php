@@ -119,10 +119,17 @@ class User extends Database{
 
 	public function updateUser($items = array()){
 
-		$token = randomStr();
-		$cleanPassword = $items['password'];
+		$oldSettings = $this->getUserByGuid($items['guid']);
 
-		$cryptedPassword = cryptPassword($cleanPassword, $token);
+		if(strlen($items['password']) > 0){
+			$token = randomStr();
+			$cleanPassword = $items['password'];
+			$cryptedPassword = cryptPassword($cleanPassword, $token);
+		}
+		else{
+			$token = $oldSettings['token'];
+			$cryptedPassword = $oldSettings['password'];
+		}
 
 		$str = " UPDATE $this->tbl SET email = :email,
 										password = :password,

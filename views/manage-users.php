@@ -84,6 +84,7 @@ if(isset($_POST['manage'])){
 
 
 
+
     $form = array_merge($formFiller, $form);
 
     $form['guid'] = $thisUser['guid'];
@@ -96,12 +97,17 @@ if(isset($_POST['manage'])){
     if($user->checkUniqueEmail($form['email'], $thisUser['guid'])){
         $error[] .= 'Epostadressen är redan registrerad.';
     }
-    if(strlen($form['password']) < 2 || strlen($form['password']) > 30){
-        $error[] .= 'Välj ett lösenord mellan 2 och 30 tecken.';
+
+
+    if(strlen($form['password']) > 0){
+        if(strlen($form['password']) < 2 || strlen($form['password']) > 30){
+            $error[] .= 'Välj ett lösenord mellan 2 och 30 tecken.';
+        }
+        if($form['password'] != $form['password2']){
+            $error[] .= 'Lösenorden stämmer inte överens.';
+        }
     }
-    if($form['password'] != $form['password2']){
-        $error[] .= 'Lösenorden stämmer inte överens.';
-    }
+
     if(strlen($form['firstname']) < 2 || strlen($form['firstname']) > 30){
         $error[] .= 'Välj ett förnamn mellan 2 och 30 tecken.';
     }
@@ -181,12 +187,12 @@ if(isset($_POST['manage'])){
             <input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="manage[email]" placeholder="Epostadress" required>
         </div>
         <div class="form-group">
-            <label for="pword">*Lösenord</label>
-            <input type="password" class="form-control" id="pword" name="manage[password]" placeholder="Lösenord" required>
+            <label for="pword">**Lösenord</label>
+            <input type="password" class="form-control" id="pword" name="manage[password]" placeholder="Lösenord">
         </div>
         <div class="form-group">
-            <label for="pword2">*Validera lösenord</label>
-            <input type="password" class="form-control" id="pword2" name="manage[password2]" placeholder="Validera lösenord" required>
+            <label for="pword2">**Validera lösenord</label>
+            <input type="password" class="form-control" id="pword2" name="manage[password2]" placeholder="Validera lösenord">
         </div>
         <br>
         <div class="form-group">
@@ -247,7 +253,8 @@ if(isset($_POST['manage'])){
         </div>
 
 
-        * måste anges<br>
+        * Måste anges<br>
+        ** Lämnas blankt om du vill behålla nuvarande lösenord<br>
         <button class="btn" type="submit">Spara uppgifter</button>
 
     </form>

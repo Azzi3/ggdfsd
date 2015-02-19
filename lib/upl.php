@@ -8,6 +8,7 @@ class Upl{
 	private $fileEnding;
 	private $filetype;
 	private $imageFiles = array('jpg', 'jpeg', 'gif', 'png');
+	private $fileFiles = array('pdf', 'txt', 'doc', 'docx');
 	public $fileInfo = array();
 
 
@@ -17,7 +18,7 @@ class Upl{
 	 * Will set the fileextension
 	 */
 	public function upload($file, $uplPath, $thumbWidth = 100, $thumbHeight = 100, $onlyPicture = 0){
-		$filename = $file['name'];
+		$filename = strtolower($file['name']);
 		$fileTmpName = $file['tmp_name'];
 		$this->fileInfo['image'] = 0;
 		$this->fileInfo['file'] = 0;
@@ -38,7 +39,7 @@ class Upl{
 			$this->cropImage($uplPath, $filename, $this->fileEnding, $thumbWidth, $thumbHeight);
 		}
 		//It's a file
-		else{
+		else if(in_array($this->fileEnding, $this->fileFiles)){
 			if($onlyPicture == 0){
 				$this->fileInfo['file'] = 1;
 
@@ -49,6 +50,9 @@ class Upl{
 			else{
 				return;
 			}
+		}
+		else{
+			return;
 		}
 
 		return $this->fileInfo;
