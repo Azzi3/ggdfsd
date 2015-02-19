@@ -27,7 +27,7 @@ public function __destruct() {
 	public function delete($sqlStr, $execArray = array()){
 
 		$str = $this->conn->prepare($sqlStr);
-		$str->execute($execArray);
+		return $str->execute($execArray);
 	}
 
 	//Insert function

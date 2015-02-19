@@ -7,13 +7,19 @@ class ApplicationForm extends Database{
 		$str = " SELECT * FROM $this->tbl WHERE company_id= :id ";
 		$arr = array('id'=>$id);
 
-		return $this->select($str, $arr);
+		return $this->selectAll($str, $arr);
 	}
 	public function getAllWhereStudentGuid($guid){
 		$str = " SELECT * FROM $this->tbl WHERE student_guid= :guid ";
 		$arr = array('guid'=>$guid);
 
-		return $this->select($str, $arr);
+		return $this->selectAll($str, $arr);
+	}
+
+	public function deleteApplication($id){
+		$str = " DELETE FROM $this->tbl WHERE id= :id";
+		$arr = array('id'=>$id);
+		return $this->delete($str, $arr);
 	}
 
 }
