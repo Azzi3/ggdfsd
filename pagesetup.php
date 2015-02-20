@@ -73,6 +73,10 @@ else if($curPage == 'manage-applications' && $signedUser){
 	$pageName = "manage-applications";
 	$subtitle = "Ansökningar";
 }
+else if($curPage == 'project-info'){
+	$pageName = "Project-info";
+	$subtitle = "Projektinfo";
+}
 
 
 else if($curPage == 'list-student'){

@@ -57,7 +57,7 @@ if(isset($_GET['deleteid'])){
 					?>
 				<tr>
 					<td><?php echo $project['name']; ?></td>
-					<td style="max-width: 10em"><?php echo $project['description']; ?></td>
+					<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['company_id']; ?>">Läs mer...<a> </td>
 					<td><?php echo $companyInfo['name']; ?></td>
 					<td><?php echo $project['spots']; ?></td>
 					<td><?php echo $project['estimated_time']; ?></td>
