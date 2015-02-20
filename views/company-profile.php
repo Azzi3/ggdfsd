@@ -11,6 +11,7 @@
   
   $companyInfo = $company->getFromId($signedUser['company_id']);
   $companyProfileInfo = $company->getFromId($userInfo['company_id']);
+  $contact = $company->getContact($companyInfo['id_contact_person'])[0];
   $userCounty = $county->getMunicipalityName($userInfo['municipality']);
   $companyTags = $company->getTags($signedUser['company_id']);
   $companyProjects = $company->getProjects($signedUser['company_id']);
@@ -50,20 +51,29 @@
       <h3 class="text-center">Info</h3>  
       
       <ul>
-				<li>Telefon: <?php echo $companyProfileInfo['phone']; ?> </li> 
-        <li>Email: <?php echo $userInfo['email']; ?> </li>
-        <li>Hemsida: <?php echo $companyProfileInfo['website_url']; ?> </li>
+				<dl>
+          <dt>Kontaktperson</dt>
+          <dd><?php echo $contact['name']; ?></dd>
+          <dd>Telefon: <?php echo $contact['phone'] ?></dd>
+          <dd>Email: <?php echo $contact['email'] ?></dd>
+        </dl>
+        
+        <dl>
+          <dt>Företag</dt>
+          <dd>Företagsmail: <?php echo $userInfo['email']; ?></dd>
+          <dd>Hemsida: <?php echo $companyProfileInfo['website_url']; ?></dd>
+        </dl>
       </ul>
 
     </div>
 
     <div class="col-md-8">
-      <h3 class="text-center">Om</h3>
+      <h3 class="text-center">Om oss</h3>
         <p><?php echo $companyProfileInfo['description']; ?></p>
       
       <hr>
       
-      <h3 class="text-center">Mina kunskaper</h3>
+      <h3 class="text-center">Våra områden</h3>
 
 	  <div class="tags text-center">
         
@@ -84,7 +94,7 @@
   </div>
   
   <div class="row">
-  	<div class="col-md-12"><h2 class="text-center">VÅRA PROJECT</h2></div>
+  	<div class="col-md-12"><h3 class="text-center">Våra projekt</h3></div>
   </div>
 
 
