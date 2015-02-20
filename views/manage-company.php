@@ -31,9 +31,12 @@ if(isset($_GET['id'])){
     if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
 }
 
+
+
 if(isset($_POST['company'])){
     $company = $_POST['company'];
-    if (!empty($_FILES['picture']['name'])){
+
+    if ($_FILES['picture']['name'] != ""){
         $image = $_FILES['picture'];
         $errors = array();
         $maxsize = 2097152;
@@ -55,6 +58,8 @@ if(isset($_POST['company'])){
             redirect(PATH.'manage-company/');
         }
   
+    } else{
+        $picturename['name'] = $items['image'];
     }
 
     if(isset($_POST['tag'])){
@@ -142,6 +147,16 @@ if(isset($_POST['company'])){
                     <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?></textarea>
                 </div>
                 
+                <div class="form-group">
+                    <?php if($items['image']): ?>
+                        <img src=" <?php echo $path . "images/company/" . $items['name'] . "/tum_" . $items['image'] ?> " alt="">
+                        <a href="#"><button class="btn btn-danger">Ta bort</button></a>
+                        
+                    <?php else: ?>
+                        <p>Ingen profilbild uppladdad</p>
+                    <?php endif; ?>
+                </div>
+
                 <div class="form-group">
                     <label for="resume">Ladda upp profilbild</label>
                     <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
