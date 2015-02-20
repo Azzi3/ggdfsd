@@ -20,12 +20,13 @@ class Course extends Database{
 
   public function create($item, $tags){
 
-    $str = " INSERT INTO $this->tbl (name, description, course_start, course_end)
-    VALUES(:name, :description, :course_start, :course_end) ";
+    $str = " INSERT INTO $this->tbl (name, description, course_start, course_end, file)
+    VALUES(:name, :description, :course_start, :course_end, :file) ";
     $arr = array('name'=>$item['name'],
           'description'=>$item['description'],
           'course_start'=>$item['course_start'],
-          'course_end'=>$item['course_end']);
+          'course_end'=>$item['course_end'],
+          'file'=>$item['file']);
 
     $lastCourseId = $this->insert($str, $item);
 
@@ -45,7 +46,8 @@ class Course extends Database{
     $str = " UPDATE $this->tbl SET name = :name,
     description = :description,
     course_start = :course_start,
-    course_end = :course_end 
+    course_end = :course_end,
+    file = :file
     WHERE id = :id ";
 
 
@@ -53,7 +55,8 @@ class Course extends Database{
           'description'=>$item['description'],
           'course_start'=>$item['course_start'],
           'course_end'=>$item['course_end'],
-          'id'=>$id);
+          'id'=>$id,
+          'file'=>$item['file']);
 
 
     $this->update($str, $arr);

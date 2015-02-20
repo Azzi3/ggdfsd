@@ -39,7 +39,11 @@ else{
 
 
 if(isset($_POST['course'])){
+
   $form = $_POST['course'];
+  $file = $_FILES['uplFile'];
+  $form['file'] = '';
+
   $session->setSession('form',$form);
   $error = array();
 
@@ -50,13 +54,24 @@ if(isset($_POST['course'])){
   if(strlen($form['description']) < 2 || strlen($form['description']) > 300){
     $error[] .= 'En beskrivning måste vara mellan 2 och 300 tecken.';
   }
+
+
+  $uplPath = PUBLIC_ROOT.'/files/';
+
+  $upl = new Upl();
+
+    if(strlen($file['tmp_name']) > 0){
+        $fileName = $upl->upload($file, $uplPath);
+        $form['file'] = $fileName['name'];
+    }
+
   
   if(count($error) > 0){
       $session->setSession('error',$error);
   }  
   else {
  
-    $courseItems = $_POST['course'];
+    $courseItems = $form;
 
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
@@ -65,12 +80,19 @@ if(isset($_POST['course'])){
     }
 
     if($id > 0){
+
+      if($courseItems['file'] == ''){
+        $courseItems['file'] = $items['file'];
+      }
+
         $course->updateCourse($courseItems, $tags, $id);
+      
     }
     else{
         $course->create($courseItems, $tags);
     }
-      redirect($path.'list-courses/');
+      $session->killSession('form');
+      redirect($path.'course-list');
 
        
   }
@@ -96,7 +118,7 @@ if(isset($_POST['course'])){
 </div>
 
     <div class="container">  
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
 
           <?php
             //show error if error-session is active
@@ -130,6 +152,16 @@ if(isset($_POST['course'])){
           <div class="form-group">
             <label for="courseEnd">Slutdatum</label>
             <input type="date" name="course[course_end]" value="<?php echo $formFiller['course_end']; ?>" class="form-control" id="courseEnd" placeholder="yyyy-mm-dd" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" required>
+          </div>
+
+          <div class="form-group">
+            <label for="uplFile">Ladda upp Fil</label>
+            <input type="file" name="uplFile" value="" id="uplFile" placeholder="Ladda upp FIl">
+            <?php if(isset($items) && strlen($items['file']) > 1) : ?>
+              Nuvarande fil: <b><?php echo $items['file']; ?>.</b>
+            <?php else : ?>
+              <b>Ingen nuvarande fil.</b>
+            <?php endif; ?>
           </div>
           
           <div class="form-group">

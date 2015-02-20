@@ -45,6 +45,8 @@ if($signedUser['course_leader']){
 					<th>Startdatum</th>
 					<th>Slutdatum</th>
 					<th>Taggar</th>
+					<th>Fil</th>
+					<th></th>
 				</tr>
 			</thead>
 
@@ -70,6 +72,12 @@ if($signedUser['course_leader']){
 								} 
 							?>
 						</td>   
+						<td>
+						<?php if(strlen($course['file']) > 1) : ?>
+						<a href="<?php echo $path.'files/'.$course['file']; ?>"><button class="btn" type="button">Ladda ner</button></a>
+						<?php endif; ?>
+						</td>
+
 						<td>   
 							<?php 
 							if($signedUser['course_leader']){
@@ -79,6 +87,7 @@ if($signedUser['course_leader']){
 							 ?>
 
 						</td>
+
 					</tr>
 				<?php } ?>
 
