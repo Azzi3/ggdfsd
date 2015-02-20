@@ -30,8 +30,8 @@
 
 
           <?php if($companyInfo['image']): ?>
-						<a href="<?php echo $path . "images/users/" . $userInfo['name'] . "/" . $companyProfileInfo['image']; ?>" target="_blank">
-            	<img class="profile-img" src="<?php echo $path . "images/company/" . $companyInfo['name'] . "/" . $companyInfo['image']; ?>" alt="">
+						<a href="<?php echo $path . "images/company/" . $companyProfileInfo['name'] . "/" . $companyProfileInfo['image']; ?>" target="_blank">
+            	<img class="profile-img" src="<?php echo $path . "images/company/" . $companyProfileInfo['name'] . "/tum_" . $companyProfileInfo['image']; ?>" alt="">
           	</a>
           <?php else: ?>
 						<img class="profile-img" src="<?php echo $path . "images/placeholder.jpg" ?>" alt="">

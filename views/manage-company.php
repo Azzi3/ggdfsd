@@ -33,58 +33,26 @@ if(isset($_GET['id'])){
 
 if(isset($_POST['company'])){
     $company = $_POST['company'];
-    if (!empty($_FILES['image']['name'])){
-        $image = $_FILES['image']['name'];
+    if (!empty($_FILES['picture']['name'])){
+        $image = $_FILES['picture'];
         $errors = array();
         $maxsize = 2097152;
-        $acceptable = array(
-            'JPEG',
-            'JPG',
-            'GIF',
-            'PNG' ,
-            'jpeg',
-            'jpg',
-            'gif',
-            'png'
-        );
-        $ext = pathinfo($image, PATHINFO_EXTENSION);
 
-        if(($_FILES['image']['size'] >= $maxsize) || ($_FILES["image"]["size"] == 0)) {
-            $errors[] = 'File too large. File must be less than 2 megabytes.';
+        $uplPath = PUBLIC_ROOT.'/images/company/'.$company['name'].'/';
+        
+        if (!file_exists($uplPath)) {
+            mkdir($uplPath, 0777);
         }
 
-        if(!in_array($ext,$acceptable)) {
-            $errors[] = 'Invalid file type. Only PDF, JPG, GIF and PNG types are accepted.';
+        $upl = new Upl();
+
+        if(strlen($image['tmp_name']) > 0){
+            $picturename = $upl->upload($image, $uplPath, 200, 200, 1);
         }
 
         if(count($errors) > 0){
             $session->setSession('error',$errors);
             redirect(PATH.'manage-company/');
-        } else {
-            $companyName = $company['name'];
-            $imageDirectory = PUBLIC_ROOT . '/images/' . '/company/' . $companyName;
-            //CHECKS IF THERE IS A DIRECTORY (IF THE COMPANY HAS AN IMAGE ALREADY)
-            if(!is_dir($imageDirectory)){
-                //SETS UP THE NEW FILE DIRECTORY & UPLOADS THE IMAGE
-                $fileTmp = $_FILES['image']['tmp_name'];
-                $newDir = mkdir(PUBLIC_ROOT . '/images/' . '/company/' . $companyName .'/');
-                $path = PUBLIC_ROOT . '/images/' . '/company/' . $companyName .'/';
-                move_uploaded_file($fileTmp, $path.$image);
-                $session->killSession('error');
-            } else {
-                //DELETES ALL FILES IN THE IMAGE DIRECTORY 
-                $path = $imageDirectory . '/*';
-                $files = glob($path);
-                foreach($files as $file){
-                    if(is_file($file))
-                        unlink($file);
-                }
-                //UPLOADS THE NEW IMAGE
-                $fileTmp = $_FILES['image']['tmp_name'];
-                $path = PUBLIC_ROOT . '/images/' . '/company/' . $companyName .'/';
-                move_uploaded_file($fileTmp, $path.$image);
-                $session->killSession('error');
-            }
         }
   
     }
@@ -95,10 +63,10 @@ if(isset($_POST['company'])){
         $tags = array();
     }
     if($id > 0){
-        $newCompany->updateCompany($company, $tags, $id, $image);
+        $newCompany->updateCompany($company, $tags, $id, $picturename['name']);
     }
     else{
-        $newCompany->createCompanyAndContact($company, $tags, $image);
+        $newCompany->createCompanyAndContact($company, $tags, $picturename['name']);
     }
 
     redirect(PATH.'company-list/');
@@ -173,14 +141,12 @@ if(isset($_POST['company'])){
                     <label for="companyDescription">Företagsbeskrivning:</label>
                     <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?></textarea>
                 </div>
+                
                 <div class="form-group">
-                    <?php if (isset($items['image'])){ ?>
-                        <img src="<?php echo PUBLIC_ROOT. '/images/' . $items['name'] .'/' . $items['image']; ?>" alt=""/> <?php 
-                    } ?>
-                    <label for="companyDescription">Bild:</label>
-                    <input type="file" id="image" class="form-control" rows="3" name="image" accepted="image/jpeg, image/jpg, image/gif, image/png">
-                    </textarea>
+                    <label for="resume">Ladda upp profilbild</label>
+                    <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
                 </div>
+                
                 <div class="form-group">
                     <label for="checkbox">Företagstaggar</label>
                 <div class="checkbox">

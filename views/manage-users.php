@@ -188,11 +188,11 @@ if(isset($_POST['manage'])){
         </div>
         <div class="form-group">
             <label for="pword">**Lösenord</label>
-            <input type="password" class="form-control" id="pword" name="manage[password]" placeholder="Lösenord">
+            <input type="password" autocomplete="off" class="form-control" id="pword" name="manage[password]" placeholder="Lösenord">
         </div>
         <div class="form-group">
             <label for="pword2">**Validera lösenord</label>
-            <input type="password" class="form-control" id="pword2" name="manage[password2]" placeholder="Validera lösenord">
+            <input type="password" autocomplete="off" class="form-control" id="pword2" name="manage[password2]" placeholder="Validera lösenord">
         </div>
         <br>
         <div class="form-group">

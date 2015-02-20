@@ -48,8 +48,13 @@
       <ul class="info-list">
         <li> <?php echo $studentProfileInfo['phone']; ?> </li>
         <li> <?php echo $userInfo['email']; ?> </li>
-        <li> <a href="<?php echo 'http://'.$studentProfileInfo['website']; ?>" target="_blank"><?php echo $studentProfileInfo['website']; ?></a>  </li>
-        <li> <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['resume']; ?>" target="_blank"> <?php echo $studentProfileInfo['resume'] ?> </a> </li>
+
+        <?php if(strlen($studentProfileInfo['website']) > 1) : ?>
+          <li> <a href="<?php echo 'http://'.$studentProfileInfo['website']; ?>" target="_blank"><?php echo $studentProfileInfo['website']; ?></a>  </li>
+        <?php endif; ?>
+        <?php if(strlen($studentProfileInfo['resume']) > 1) : ?>
+          <li> <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['resume']; ?>" target="_blank"> <?php echo $studentProfileInfo['resume'] ?> </a> </li>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-8">
