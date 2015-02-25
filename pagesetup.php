@@ -74,7 +74,7 @@ else if($curPage == 'manage-applications' && $signedUser){
 	$subtitle = "Ansökningar";
 }
 else if($curPage == 'project-info'){
-	$pageName = "Project-info";
+	$pageName = "project-info";
 	$subtitle = "Projektinfo";
 }
 
