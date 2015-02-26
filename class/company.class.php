@@ -115,21 +115,6 @@ class Company extends Database{
 		}
 	}
 
-	/**
-	* nullifies the image path column in the selected company 
-	* @param id
-	*/
-	// public function deleteImgPath($id){
-
-	// 	$str = " UPDATE $this->tbl SET 
-	// 	image = :image,
-	// 	WHERE id = :id ";
-
-	// 	$arr = array('image' => null, 'id' => $id);
-
-	// 	$this->update($str, $arr);
-	// }
-
 	public function save($items = array()) {
 		// Förbereder mysql kommando
 		$str = " UPDATE $this->tbl SET name=:name,
