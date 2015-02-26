@@ -115,7 +115,6 @@ class Company extends Database{
 		}
 	}
 
-
 	public function save($items = array()) {
 		// Förbereder mysql kommando
 		$str = " UPDATE $this->tbl SET name=:name,
