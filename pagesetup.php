@@ -89,6 +89,11 @@ else if($curPage == 'list-student'){
 	$subtitle = "List students";
 }
 
+else if($curPage == 'manage-tags'){
+	$pageName = "manage-tags";
+	$subtitle = "Manage tags";
+}
+
 
 else{
 	$pageName = "404";
