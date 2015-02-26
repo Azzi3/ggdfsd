@@ -46,6 +46,8 @@ if(isset($_POST['course'])){
 
   $session->setSession('form',$form);
   $error = array();
+  $daysToAdd = strtotime("+3 day");
+  $earliestDate = date('Y-m-d', $daysToAdd);
 
   if(strlen($form['name']) < 2 || strlen($form['name']) > 50){
     $error[] .= 'Ett namn måste vara mellan 2 och 50 tecken.';
@@ -54,6 +56,18 @@ if(isset($_POST['course'])){
   if(strlen($form['description']) < 2 || strlen($form['description']) > 300){
     $error[] .= 'En beskrivning måste vara mellan 2 och 300 tecken.';
   }
+
+  if($_POST['course']['course_start'] > $_POST['course']['course_end']){
+        $errors[] = 'Kursen kan inte sluta innan den började.';
+        $session->setSession('error',$errors);
+        redirect(CURRENT_PATH);
+    }
+
+  if($_POST['course']['course_start'] < $earliestDate){
+        $errors[] = 'Startdatum för kursen måste ligga minst tre dagar fram i tiden.';
+        $session->setSession('error',$errors);
+        redirect(CURRENT_PATH);
+    }
 
 
   $uplPath = PUBLIC_ROOT.'/files/';
