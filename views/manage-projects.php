@@ -36,6 +36,14 @@ if(isset($_POST['project'])){
     $project = $_POST['project'];
     $project['company']=$signedUser['company_id'];
 
+    $errors = array();
+
+    if($_POST['project']['spots'] <= 0){
+        $errors[] = 'Det måste finnas minst 1 plats i ditt projekt.';
+        $session->setSession('error',$errors);
+        redirect(CURRENT_PATH);
+    }
+
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
     }else{
@@ -57,6 +65,18 @@ require_once('../partials/project-header.php');
 ?>
     <div class="container">
     	<form method="POST" action="">
+            <?php
+                //show error if error-session is active
+                if($session->getSession('error')){
+                    echo '<div class="alert alert-danger" role="alert">';
+                    foreach ($session->getSession('error') as $item) {
+                        echo '<li>'.$item.'</li>';
+                    }
+                    echo '</div>';
+                    //kill session when 'echoed'.
+                    $session->killSession('error');
+                }
+                ?>
     	  <div class="form-group">
     	    <label for="projectName">Namn</label>
     	    <input type="text" name="project[name]" value="<?php echo $items['name']; ?>" class="form-control" id="projectName" placeholder="Namn" required>
