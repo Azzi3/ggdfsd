@@ -78,12 +78,18 @@ if(isset($_POST['manage'])){
         $form['picture'] = $picturename['name'];
     }
     if(strlen($resume['tmp_name']) > 0){
+        
         $resumename = $upl->upload($resume, $uplPath);
         $form['resume'] = $resumename['name'];    
     }
 
+    if(isset($form['deleteresume'])){
+        $form['resume'] = "";
+    }
 
-
+    if(isset($form['deleteimg'])){
+        $form['picture'] = "";
+    }
 
     $form = array_merge($formFiller, $form);
 
@@ -243,11 +249,36 @@ if(isset($_POST['manage'])){
             </div>   
         </div>
 
+        
+
         <div class="form-group">
+            
+            <?php if($profileInfo['resume']): ?>
+                <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
+                <label for="deleteresume">Ta bort CV?</label>
+                <input id="deleteresume" type="checkbox" name="manage[deleteresume]">
+                <br>
+            <?php else: ?>
+                <p>Ingen profilbild uppladdad</p>
+            <?php endif; ?>
+
             <label for="resume">Ladda upp CV</label>
             <input type="file" name="resume" value="" placeholder="Ladda upp CV">
         </div>
+        
+        
+
         <div class="form-group">
+            
+            <?php if($profileInfo['picture']): ?>
+                <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
+                <label for="deleteimg">Ta bort profilbild?</label>
+                <input id="deleteimg" type="checkbox" name="manage[deleteimg]">
+                <br>
+            <?php else: ?>
+                <p>Ingen profilbild uppladdad</p>
+            <?php endif; ?>
+            
             <label for="resume">Ladda upp profilbild</label>
             <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
         </div>
