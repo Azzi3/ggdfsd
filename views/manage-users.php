@@ -247,6 +247,7 @@ if(isset($_POST['manage'])){
                     </label>
                     <?php endforeach; ?>
             </div>   
+            <a href="<?php echo $path; ?>manage-tags">Ny tagg</a>
         </div>
 
         
