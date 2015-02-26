@@ -8,3 +8,11 @@
 .edit-anchor{
   font-size: 30px;
 }
+
+#profile-description {
+	min-height: 160px;
+}
+
+hr {
+	margin: 40px 0;
+}

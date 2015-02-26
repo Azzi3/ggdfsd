@@ -24,8 +24,7 @@ $students = $studentObj->getAll();
     <div class="jumbotron">
 
         <h1>Studentlista</h1>
-        <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        
+       
     </div>
 </div>
 

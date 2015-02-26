@@ -76,7 +76,7 @@ if(isset($_POST['company'])){
         $newCompany->createCompanyAndContact($company, $tags, $picturename['name']);
     }
 
-    redirect(PATH.'company-list/');
+    redirect(PATH.'company-profile/');
 
 }
 
@@ -86,8 +86,8 @@ if(isset($_POST['company'])){
     <div class="jumbotron">
 
         <h1>Hantera företagsprofil!</h1>
-        <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        <a class="btn btn-primary" href="<?php echo $path; ?>company-list" role="button">Visa företag</a>
+        <a class="btn btn-primary" href="<?php echo $path; ?>company-profile" role="button">Företags sida</a>
+        <a class="btn btn-primary" href="<?php echo $path; ?>company-list" role="button">Företags lista</a>
 
     </div>
 </div>

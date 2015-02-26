@@ -2,6 +2,7 @@
   
   $company = new Company(); 
   $county = new County();
+  $liaProject = new LiaProject();
 
   if(isset($_GET['uid'])){
     $userInfo = $user->getUserByGuid($_GET['uid']);
@@ -18,14 +19,13 @@
 ?>
 <div class="container">
 
-  <div class="row">
     <div class="jumbotron">
 
       <?php if($session->getSession('guid') == $userInfo['guid']) : ?>
         <a class="edit-anchor" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>"> <button class="btn pull-right">Redigera uppgifter</button></a>
       <?php endif; ?>
 
-      <div class="row">
+      <div class="container">
         <div class="col-md-3 text-center">
           
 
@@ -44,9 +44,9 @@
       </div>
       
     </div>
-  </div>
+
   
-  <div class="row">
+  <div class="container">
     <div class="col-md-4">
       <h3 class="text-center">Info</h3>  
       
@@ -69,9 +69,9 @@
 
     <div class="col-md-8">
       <h3 class="text-center">Om oss</h3>
-        <p><?php echo $companyProfileInfo['description']; ?></p>
+        <p id="profile-description"><?php echo newLine($companyProfileInfo['description']); ?></p>
       
-      <hr>
+      <hr>	
       
       <h3 class="text-center">Våra områden</h3>
 
@@ -93,37 +93,61 @@
     </div>
   </div>
   
-  <div class="row">
+  
+  
+  <div class="container">
+  <hr>
   	<div class="col-md-12"><h3 class="text-center">Våra projekt</h3></div>
   </div>
 
 
-  <div class="row">
-  	<table class="table table-striped table-hover">
-	  	<thead>
-	  		<tr>
-  				<th>Namn</th>
-  				<th>Beskrivning</th>
-  				<th></th>
-  			</tr>	
-	  	</thead>
-  		<tbody>
-  			
-  			<?php foreach($companyProjects as $project): ?>
-					<tr>
-						<td><?php echo $project['name']; ?></td>
-						<td><?php echo $project['description']; ?></td>
-						<td>
-							<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
-								<a class="push-right" href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
-								<a class="btn btn-danger" id="deleteProjectBtn" data-projectid="<?php echo $project['id']; ?>" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
-							<?php endif; ?>
-						</td>
-					</tr>	  
-				<?php endforeach; ?>
-
-  		</tbody>
-  	</table>
+  <div class="container">
+  	<div class="table-responsive">
+  			<table class="table table-hover">
+  				<thead>
+  					<tr>
+  						<th>Namn</th>
+  						<th>Beskrivning</th>
+  						<th>Platser</th>
+  						<th>Uppskattad tid</th>
+  						<th>Taggar</th>
+  						<th></th>
+  					</tr>
+  				</thead>
+  	
+  				<tbody>
+  					<?php $company = new Company();
+  					 foreach ($companyProjects as $project){ 
+  							$companyInfo = $company->getFromId($project['company_id']);
+  	
+  						?>
+  					<tr>
+  						<td><?php echo $project['name']; ?></td>
+  						<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>">Läs mer...<a> </td>
+  						<td><?php echo $project['spots']; ?></td>
+  						<td><?php echo $project['estimated_time']; ?></td>
+  						<td><?php
+  							$counter = 0;
+  							$projectTags = $liaProject->getTags($project['id']);
+  							foreach ($projectTags as $projectTag) {
+  								echo $projectTag['name']; if ($counter != count($projectTags) - 1){
+  									echo ", ";
+  								};
+  								$counter++;
+  	
+  							} ?></td>
+  							<td>
+  								<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
+  									<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
+  									<a id="deleteProjectBtn" data-name="<?php echo $project['name'];  ?>" data-projectid="<?php echo $project['id']; ?>" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+  								<?php endif; ?>
+  	
+  							</td>
+  					</tr>
+  						<?php } ?>
+  				</tbody>
+  			</table>
+  		</div>
   </div>
 	
 </div>

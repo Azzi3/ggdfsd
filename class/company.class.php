@@ -86,7 +86,7 @@ class Company extends Database{
 					'city'=>$item['city'],
 					'website_url'=>$item['website_url'],
 					'image'=>$image,
-					'description'=>$item['website_url'],
+					'description'=>$item['description'],
 					'id'=>$id);
 
 		$this->update($str, $arr);
