@@ -62,6 +62,9 @@ if(isset($_POST['company'])){
         $picturename['name'] = $items['image'];
     }
 
+    print_r($company['deleteimg']);
+    die();
+
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
     }else{
@@ -150,7 +153,8 @@ if(isset($_POST['company'])){
                 <div class="form-group">
                     <?php if($items['image']): ?>
                         <img src=" <?php echo $path . "images/company/" . $items['name'] . "/tum_" . $items['image'] ?> " alt="">
-                        <a href="#"><button class="btn btn-danger">Ta bort</button></a>
+                        <label for="deleteimg">Ta bort profilbild?</label>
+                        <input id="deleteimg" type="checkbox" name="company[deleteimg]">
                         
                     <?php else: ?>
                         <p>Ingen profilbild uppladdad</p>
