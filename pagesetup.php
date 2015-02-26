@@ -40,6 +40,11 @@ else if($curPage == 'company-profile' && $signedUser){
 	$subTitle = "Företagsprofil";
 }
 
+else if($curPage == 'apply' && $signedUser['student'] == 1){
+	$pageName = "apply-project";
+	$subTitle = "Ansök";
+}
+
 else if($curPage == 'generate-key' && $signedUser['course_leader'] == 1){
 	$pageName = "generate-key";
 	$subTitle = "Generera nyckel";

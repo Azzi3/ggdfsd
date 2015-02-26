@@ -61,6 +61,8 @@ if(isset($_GET['id'])){
     	    </label>
             <?php endforeach; ?>
     	  </div>
+
+          <a href="<?php echo $path ?>apply?cid=<?php echo $items['id']; ?>"><button type="button" class="btn">Ansök</button></a>
     	
     </div><?php
 //open the object/class....

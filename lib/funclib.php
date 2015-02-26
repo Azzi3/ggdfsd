@@ -17,6 +17,10 @@ function redirect($toLink){
 	die();
 }
 
+function newLine($str){
+	return str_replace("\n", '<br>', $str);
+}
+
 //Randomizer STRING
 function randomStr($len = 10){
 	$char = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789-_";
