@@ -4,6 +4,7 @@ class LiaProject extends Database{
 
 	private $tbl = 'lia_project';
 	private $tbl_tags = 'project_tag';
+	private $tbl_applicant = 'project_applicant';
 
 
 	public function getAll(){
@@ -107,6 +108,26 @@ class LiaProject extends Database{
 		}
 
 	
+	}
+
+	public function checkExistingApplicant($items = array()){
+		$str = " SELECT * FROM $this->tbl_applicant WHERE project_id = :project_id AND user_id = :user_id ";
+		$arr = array('project_id'=>$items['project_id'],
+			'user_id'=>$items['user_id']);
+
+		return $this->select($str, $arr);
+
+	}
+
+
+	public function addApplicant($items = array()){
+		$str = " INSERT INTO $this->tbl_applicant (project_id, user_id, msg)
+		VALUES (:project_id, :user_id, :msg) ";
+		$arr = array('project_id'=>$items['project_id'],
+			'user_id'=>$items['user_id'],
+			'msg'=>$items['msg']);
+
+		$this->insert($str, $arr);
 	}
 
 
