@@ -58,12 +58,11 @@ if(isset($_POST['company'])){
             redirect(PATH.'manage-company/');
         }
   
+    } elseif(isset($company['deleteimg'])){
+        $picturename['name'] = "";
     } else{
         $picturename['name'] = $items['image'];
     }
-
-    print_r($company['deleteimg']);
-    die();
 
     if(isset($_POST['tag'])){
         $tags = $_POST['tag'];
@@ -154,7 +153,7 @@ if(isset($_POST['company'])){
                     <?php if($items['image']): ?>
                         <img src=" <?php echo $path . "images/company/" . $items['name'] . "/tum_" . $items['image'] ?> " alt="">
                         <label for="deleteimg">Ta bort profilbild?</label>
-                        <input id="deleteimg" type="checkbox" name="company[deleteimg]">
+                        <input id="deleteimg" type="checkbox" value="0" name="company[deleteimg]">
                         
                     <?php else: ?>
                         <p>Ingen profilbild uppladdad</p>
