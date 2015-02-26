@@ -171,7 +171,7 @@ if(isset($_POST['course'])){
           <div class="form-group">
             <label for="uplFile">Ladda upp Fil</label>
             <input type="file" name="uplFile" value="" id="uplFile" placeholder="Ladda upp FIl">
-            <?php if(isset($items) && strlen($items['file']) > 1) : ?>
+            <?php if(!empty($items['file']) && strlen($items['file']) > 1) : ?>
               Nuvarande fil: <b><?php echo $items['file']; ?>.</b>
             <?php else : ?>
               <b>Ingen nuvarande fil.</b>
