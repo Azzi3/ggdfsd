@@ -13,15 +13,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
 
 $items = array_fill_keys(
   array('name', 'street_address', 'zip_code', 'city', 'website_url', 'description', 'file'), '');
-$contact = array_fill_keys(
-  array('name', 'phone', 'email'), '');
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $items = $newCompany->getFromId($id);
     $usedTags = $companyTag->getAllFromCompanyId($id);
-    $contact = $newCompany->getContact($items['id_contact_person'])[0];
-
     $buttonText = 'Spara';
 }else{
     $id = 0;
@@ -111,15 +107,15 @@ if(isset($_POST['company'])){
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
                     <label for="contactPersonName">Namn:</label>
-                    <input type="text" class="form-control" id="contact_name" value="<?php echo $contact['name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
+                    <input type="text" class="form-control" id="contact_name" value="<?php echo $items['contact_name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
                 </div>
                 <div class="form-group">
                     <label for="contactPersonTel">Telefonnummer:</label>
-                    <input type="number" class="form-control" id="contact_phone" value="<?php echo $contact['phone']; ?>" name="company[contact_phone]" required>
+                    <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
                 </div>
                 <div class="form-group">
                     <label for="contactPersonEmail">E-post:</label>
-                    <input type="email" class="form-control" id="contact_email" value="<?php echo $contact['email']; ?>" name="company[contact_email]" required>
+                    <input type="email" class="form-control" id="contact_email" value="<?php echo $items['contact_email']; ?>" name="company[contact_email]" required>
                 </div>
 
                 <legend>Företagsinfo</legend>

@@ -111,8 +111,11 @@ class LiaProject extends Database{
 	}
 
 	public function checkExistingApplicant($items = array()){
-		$str = " SELECT * FROM $this->tbl_applicant WHERE project_id = :project_id AND user_id = :user_id ";
+		$str = " SELECT * FROM $this->tbl_applicant WHERE
+		(project_id = :project_id AND user_id = :user_id)
+		OR (company_id = :company_id AND user_id = :user_id) ";
 		$arr = array('project_id'=>$items['project_id'],
+			'company_id'=>$items['company_id'],
 			'user_id'=>$items['user_id']);
 
 		return $this->select($str, $arr);
@@ -121,9 +124,10 @@ class LiaProject extends Database{
 
 
 	public function addApplicant($items = array()){
-		$str = " INSERT INTO $this->tbl_applicant (project_id, user_id, msg)
-		VALUES (:project_id, :user_id, :msg) ";
+		$str = " INSERT INTO $this->tbl_applicant (project_id, user_id, msg, company_id)
+		VALUES (:project_id, :user_id, :msg, :company_id) ";
 		$arr = array('project_id'=>$items['project_id'],
+			'company_id'=>$items['company_id'],
 			'user_id'=>$items['user_id'],
 			'msg'=>$items['msg']);
 

@@ -4,24 +4,26 @@
   $county = new County();
   $liaProject = new LiaProject();
 
-  if(isset($_GET['uid'])){
-    $userInfo = $user->getUserByGuid($_GET['uid']);
-  } else {
-    $userInfo = $signedUser;
+  if(isset($_GET['id']) && strlen($_GET['id']) > 0 && $company->getFromId($_GET['id'])){
+    $userInfo = $company->getFromId($_GET['id']);
+  } else if($signedUser['company_owner'] == 1) {
+    $userInfo = $company->getFromId($signedUser['company_id']);
+  }else{
+    redirect($path.'404');
   }
   
-  $companyInfo = $company->getFromId($signedUser['company_id']);
-  $companyProfileInfo = $company->getFromId($userInfo['company_id']);
-  $contact = $company->getContact($companyInfo['id_contact_person'])[0];
-  $userCounty = $county->getMunicipalityName($userInfo['municipality']);
-  $companyTags = $company->getTags($signedUser['company_id']);
-  $companyProjects = $company->getProjects($signedUser['company_id']);
+  $companyInfo = $company->getFromId($userInfo['id']);
+  $companyProfileInfo = $company->getFromId($userInfo['id']);
+  $companyTags = $company->getTags($userInfo['id']);
+  $companyProjects = $company->getProjects($userInfo['id']);
+
+
 ?>
 <div class="container">
 
     <div class="jumbotron">
 
-      <?php if($session->getSession('guid') == $userInfo['guid']) : ?>
+      <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>
         <a class="edit-anchor" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>"> <button class="btn pull-right">Redigera uppgifter</button></a>
       <?php endif; ?>
 
@@ -39,7 +41,7 @@
           <?php endif; ?>
 			
           <h3 class="text-center"> <?php echo $companyInfo['name']; ?> </h3>
-          <h4><?php echo $userCounty['name']; ?></h4>
+          <h4><?php echo $companyInfo['city']; ?></h4>
         </div>
       </div>
       
@@ -53,14 +55,14 @@
       <ul>
 				<dl>
           <dt>Kontaktperson</dt>
-          <dd><?php echo $contact['name']; ?></dd>
-          <dd>Telefon: <?php echo $contact['phone'] ?></dd>
-          <dd>Email: <?php echo $contact['email'] ?></dd>
+          <dd><?php echo $companyProfileInfo['contact_name']; ?></dd>
+          <dd>Telefon: <?php echo $companyProfileInfo['contact_phone']; ?></dd>
+          <dd>Email: <?php echo $companyProfileInfo['contact_email']; ?></dd>
         </dl>
         
         <dl>
           <dt>Företag</dt>
-          <dd>Företagsmail: <?php echo $userInfo['email']; ?></dd>
+          <dd>Företagsmail: <?php echo $companyProfileInfo['contact_email']; ?></dd>
           <dd>Hemsida: <?php echo $companyProfileInfo['website_url']; ?></dd>
         </dl>
       </ul>
@@ -148,6 +150,12 @@
   				</tbody>
   			</table>
   		</div>
+
+        <hr>
+          <a href="<?php echo $path ?>apply?comp=<?php echo $userInfo['id']; ?>"><button type="button" class="btn pull-right">Spontanansökan till Lia</button></a>
+          <div class="clearfix"></div>
+          <br>
+
   </div>
 	
 </div>

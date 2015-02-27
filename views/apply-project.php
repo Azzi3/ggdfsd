@@ -1,18 +1,43 @@
 <?php
 
-if(isset($_GET['cid'])){
+if(isset($_GET['cid']) || isset($_GET['comp'])){
 	$error = array();
 	$liaProject = new LiaProject();
-	$lia = $liaProject->getFromId($_GET['cid']);
-	if(!$lia){
-		redirect($path.'404');
+	$company = new Company();
+	$cid = null;
+	$comp = null;
+
+	if(isset($_GET['cid'])){
+		$cid = $_GET['cid'];
+		$lia = $liaProject->getFromId($_GET['cid']);
+		if(!$lia){
+			redirect($path.'404');
+		}
+		$name = $lia['name'];
+		$desc = $lia['description'];
+		$msg = "Din ansökan till ".$lia['name']." är mottagen.";
+
+		$redirectPath = CURRENT_PATH.'?cid='.$_GET['cid'];
+
+	}else{
+		$comp = $_GET['comp'];
+		$company = new Company();
+		$companyInfo = $company->getFromId($_GET['comp']);
+		$name = "Spontanansökan till ".$companyInfo['name'];
+		$desc = '';
+		$msg = "Din Spontanansökan är mottagen.";
+
+		$redirectPath = CURRENT_PATH.'?comp='.$_GET['comp'];
+
 	}
 
 	$formFiller['txt'] = '';
 
-	if(isset($_POST['txt'])){
-		$form['msg'] = $_POST['txt'];
-		$form['project_id'] = $_GET['cid'];
+	if(isset($_POST['apply'])){
+		$form['msg'] = $_POST['apply']['txt'];
+		$form['course'] = $_POST['apply']['course'];
+		$form['project_id'] = $cid;
+		$form['company_id'] = $_GET['comp'];
 		$form['user_id'] = $signedUser['id'];
 
 		$formFiller['txt'] = $form['msg'];
@@ -30,11 +55,13 @@ if(isset($_GET['cid'])){
 
 				$header = 'From: noreply@liabanken.se';
 
-				$msg = "Din ansökan till ".$lia['name']." är mottagen.";
+				
 				mail($signedUser['email'], 'Projektansökan', $msg);
 
 				$msg = "Du har fått en ansökan till ett liaprojekt från ".$signedUser['firstname'].' '.$signedUser['lastname'].". \nLogga in på liabanken.se för att läsa hela meddelandet.";
 				mail($contactEmail, 'Projektansökan', $msg);
+
+
 
 
 				$liaProject->addApplicant($form);
@@ -49,44 +76,69 @@ if(isset($_GET['cid'])){
 	        $session->setSession('error',$error);
 	    }
 
-		redirect(CURRENT_PATH.'?cid='.$_GET['cid']);
+		redirect($redirectPath);
 	}
 
 
-
+	
 }else{
 	redirect($path.'404');
 }
 
 ?>
-<h1>Ansök lia (<?php echo $lia['name']; ?>)</h1>
-<p><?php echo newLine($lia['description']); ?></p>
-<form action="" method="POST" accept-charset="utf-8">
-    <?php
-    //show error if error-session is active
-    if($session->getSession('error')){
-        echo '<div class="alert alert-danger" role="alert">';
-        foreach ($session->getSession('error') as $item) {
-            echo '<li>'.$item.'</li>';
-        }
-        echo '</div>';
+<div class="container">
 
-        //kill session when 'echoed'.
-        $session->killSession('error');
-    }
-    //show SUCCESS if SUCCESS-session is active
-    if($session->getSession('success')){
-        echo '<div class="alert alert-success" role="alert">';
-        echo '<li>'.$session->getSession('success').'</li>';
-        echo '</div>';
+	<h1>Ansök lia (<?php echo $name; ?>)</h1>
+	<p><?php echo newLine($desc); ?></p>
+	<form action="" method="POST" accept-charset="utf-8">
+	    <?php
+	    //show error if error-session is active
+	    if($session->getSession('error')){
+	        echo '<div class="alert alert-danger" role="alert">';
+	        foreach ($session->getSession('error') as $item) {
+	            echo '<li>'.$item.'</li>';
+	        }
+	        echo '</div>';
 
-        //kill session when 'echoed'.
-        $session->killSession('success');
-    }
-    ?>
-	<div class="form-group">
-		<label for="txt">Meddelande</label>
-		<textarea id="txt" class="form-control" name="txt" placeholder="Meddelande till handledare på företaget"><?php echo $formFiller['txt']; ?></textarea>
-		<button class="btn" type="submit">Skicka ansökan</button>
-	</div>
-</form>
+	        //kill session when 'echoed'.
+	        $session->killSession('error');
+	    }
+	    //show SUCCESS if SUCCESS-session is active
+	    if($session->getSession('success')){
+	        echo '<div class="alert alert-success" role="alert">';
+	        echo '<li>'.$session->getSession('success').'</li>';
+	        echo '</div>';
+
+	        //kill session when 'echoed'.
+	        $session->killSession('success');
+	    }
+
+
+
+
+	    $courseObj = new Course();
+		$courses = $courseObj->getAll();
+
+	    ?>
+	    <div class="form-group">
+		    <label for="course">Lia kurs</label><br>
+		    <select id="course" name="apply[course]">
+		    <?php foreach ($courses as $item) :
+
+		    	if($item['course_start'] > date('Y-m-d')) : ?>
+		    	<option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
+		    <?php endif;
+		    endforeach; ?>
+		    	option
+		    </select>
+	    </div>
+
+		<div class="form-group">
+			<label for="txt">Meddelande</label>
+			<textarea id="txt" class="form-control" name="apply[txt]" placeholder="Meddelande till handledare på företaget"><?php echo $formFiller['txt']; ?></textarea>
+			<br>
+			<button class="btn" type="submit">Skicka ansökan</button>
+		</div>
+	</form>
+
+</div>

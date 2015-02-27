@@ -1,5 +1,6 @@
 <?php
 $companyObj = new Company();
+$user = new User();
 $companies = $companyObj->getAll();
 if(isset($_GET['deleteid'])){
 	$getCmpName = $companyObj->getFromId($_GET['deleteid']);
@@ -66,9 +67,9 @@ if(isset($_GET['deleteid'])){
 			</thead>
 
 			<tbody>
-				<?php foreach ($companies as $company){  ?>
+				<?php foreach ($companies as $company){	?>
 				<tr>
-					<td><?php echo $company['name'] ?></td>
+					<td><a href="<?php echo $path; ?>company-profile?id=<?php echo $company['id']; ?>"><?php echo $company['name'] ?></a></td>
 					<td style="max-width: 10em"><?php echo $company['street_address'] ?></td>
 					<td><?php echo $company['zip_code'] ?></td>
 						<td><?php echo $company['city'] ?></td>

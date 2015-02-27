@@ -35,17 +35,27 @@ class Company extends Database{
 
 	public function createCompanyAndContact($item, $tags, $image){
 
-		$str = " INSERT INTO $this->tbl_contact (name, email, phone)
-		VALUES(:contact_name, :contact_email, :contact_phone) ";
 
-		$arr = array('contact_name'=>$item['contact_name'],
-					'contact_email'=>$item['contact_email'],
-					'contact_phone'=>$item['contact_phone']);
-
-		$lastContactId = $this->insert($str, $arr);	
-
-		$str = " INSERT INTO $this->tbl (name, street_address, zip_code, city, website_url, description, image, id_contact_person)
-		VALUES(:name, :street_address, :zip_code, :city, :website_url, :description, :image, :id_contact_person) ";
+		$str = " INSERT INTO $this->tbl (name,
+			street_address,
+			zip_code,
+			city,
+			website_url,
+			description,
+			image,
+			contact_phone,
+			contact_email,
+			contact_name)
+		VALUES(:name,
+			:street_address,
+			:zip_code,
+			:city,
+			:website_url,
+			:description,
+			:image,
+			:contact_phone,
+			:contact_email,
+			:contact_name) ";
 		$arr = array('name'=>$item['name'],
 					'street_address'=>$item['street_address'],
 					'zip_code'=>$item['zip_code'],
@@ -53,7 +63,9 @@ class Company extends Database{
 					'website_url'=>$item['website_url'],
 					'description'=>$item['description'],
 					'image'=>$image,
-					'id_contact_person'=>$lastContactId);
+					'contact_phone'=>$item['contact_phone'],
+					'contact_email'=>$item['contact_email'],
+					'contact_name'=>$item['contact_name']);
 		
 		$lastCompanyId = $this->insert($str, $arr);
 
@@ -76,7 +88,10 @@ class Company extends Database{
 		city = :city,
 		website_url = :website_url,
 		image = :image,
-		description = :description
+		description = :description,
+		contact_name = :contact_name,
+		contact_phone = :contact_phone,
+		contact_email = :contact_email
 		WHERE id = :id ";
 
 
@@ -87,19 +102,13 @@ class Company extends Database{
 					'website_url'=>$item['website_url'],
 					'image'=>$image,
 					'description'=>$item['description'],
-					'id'=>$id);
+					'id'=>$id,
+					'contact_phone'=>$item['contact_phone'],
+					'contact_email'=>$item['contact_email'],
+					'contact_name'=>$item['contact_name']);
 
 		$this->update($str, $arr);
 
-		$str = "UPDATE $this->tbl_contact SET name = :name,
-		email= :email, phone= :phone
-		WHERE id = :id";
-		
-		$arr = array('name'=> $item['contact_name'],
-					'email' => $item['contact_email'],
-					'phone' => $item['contact_phone'],
-					'id' => $item['id_contact_person']);
-		$this->update($str, $arr);
 
 		$str = " DELETE FROM $this->tbl_tags WHERE company_id = :companyId ";
 		$arr = array('companyId'=>$id);
@@ -193,11 +202,11 @@ class Company extends Database{
 	public function getContact($contactId){
 		$str = "SELECT * 
 		FROM contact_person
-		WHERE id=:id";
+		WHERE id = :id ";
 
 		$arr = array('id' => $contactId);
 
-		return $this->selectAll($str, $arr);
+		return $this->select($str, $arr);
 	}
 
 

@@ -20,6 +20,13 @@ class User extends Database{
 		return $this->select($str, $arr);
 	}
 
+	public function getUserByCompanyId($id){
+		$str = " SELECT * FROM $this->tbl WHERE company_id = :id ";
+		$arr = array('id'=>$id);
+
+		return $this->select($str, $arr);
+	}
+
 
 
 
