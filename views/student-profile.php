@@ -59,7 +59,7 @@
 
     <div class="col-md-8">
       <h3 class="text-center">Om</h3>
-        <p><?php echo str_replace("\n","<br />", $studentProfileInfo['info']); ?></p>
+        <p><?php echo newLine($studentProfileInfo['info']); ?></p>
       
       <hr>
       
