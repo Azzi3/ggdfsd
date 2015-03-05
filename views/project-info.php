@@ -62,7 +62,7 @@ if(isset($_GET['id'])){
             <?php endforeach; ?>
     	  </div>
 
-          <a href="<?php echo $path ?>apply?cid=<?php echo $items['id']; ?>"><button type="button" class="btn">Ansök</button></a>
+          <a class="btn btn-success" href="<?php echo $path ?>apply?cid=<?php echo $items['id']; ?>">Ansök</a>
     	
     </div><?php
 //open the object/class....
