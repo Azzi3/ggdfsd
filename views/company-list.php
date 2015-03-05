@@ -48,7 +48,7 @@ if(isset($_GET['deleteid'])){
 
 
 <form action="" method="POST" accept-charset="utf-8">
-<input type="text" name="search" value="" placeholder="Sök företag"> <button type="submit">Sök</button>
+	<input type="text" name="search" value="" placeholder="Sök företag"> <button type="submit">Sök</button>
 </form>
 
 
