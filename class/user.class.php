@@ -27,6 +27,13 @@ class User extends Database{
 		return $this->select($str, $arr);
 	}
 
+	public function setCompany($id, $uid){
+		$str = " UPDATE $this->tbl SET company_id = :id WHERE id = :uid ";
+		$arr = array('id'=>$id, 'uid'=>$uid);
+
+		$this->update($str, $arr);
+	}
+
 
 
 

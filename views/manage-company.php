@@ -19,9 +19,15 @@ if(isset($_GET['id'])){
     $items = $newCompany->getFromId($id);
     $usedTags = $companyTag->getAllFromCompanyId($id);
     $buttonText = 'Spara';
-}else{
+}else if(!isset($_POST['company'])){
+    $items['contact_name'] = '';
+    $items['contact_email'] = '';
+    $items['image'] = '';
     $id = 0;
     $buttonText = 'Skapa';
+}else{
+    $id = 0;
+    $items['image'] = '';
 }
 if(isset($_GET['id'])){
     if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
@@ -69,7 +75,8 @@ if(isset($_POST['company'])){
         $newCompany->updateCompany($company, $tags, $id, $picturename['name']);
     }
     else{
-        $newCompany->createCompanyAndContact($company, $tags, $picturename['name']);
+        $lastId = $newCompany->createCompanyAndContact($company, $tags, $picturename['name']);
+        $user->setCompany($lastId, $signedUser['id']);
     }
 
     redirect(PATH.'company-profile/');
