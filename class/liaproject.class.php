@@ -129,11 +129,12 @@ class LiaProject extends Database{
 
 
 	public function addApplicant($items = array()){
-		$str = " INSERT INTO $this->tbl_applicant (project_id, user_id, msg, company_id)
-		VALUES (:project_id, :user_id, :msg, :company_id) ";
+		$str = " INSERT INTO $this->tbl_applicant (project_id, user_id, msg, company_id, course_id)
+		VALUES (:project_id, :user_id, :msg, :company_id, :course_id) ";
 		$arr = array('project_id'=>$items['project_id'],
 			'company_id'=>$items['company_id'],
 			'user_id'=>$items['user_id'],
+			'course_id'=>$items['course_id'],
 			'msg'=>$items['msg']);
 
 		$this->insert($str, $arr);
