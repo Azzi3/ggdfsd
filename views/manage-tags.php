@@ -7,7 +7,9 @@ $tags = $tag->getAll();
 
 //default values for form
 $items = array('name'=>'');
-                
+
+//profanity array
+$profanities = array('');  
 
 if($session->getSession('form'))
   $formFiller = array_merge($items, $session->getSession('form'));
@@ -21,8 +23,13 @@ if(isset($_POST['tag'])){
 
   $error = array();
 
-  if(strlen($form['name']) < 3 || strlen($form['name']) > 30){
-    $error[] .= 'Namnet på taggen måste vara mellan 3 och 30 bokstäver.';
+  if(strlen($form['name']) < 2 || strlen($form['name']) > 30){
+    $error[] .= 'Namnet på taggen måste vara mellan 2 och 30 bokstäver.';
+  }
+
+  $checkName = $tag->getByName($form['name']);
+  if($checkName){
+    $error[] .= 'Namnet används redan.'; 
   }
 
   if(count($error) > 0){
