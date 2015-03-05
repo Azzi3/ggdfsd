@@ -29,8 +29,7 @@ if(isset($_GET['id'])){
     <div class="jumbotron">
 
         <h1>Projekt!</h1>
-        <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        <a class="btn btn-primary" href="<?php echo $path; ?>projects" role="button">Visa projekt</a>
+        <a class="btn btn-default" href="<?php echo $path; ?>projects" role="button">Tillbaka</a>
     </div>
 </div>
 

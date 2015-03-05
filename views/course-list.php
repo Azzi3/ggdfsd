@@ -74,7 +74,7 @@ if($signedUser['course_leader']){
 						</td>   
 						<td>
 						<?php if(strlen($course['file']) > 1) : ?>
-							<a href="<?php echo $path.'files/'.$course['file']; ?>"><button class="btn" type="button">Ladda ner</button></a>
+							<a class="btn btn-default" href="<?php echo $path.'files/'.$course['file']; ?>">Ladda ner</a>
 						<?php endif; ?>
 						</td>
 
