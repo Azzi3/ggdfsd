@@ -22,4 +22,11 @@ class Tag extends Database{
 
   }
 
+  public function getByName($name){
+    $str = " SELECT * FROM $this->tbl WHERE name = :name  ";
+    $arr = array('name'=>$name);
+
+    return $this->select($str, $arr);
+  }
+
 }
