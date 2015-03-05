@@ -49,7 +49,7 @@ $(document).ready(function() {
 		if(!name){
 			name = "Lägg till data-name på deleteknappen";
 		}
-		$('#myModalLabel').append('"' + name + '"');
+		$('#myModalLabel').append(name);
 		$(document).on('click', '#reallyDelete', function (e) {
 			var url = location.origin + location.pathname + '?deleteid='+ id;
 			location.href = url;

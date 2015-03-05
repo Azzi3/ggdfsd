@@ -19,9 +19,15 @@ if(isset($_GET['id'])){
     $items = $newCompany->getFromId($id);
     $usedTags = $companyTag->getAllFromCompanyId($id);
     $buttonText = 'Spara';
-}else{
+}else if(!isset($_POST['company'])){
+    $items['contact_name'] = '';
+    $items['contact_email'] = '';
+    $items['image'] = '';
     $id = 0;
     $buttonText = 'Skapa';
+}else{
+    $id = 0;
+    $items['image'] = '';
 }
 if(isset($_GET['id'])){
     if($_GET['id'] != $signedUser['company_id']) { die("No access"); }
@@ -69,7 +75,8 @@ if(isset($_POST['company'])){
         $newCompany->updateCompany($company, $tags, $id, $picturename['name']);
     }
     else{
-        $newCompany->createCompanyAndContact($company, $tags, $picturename['name']);
+        $lastId = $newCompany->createCompanyAndContact($company, $tags, $picturename['name']);
+        $user->setCompany($lastId, $signedUser['id']);
     }
 
     redirect(PATH.'company-profile/');
@@ -106,15 +113,15 @@ if(isset($_POST['company'])){
                 ?>
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
-                    <label for="contactPersonName">Namn:</label>
+                    <label for="contactPersonName">Kontaktpersonens namn:</label>
                     <input type="text" class="form-control" id="contact_name" value="<?php echo $items['contact_name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
                 </div>
                 <div class="form-group">
-                    <label for="contactPersonTel">Telefonnummer:</label>
+                    <label for="contactPersonTel">Kontaktpersonens eelefonnummer:</label>
                     <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
                 </div>
                 <div class="form-group">
-                    <label for="contactPersonEmail">E-post:</label>
+                    <label for="contactPersonEmail">Kontaktpersonens e-post:</label>
                     <input type="email" class="form-control" id="contact_email" value="<?php echo $items['contact_email']; ?>" name="company[contact_email]" required>
                 </div>
 

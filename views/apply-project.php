@@ -50,7 +50,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 				$company = new Company();
 				$user = new User();
 
-				$thisCompany = $company->getFromId($_GET['cid']);
+				$thisCompany = $company->getFromId($_GET['comp']);
 				$contactEmail = $thisCompany['contact_email'];
 
 				$header = 'From: noreply@liabanken.se';

@@ -140,7 +140,44 @@ class LiaProject extends Database{
 		$this->insert($str, $arr);
 	}
 
+	public function getMyApplicationsUser($userId){
+		$str = " SELECT * FROM $this->tbl_applicant WHERE user_id = :id ";
+		$arr = array('id'=>$userId);
 
+		return $this->selectAll($str, $arr);
+	}
+
+	public function getMyApplicationsCompany($companyId){
+		$str = " SELECT * FROM $this->tbl_applicant WHERE company_id = :id ";
+		$arr = array('id'=>$companyId);
+
+		return $this->selectAll($str, $arr);
+	}
+
+	public function removeApplicant($applicationId){
+		$str = " DELETE FROM $this->tbl_applicant WHERE id = :id ";
+		$arr = array('id'=>$applicationId);
+
+		$this->delete($str, $arr);
+	}
+
+	public function acceptApplicant($uid, $id){
+		$str = " UPDATE $this->tbl_applicant SET status = 1 WHERE user_id = :uid AND id = :id ";
+		$arr = array('uid'=>$uid, 'id'=>$id);
+		$this->update($str, $arr);
+	}
+
+	public function denyApplicant($uid, $id){
+		$str = " UPDATE $this->tbl_applicant SET status = 2 WHERE user_id = :uid AND id = :id ";
+		$arr = array('uid'=>$uid, 'id'=>$id);
+		$this->update($str, $arr);
+	}
+
+	public function finishApplicant($uid, $id){
+		$str = " UPDATE $this->tbl_applicant SET status = 3 WHERE user_id = :uid AND id = :id ";
+		$arr = array('uid'=>$uid, 'id'=>$id);
+		$this->update($str, $arr);
+	}
 
 
 

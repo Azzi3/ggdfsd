@@ -78,6 +78,8 @@ class Company extends Database{
 			$this->insert($str, $arr);
 		}
 
+		return $lastCompanyId;
+
 	}
 
 	public function updateCompany($item, $tags, $id, $image){
