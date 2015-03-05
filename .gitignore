@@ -1,4 +1,5 @@
-public/images/*
+public/images/users/*
+public/images/company/*
 .DS_Store
 .IDEA
 config.php
