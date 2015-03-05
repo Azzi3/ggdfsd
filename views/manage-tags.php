@@ -2,18 +2,17 @@
 <?php
 //open the object/class....
 $tag = new Tag();
+$profanities = new Profanity();
 $tags = $tag->getAll();
-
+$profanitiesList = $profanities->getProfanityList();
 
 //default values for form
 $items = array('name'=>'');
-
-//profanity array
-$profanities = array('');  
+ 
 
 if($session->getSession('form'))
   $formFiller = array_merge($items, $session->getSession('form'));
-else{
+else {
   $formFiller = $items;
 }
 
@@ -30,6 +29,21 @@ if(isset($_POST['tag'])){
   $checkName = $tag->getByName($form['name']);
   if($checkName){
     $error[] .= 'Namnet används redan.'; 
+  }
+
+  $nameLowerCase = strtolower($form['name']);
+  if(in_array($nameLowerCase, $profanitiesList)){
+      $error[] .= 'Namnet kan anses stötande.'; 
+  } else {
+    foreach ($profanitiesList as $profanity){;
+      if (strpos($nameLowerCase, $profanity) !== false) {
+        $error[] .= 'Namnet kan anses stötande.'; 
+      }
+    }
+  }
+
+  if(preg_match("/[^\w-. åäö]/", $nameLowerCase)){
+    $error[] .= 'Namnet innehåller ogiltliga tecken.';
   }
 
   if(count($error) > 0){
@@ -69,7 +83,7 @@ if(isset($_POST['tag'])){
     <form method="POST" action="">
       <div class="form-group">
         <label for="name">Namn</label>
-        <input type="text" name="tag[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" pattern="^([^0-9]*)$" placeholder="Namn" required>
+        <input type="text" name="tag[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" placeholder="Namn" required>
       </div>
       <button type="submit" class="btn btn-default">Spara</button>
     
