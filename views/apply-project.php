@@ -35,9 +35,9 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 
 	if(isset($_POST['apply'])){
 		$form['msg'] = $_POST['apply']['txt'];
-		$form['course'] = $_POST['apply']['course'];
+		$form['course_id'] = $_POST['apply']['course'];
 		$form['project_id'] = $cid;
-		$form['company_id'] = $_GET['comp'];
+		$form['company_id'] = $comp;
 		$form['user_id'] = $signedUser['id'];
 
 		$formFiller['txt'] = $form['msg'];
@@ -51,7 +51,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 				$user = new User();
 
 				$thisCompany = $company->getFromId($_GET['cid']);
-				$contactEmail = $user->getUserById($thisCompany['id_contact_person'])['email'];
+				$contactEmail = $thisCompany['contact_email'];
 
 				$header = 'From: noreply@liabanken.se';
 
@@ -62,7 +62,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 				mail($contactEmail, 'Projektansökan', $msg);
 
 
-
+				$form['company_id'] = $thisCompany['id'];
 
 				$liaProject->addApplicant($form);
 
