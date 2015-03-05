@@ -160,7 +160,7 @@
       else {
         echo
             '<a href="$path ?>apply?comp=<?php echo $userInfo[id]; ?>">
-            <a class=" btn btn-success pull-right" href="<?php echo $path ?>apply?comp=<?php echo $userInfo["id"]; ?>">Spontanansökan till Lia</a>'
+            <a class=" btn btn-success pull-right" href="<?php echo $path;?>apply?comp=<?php echo $userInfo["id"]; ?>Spontanansökan till Lia</a>';
         }?>
 
   </div>
