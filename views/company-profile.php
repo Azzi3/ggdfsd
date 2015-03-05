@@ -153,11 +153,14 @@
   				</tbody>
   			</table>
   		</div>
-
-        <hr>
-          <a href="<?php echo $path ?>apply?comp=<?php echo $userInfo['id']; ?>"><button type="button" class="btn pull-right">Spontanansökan till Lia</button></a>
-          <div class="clearfix"></div>
-          <br>
+      <?php if($signedUser['company_owner'] == 1) {
+        //nopnopnonpe
+      }
+      else {
+        echo
+            "<a href='$path ?>apply?comp=<?php echo $userInfo[id]; ?>'>
+              <button type='button' class='btn pull-right'>Spontanansökan till Lia</button></a>";
+        }?>
 
   </div>
 	

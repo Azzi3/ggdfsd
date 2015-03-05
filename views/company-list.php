@@ -46,18 +46,10 @@ if(isset($_GET['deleteid'])){
 
 ?>
 
-<?php if($signedUser['company_owner'] == 1) {
 
-	// nopnopnopnopnope
-}
-else {
-	echo
-	
-		"<form action='' method='POST' accept-charset='utf-8'>
-			<input type='text' name='search' value='' placeholder='Sök företag'> <button type='submit'>Sök</button>
-		</form>";
-}?>
-
+<form action="" method="POST" accept-charset="utf-8">
+	<input type="text" name="search" value="" placeholder="Sök företag"> <button type="submit">Sök</button>
+</form>
 
 
 	<div class="table-responsive">
