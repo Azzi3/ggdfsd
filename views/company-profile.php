@@ -26,6 +26,9 @@
       <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>
         <a class="edit-anchor" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>"> <button class="btn pull-right">Redigera uppgifter</button></a>
       <?php endif; ?>
+      <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>
+        <a class="edit-anchor" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>
+      <?php endif; ?>
 
       <div class="container">
         <div class="col-md-3 text-center">
