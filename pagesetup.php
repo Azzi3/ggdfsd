@@ -70,6 +70,11 @@ else if($curPage == 'course-list') {
 	$subTitle = "Kurser";
 }
 
+else if($curPage == 'course-info'){
+	$pageName = "course-info";
+	$subTitle = "Kurs";
+}
+
 else if($curPage == 'student-profile' && $signedUser){
 	$pageName = "student-profile";
 	$subtitle = "Studentprofil";

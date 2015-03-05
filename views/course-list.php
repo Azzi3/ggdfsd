@@ -54,7 +54,7 @@ if($signedUser['course_leader']){
 				
 				<?php foreach ($courses as $course){  ?>
 					<tr>
-						<td><?php echo $course['name'] ?></td>
+						<td><a href="<?php echo $path . 'course-info?id=' . $course['id'] ?>"><?php echo $course['name'] ?></a></td>
 						<td style="max-width: 10em"><?php echo $course['description'] ?></td>
 						<td><?php echo $course['course_start'] ?></td>
 						<td><?php echo $course['course_end'] ?></td>
@@ -74,7 +74,7 @@ if($signedUser['course_leader']){
 						</td>   
 						<td>
 						<?php if(strlen($course['file']) > 1) : ?>
-						<a href="<?php echo $path.'files/'.$course['file']; ?>"><button class="btn" type="button">Ladda ner</button></a>
+							<a href="<?php echo $path.'files/'.$course['file']; ?>"><button class="btn" type="button">Ladda ner</button></a>
 						<?php endif; ?>
 						</td>
 
