@@ -42,7 +42,7 @@
         <h3>Taggar</h3>
       
         <?php foreach ($courseTags as $courseTag): ?>
-          <a href="#" class="tag btn btn-primary"><?php echo $courseTag['name']; ?></a>
+          <a class="tag btn btn-primary"><?php echo $courseTag['name']; ?></a>
         <?php endforeach ?>
 
       </div>
