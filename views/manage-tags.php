@@ -22,8 +22,8 @@ if(isset($_POST['tag'])){
 
   $error = array();
 
-  if(strlen($form['name']) < 2 || strlen($form['name']) > 30){
-    $error[] .= 'Namnet på taggen måste vara mellan 2 och 30 bokstäver.';
+  if(strlen($form['name']) < 1 || strlen($form['name']) > 30){
+    $error[] .= 'Namnet på taggen måste vara mellan 1 och 30 bokstäver.';
   }
 
   $checkName = $tag->getByName($form['name']);
