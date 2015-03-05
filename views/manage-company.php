@@ -113,15 +113,15 @@ if(isset($_POST['company'])){
                 ?>
                 <legend>Kontaktperson</legend>
                 <div class="form-group">
-                    <label for="contactPersonName">Namn:</label>
+                    <label for="contactPersonName">Kontaktpersonens namn:</label>
                     <input type="text" class="form-control" id="contact_name" value="<?php echo $items['contact_name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
                 </div>
                 <div class="form-group">
-                    <label for="contactPersonTel">Telefonnummer:</label>
+                    <label for="contactPersonTel">Kontaktpersonens eelefonnummer:</label>
                     <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
                 </div>
                 <div class="form-group">
-                    <label for="contactPersonEmail">E-post:</label>
+                    <label for="contactPersonEmail">Kontaktpersonens e-post:</label>
                     <input type="email" class="form-control" id="contact_email" value="<?php echo $items['contact_email']; ?>" name="company[contact_email]" required>
                 </div>
 
