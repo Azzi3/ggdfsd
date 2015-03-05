@@ -95,17 +95,22 @@ class LiaProject extends Database{
 	public function deleteProjectAndTag($id, $companyId){
 		// ta bort mellantabell rader 
 		// ta bort tagger med projekt 
+		$str = "UPDATE $this->tbl_applicant SET project_id = null WHERE project_id = :id ";
+		$arr = array(
+			'id'=>$id
+		);
+		$this->update($str, $arr);
+
+		$str = " DELETE FROM $this->tbl_tags WHERE project_id = :id";
+		$arr = array('id'=>$id);
+		$this->delete($str, $arr);	
 
 		$str = "DELETE FROM $this->tbl WHERE id = :id AND company_id = :company_id ";
 		$arr = array(
 			'id'=>$id,
 			'company_id' => $companyId
 		);
-		if($this->delete($str, $arr)){
-			$str = " DELETE FROM $this->tbl_tags WHERE project_id = :id";
-			$arr = array('id'=>$id);
-			$this->delete($str, $arr);	
-		}
+		$this->delete($str, $arr);
 
 	
 	}
