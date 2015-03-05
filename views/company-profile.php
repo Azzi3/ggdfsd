@@ -154,10 +154,14 @@
   			</table>
   		</div>
 
-        <hr>
-          <a class=" btn btn-success pull-right" href="<?php echo $path ?>apply?comp=<?php echo $userInfo['id']; ?>">Spontanansökan till Lia</a>
-          <div class="clearfix"></div>
-          <br>
+      <?php if($signedUser['company_owner'] == 1) {
+        //nopnopnonpe
+      }
+      else {
+        echo
+            '<a href="$path ?>apply?comp=<?php echo $userInfo[id]; ?>">
+            <a class=" btn btn-success pull-right" href="<?php echo $path ?>apply?comp=<?php echo $userInfo["id"]; ?>">Spontanansökan till Lia</a>'
+        }?>
 
   </div>
 	
