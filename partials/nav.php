@@ -40,6 +40,11 @@
 			?>
           	  
           	<?php endif; ?>
+          	
+          	<?php if($signedUser['course_leader'] == 1) : ?>
+			<?php echo "Meny"?>
+			<?php endif; ?>
+			
         <span class="caret"></span></a>
 
 		  	<ul class="dropdown-menu" role="menu">
