@@ -1,21 +1,36 @@
 <?php 
 
-$ApplicationFormObj = new ApplicationForm();
+$liaProject = new liaProject();
 
 if(isset($_GET['deleteid'])){
 
-	$ApplicationFormObj->deleteApplication($_GET['deleteid']);
+	$liaProject->removeApplicant($_GET['deleteid']);
+	redirect(CURRENT_PATH);
+}
+
+if(isset($_GET['accept']) && isset($_GET['uid'])){
+	$liaProject->acceptApplicant($_GET['uid'], $_GET['accept']);
+	redirect(CURRENT_PATH);
+}
+
+if(isset($_GET['deny']) && isset($_GET['uid'])){
+	$liaProject->denyApplicant($_GET['uid'], $_GET['deny']);
+	redirect(CURRENT_PATH);
+}
+
+if(isset($_GET['finish']) && isset($_GET['uid'])){
+	$liaProject->finishApplicant($_GET['uid'], $_GET['finish']);
 	redirect(CURRENT_PATH);
 }
 
 if($signedUser['student']){
-	$ApplicationForms = $ApplicationFormObj->getAllWhereStudentGuid($signedUser['guid']);
+	$myApplications = $liaProject->getMyApplicationsUser($signedUser['id']);
 	$thName = 'Företag';
 }elseif($signedUser['company_owner']){
-	$ApplicationForms = $ApplicationFormObj->getAllWhereCompanyId($signedUser['company_id']);
+	$myApplications = $liaProject->getMyApplicationsCompany($signedUser['company_id']);
 	$thName = "Elevens namn";
-
 }
+
 ?>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -49,33 +64,49 @@ if($signedUser['student']){
 				<tr>
 					<th><?php echo $thName; ?></th>
 					<th>Lia kurs</th>
-					<th>Godkänd</th>
+					<th>Status</th>
+					<th></th>
 				</tr>
 			</thead>
 
 			<tbody>
-			<?php 
-			foreach ($ApplicationForms as $ApplicationForm){
+			<?php
+			$course = new Course();
+			$CompanyObj = new Company();
+			$UserObj = new User();
+			foreach ($myApplications as $ApplicationForm){
 				if($signedUser['student']){
-						$CompanyObj = new Company();
+						
 						$company = $CompanyObj->getFromId($ApplicationForm['company_id']); 
 						$tdName = $company['name'];
-						$btn = 	'<a data-applicationid="' . $ApplicationForm['id'] . '"  id="deleteApplicationBtn" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Ta bort</a>';
+						$btn = 	'<a data-name=" ansökan till '.$tdName.'" data-applicationid="' . $ApplicationForm['id'] . '"  id="deleteApplicationBtn" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Ta bort</a>';
 				}elseif($signedUser['company_owner']){
-					 	$UserObj = new User();
-					 	$user = $UserObj->getUserByGuid($ApplicationForm['student_guid']);
+					 	$user = $UserObj->getUserByid($ApplicationForm['user_id']);
 					 	$tdName = $user['firstname'] . ' ' . $user['lastname'];
-					 	$btn = '<a class="btn btn-success">Godkänd</a><a class="btn">Neka</a>';
+					 	$btn = '<a href="'.CURRENT_PATH.'?accept='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-success">Godkänd</a>
+					 	<a href="'.CURRENT_PATH.'?deny='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-danger">Neka</a>
+					 	<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
 				}
+
+				$courseName = $course->getFromId($ApplicationForm['course_id'])['name'];
+
+				if($ApplicationForm['status'] == 0){
+					$status = 'Ny ansökan';
+				}else if($ApplicationForm['status'] == 1){
+					$status = 'Godkänd';
+				}else if($ApplicationForm['status'] == 2){
+					$status = 'Nekad';
+				}else if($ApplicationForm['status'] == 3){
+					$status = 'Genomförd';
+				}
+
 			?>
 			
 				 <tr>
 				 	<td><?php echo $tdName; ?></td>
-				 	<td>CMS + länk till kursen</td>
-				 	<td>Nej</td>
-				 	<td>
-				 		<?php echo $btn ?>
-				 	</td>
+				 	<td><?php echo $courseName; ?></td>
+				 	<td><b><?php echo $status; ?></b></td>
+				 	<td><?php echo $btn; ?></td>
 				 </tr>
 			 	 <?php } ?>
 
