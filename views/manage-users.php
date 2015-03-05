@@ -287,7 +287,7 @@ if(isset($_POST['manage'])){
 
         * Måste anges<br>
         ** Lämnas blankt om du vill behålla nuvarande lösenord<br>
-        <button class="btn" type="submit">Spara uppgifter</button>
+        <button class="btn btn-default" type="submit">Spara uppgifter</button>
 
     </form>
 

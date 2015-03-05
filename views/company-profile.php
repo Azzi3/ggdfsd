@@ -24,10 +24,10 @@
     <div class="jumbotron">
 
       <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>
-        <a class="edit-anchor" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>"> <button class="btn pull-right">Redigera uppgifter</button></a>
+        <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>">Redigera uppgifter</a>
       <?php endif; ?>
       <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>
-        <a class="edit-anchor" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>
+        <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company"; ?>">Skapa företag</a>
       <?php endif; ?>
 
       <div class="container">
@@ -88,7 +88,7 @@
 
         <?php foreach ($companyTags as $companyTag) : ?>      
         
-             <a href="#" class="tag btn btn-primary"><?php echo $companyTag['name']; ?></a>
+             <a class="tag btn btn-primary"><?php echo $companyTag['name']; ?></a>
 
         <?php endforeach; ?>
 
@@ -143,7 +143,7 @@
   							} ?></td>
   							<td>
   								<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
-  									<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
+  									<a class="btn btn-default" href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>">Ändra</a>
   									<a id="deleteProjectBtn" data-name="<?php echo $project['name'];  ?>" data-projectid="<?php echo $project['id']; ?>" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
   								<?php endif; ?>
   	
@@ -155,7 +155,7 @@
   		</div>
 
         <hr>
-          <a href="<?php echo $path ?>apply?comp=<?php echo $userInfo['id']; ?>"><button type="button" class="btn pull-right">Spontanansökan till Lia</button></a>
+          <a class=" btn btn-success pull-right" href="<?php echo $path ?>apply?comp=<?php echo $userInfo['id']; ?>">Spontanansökan till Lia</a>
           <div class="clearfix"></div>
           <br>
 

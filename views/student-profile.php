@@ -17,11 +17,10 @@
 ?>
 <div class="container">
 
-  <div class="row">
     <div class="jumbotron">
 
       <?php if($session->getSession('guid') == $userInfo['guid']) : ?>
-        <a class="edit-anchor" href="<?php echo $path; ?>manage-user"><button class="btn pull-right">Redigera uppgifter</button></a>
+        <a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-user">Redigera uppgifter</a>
       <?php endif; ?>
 
       <div class="row">
@@ -37,7 +36,6 @@
       </div>
       
     </div>
-  </div>
   
   <div class="row">
     
@@ -65,24 +63,13 @@
       
       <h3 class="text-center">Mina kunskaper</h3>
 
-      <div class="tags">
+      <div class="tags text-center">
+
+          <?php foreach ($studentTags as $studentTag) : ?>      
         
-        <?php 
-          
-          $counter = 0;
+             <a class="tag btn btn-primary"><?php echo $studentTag['name']; ?></a>
 
-          foreach ($studentTags as $studentTag) {
-            
-            echo $studentTag['name'];
-            if ($counter != count($studentTags) -1) {
-                echo ", ";
-              }  
-            $counter ++;
-          }
-
-
-
-        ?>
+        <?php endforeach; ?>
 
       </div>
 
