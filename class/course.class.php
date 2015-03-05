@@ -4,6 +4,8 @@ class Course extends Database{
 
   private $tbl = 'course';
   private $tbl_tags = 'course_tag';
+  private $tbl_applicant = 'project_applicant';
+
 
   public function getAll(){
     $str = " SELECT * FROM $this->tbl ";
@@ -102,4 +104,12 @@ class Course extends Database{
 
     return $this->selectAll($str, $arr);
   }
+
+  public function getApplicationsWithCourseId($id){
+    $str = " SELECT * FROM $this->tbl_applicant WHERE course_id = :id";
+    $arr = array('id' => $id);
+
+    return $this->selectAll($str, $arr);
+  }
+
 }
