@@ -15,7 +15,10 @@ if(isset($_POST['sendKey'])){
 }
 
 
-
+if(isset($_GET['reset'])){
+	$session->killSession('key');
+	redirect(CURRENT_PATH);
+}
 
 if(isset($_POST['key'])){
 	$keyType = $_POST['key'];
@@ -63,6 +66,7 @@ if($session->getSession('error')){
 	<textarea class="form-control" style="resize:none; height:200px;" id="msg" name="sendKey[message]"><?php echo $messageText; ?></textarea>
 	</div>
 	<button class="btn btn-default" type="submit">Skicka nyckeln</button>
+	<a href="?reset=1"><button class="btn btn-default" type="button">Generera ny nyckel</button></a>
 </form>
 
 <?php else : ?>
