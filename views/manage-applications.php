@@ -109,14 +109,20 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 			<?php
 			foreach ($myApplications as $ApplicationForm){
 
+						$acceptButton = '';
+					 	$denyButton = '';
+					 	$finishButton = '';
+					 	$formButton = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
+					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
+					<button class="btn" type="submit">Spara omdömme</button>
+					</form>';
 
 
 
-				if($signedUser['student']){
-						
+				if($signedUser['student']){				
 						$company = $CompanyObj->getFromId($ApplicationForm['company_id']); 
 						$tdName = $company['name'];
-						$btn = 	'<a data-name=" ansökan till '.$tdName.'" data-applicationid="' . $ApplicationForm['id'] . '"  id="deleteApplicationBtn" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Ta bort</a>';
+						$formButton = 	'<a data-name=" ansökan till '.$tdName.'" data-applicationid="' . $ApplicationForm['id'] . '"  id="deleteApplicationBtn" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Ta bort</a>';
 				}elseif($signedUser['company_owner']){
 					 	$user = $UserObj->getUserByid($ApplicationForm['user_id']);
 					 	$tdName = $user['firstname'] . ' ' . $user['lastname'];
@@ -124,7 +130,10 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 					 	$acceptButton = '<a href="'.CURRENT_PATH.'?accept='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-success">Godkänd</a>';
 					 	$denyButton = '<a href="'.CURRENT_PATH.'?deny='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-danger">Neka</a>';
 					 	$finishButton = '<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
-
+					 	$formButton = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
+					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
+					<button class="btn" type="submit">Spara omdömme</button>
+					</form>';
 				}
 
 				$courseName = $course->getFromId($ApplicationForm['course_id'])['name'];
@@ -142,10 +151,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 					$btn = $acceptButton.' '.$finishButton;
 				}else if($ApplicationForm['status'] == 3){
 					$status = 'Genomförd';
-					$btn = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
-					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
-					<button class="btn" type="submit">Spara omdömme</button>
-					</form>';
+					$btn = $formButton;
 				}
 
 			?>
