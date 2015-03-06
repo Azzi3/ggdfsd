@@ -55,7 +55,7 @@ else if($curPage == 'manage-user' && $signedUser) {
 	$subTitle = "Hantera dina uppgifter";
 }
 
-else if($curPage == 'manage-courses' && $signedUser) {
+else if($curPage == 'manage-courses' && $signedUser['course_leader'] == 1) {
 	$pageName = "manage-courses";
 	$subTitle = "Hantera kurser";
 }
