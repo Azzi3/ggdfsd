@@ -25,6 +25,16 @@ $(document).ready(function() {
 		});
 	});
 
+	$(document).on('click', '#deleteTagBtn', function (e) {
+		var id = $(this).data('tagid');
+		var name = $(this).data('name');
+		$('#myModalLabel').append('' + name + '');
+		$(document).on('click', '#reallyDelete', function (e) {
+			var url = location.origin + location.pathname + '?deleteid='+ id;
+			location.href = url;
+		});
+	});
+
 	/**
 	*
 	*
