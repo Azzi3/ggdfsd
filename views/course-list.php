@@ -80,7 +80,7 @@ if($signedUser['course_leader']){
 							<?php 
 							if($signedUser['course_leader']){
 								echo $editBtn  = '<a class="btn btn-default" href="'. $path . 'manage-courses?id='. $course['id'].'">Ändra</a> ';
-								echo $deleteBtn  = '<a id="deleteCourseBtn" data-courseid="'. $course['id']. '" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>';
+								echo $deleteBtn  = '<a id="deleteCourseBtn" data-name=" '.$course['name'] . '" data-courseid="'. $course['id']. '" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>';
 							}
 							 ?>
 

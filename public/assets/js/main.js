@@ -42,10 +42,7 @@ $(document).ready(function() {
 	$(document).on('click', '#deleteCourseBtn', function (e) {
 		var id = $(this).data('courseid');
 		var name = $(this).data('name');
-		if(!name){
-			name = "Lägg till data-name på deleteknappen";
-		}
-		$('#myModalLabel').append('"' + name + '"');
+		$('#myModalLabel').append(name);
 
 		$(document).on('click', '#reallyDelete', function (e) {
 			var url = location.origin + location.pathname + '?deleteid='+ id;
