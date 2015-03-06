@@ -62,7 +62,7 @@ if($session->getSession('error')){
 	<label for="msg">Epostmeddelande</label>
 	<textarea class="form-control" style="resize:none; height:200px;" id="msg" name="sendKey[message]"><?php echo $messageText; ?></textarea>
 	</div>
-	<button class="btn" type="submit">Skicka nyckeln</button>
+	<button class="btn btn-default" type="submit">Skicka nyckeln</button>
 </form>
 
 <?php else : ?>
