@@ -136,8 +136,11 @@ if(isset($_POST['tag'])){
           <tr>
             <td><?php echo $tag['name'] ?></td>
             <td><?php
-              if (!empty(checkTagUsage($tag['id'], $tbl_course)) || !empty(checkTagUsage($tag['id'], $tbl_project)) ||
-                !empty(checkTagUsage($tag['id'], $tbl_student)) || !empty(checkTagUsage($tag['id'], $tbl_company))){
+              $check1 = checkTagUsage($tag['id'], $tbl_course);
+              $check2 = checkTagUsage($tag['id'], $tbl_project);
+              $check3 = checkTagUsage($tag['id'], $tbl_student);
+              $check4 = checkTagUsage($tag['id'], $tbl_company);
+              if (!empty($check1) || !empty($check2) || !empty($check3) || !empty($check4)){
                   echo "Ja";
                   $used = true; 
               } else {
