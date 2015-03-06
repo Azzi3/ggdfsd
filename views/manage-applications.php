@@ -74,7 +74,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort</h4>
+				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort <span></span>?</h4>
 			</div>
 		
 			<div class="modal-footer">

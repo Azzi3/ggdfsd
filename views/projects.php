@@ -14,7 +14,7 @@ if(isset($_GET['deleteid'])){
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort </h4>
+				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort <span></span></h4>
 			</div>
 		
 			<div class="modal-footer">
@@ -42,7 +42,8 @@ if(isset($_GET['deleteid'])){
 					<th>Företag</th>
 					<th>Platser</th>
 					<th>Uppskattad tid</th>
-					<th>Taggar</th>					<th></th>
+					<th>Taggar</th>
+					<th></th>
 				</tr>
 			</thead>
 
@@ -52,7 +53,8 @@ if(isset($_GET['deleteid'])){
 						$companyInfo = $company->getFromId($project['company_id']);
 
 					?>
-				<tr>					<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>"><?php echo $project['name']; ?><a> </td>
+				<tr>
+					<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>"><?php echo $project['name']; ?><a> </td>
 					<td><a href="<?php echo $path; ?>company-profile?id=<?php echo $project['company_id']; ?>"> <?php echo $companyInfo['name']; ?></a></td>
 					<td><?php echo $project['spots']; ?></td>
 					<td><?php echo $project['estimated_time']; ?></td>

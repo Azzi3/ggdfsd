@@ -60,7 +60,8 @@ if(isset($_GET['deleteid'])){
 					<th>Kontaktperson</th>
 					<th>Stad</th>
 					<th>Hemsida</th>
-					<th>Taggar</th>					<th></th>
+					<th>Taggar</th>
+					<th></th>
 				</tr>
 			</thead>
 
@@ -81,12 +82,6 @@ if(isset($_GET['deleteid'])){
 							};
 							$counter++;
 						} ?></td>
-						<td>
-						<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $company['id']) : ?>
-						<a class="btn btn-default" href="<?php echo $path; ?>manage-company?id=<?php echo $company['id']; ?>">Ändra</a>
-							<a id="deleteCompanyBtn" data-companyid="<?php echo $company['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
-						<?php endif; ?>
-						</td>
 					</tr>
 					<?php } ?>
 				</tbody>
