@@ -76,7 +76,7 @@ if($session->getSession('error')){
 			<option value="student">Student</option>
 		</select>
 	</div>
-	<button class="btn" type="submit">Generera nyckel</button>
+	<button class="btn btn-default" type="submit">Generera nyckel</button>
 </form>
 
 <?php endif; ?>
