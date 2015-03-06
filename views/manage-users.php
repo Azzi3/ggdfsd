@@ -254,7 +254,7 @@ if(isset($_POST['manage'])){
 
         <div class="form-group">
             
-            <?php if($profileInfo['resume']): ?>
+            <?php if(isset($profileInfo['resume'])): ?>
                 <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
                 <label for="deleteresume">Ta bort CV?</label>
                 <input id="deleteresume" type="checkbox" name="manage[deleteresume]">
@@ -271,7 +271,7 @@ if(isset($_POST['manage'])){
 
         <div class="form-group">
             
-            <?php if($profileInfo['picture']): ?>
+            <?php if(isset($profileInfo['picture'])): ?>
                 <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
                 <label for="deleteimg">Ta bort profilbild?</label>
                 <input id="deleteimg" type="checkbox" name="manage[deleteimg]">
