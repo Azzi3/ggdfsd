@@ -1,6 +1,9 @@
 <?php 
 
 $liaProject = new liaProject();
+$course = new Course();
+$CompanyObj = new Company();
+$UserObj = new User();
 
 if(isset($_GET['deleteid'])){
 
@@ -9,11 +12,23 @@ if(isset($_GET['deleteid'])){
 }
 
 if(isset($_GET['accept']) && isset($_GET['uid'])){
+	$userEmail = $UserObj->getUserByid($_GET['uid'])['email'];
+
+	$subject = 'LIA-plats accepterad';
+	$msg = 'Din sökta LIA-plats är accepterad, logga in på LIAbanken för mer information.';
+	mail($userEmail, $subject, $msg, 'From: noreply@liabanken.se');
+
 	$liaProject->acceptApplicant($_GET['uid'], $_GET['accept']);
 	redirect(CURRENT_PATH);
 }
 
 if(isset($_GET['deny']) && isset($_GET['uid'])){
+	$userEmail = $UserObj->getUserByid($_GET['uid'])['email'];
+
+	$subject = 'LIA-plats nekad';
+	$msg = 'Din sökta LIA-plats är nekad, logga in på LIAbanken för mer information.';
+	mail($userEmail, $subject, $msg, 'From: noreply@liabanken.se');
+
 	$liaProject->denyApplicant($_GET['uid'], $_GET['deny']);
 	redirect(CURRENT_PATH);
 }
@@ -30,6 +45,27 @@ if($signedUser['student']){
 	$myApplications = $liaProject->getMyApplicationsCompany($signedUser['company_id']);
 	$thName = "Elevens namn";
 }
+
+
+
+
+if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
+	$report = $_POST['report'];
+	$applicant = $_GET['app'];
+	$id = $_GET['id'];
+
+	if(strlen($report) > 200){
+		//error här, lämnar tomt så att jocke kan fixa sen. :) Ha så kul Joeck!!1
+	}
+	else{
+		$liaProject->editReportApplicant($applicant, $id, $report);
+	}
+
+	
+	redirect(CURRENT_PATH);
+
+}
+
 
 ?>
 
@@ -64,16 +100,18 @@ if($signedUser['student']){
 					<th><?php echo $thName; ?></th>
 					<th>Lia kurs</th>
 					<th>Status</th>
+					<th>Ansökning slutar</th>
 					<th></th>
 				</tr>
 			</thead>
 
 			<tbody>
 			<?php
-			$course = new Course();
-			$CompanyObj = new Company();
-			$UserObj = new User();
 			foreach ($myApplications as $ApplicationForm){
+
+
+
+
 				if($signedUser['student']){
 						
 						$company = $CompanyObj->getFromId($ApplicationForm['company_id']); 
@@ -82,21 +120,32 @@ if($signedUser['student']){
 				}elseif($signedUser['company_owner']){
 					 	$user = $UserObj->getUserByid($ApplicationForm['user_id']);
 					 	$tdName = $user['firstname'] . ' ' . $user['lastname'];
-					 	$btn = '<a href="'.CURRENT_PATH.'?accept='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-success">Godkänd</a>
-					 	<a href="'.CURRENT_PATH.'?deny='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-danger">Neka</a>
-					 	<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
+
+					 	$acceptButton = '<a href="'.CURRENT_PATH.'?accept='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-success">Godkänd</a>';
+					 	$denyButton = '<a href="'.CURRENT_PATH.'?deny='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-danger">Neka</a>';
+					 	$finishButton = '<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
+
 				}
 
 				$courseName = $course->getFromId($ApplicationForm['course_id'])['name'];
+				$lastDay = $course->getFromId($ApplicationForm['course_id'])['course_start'];
+
 
 				if($ApplicationForm['status'] == 0){
 					$status = 'Ny ansökan';
+					$btn = $acceptButton.' '.$denyButton;
 				}else if($ApplicationForm['status'] == 1){
 					$status = 'Godkänd';
+					$btn = $denyButton.' '.$finishButton;
 				}else if($ApplicationForm['status'] == 2){
 					$status = 'Nekad';
+					$btn = $acceptButton.' '.$finishButton;
 				}else if($ApplicationForm['status'] == 3){
 					$status = 'Genomförd';
+					$btn = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
+					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
+					<button class="btn" type="submit">Spara omdömme</button>
+					</form>';
 				}
 
 			?>
@@ -105,6 +154,7 @@ if($signedUser['student']){
 				 	<td><?php echo $tdName; ?></td>
 				 	<td><?php echo $courseName; ?></td>
 				 	<td><b><?php echo $status; ?></b></td>
+				 	<td><?php echo $lastDay; ?></td>
 				 	<td><?php echo $btn; ?></td>
 				 </tr>
 			 	 <?php } ?>

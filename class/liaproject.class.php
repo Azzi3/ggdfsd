@@ -179,6 +179,12 @@ class LiaProject extends Database{
 		$this->update($str, $arr);
 	}
 
+	public function editReportApplicant($uid, $id, $report){
+		$str = " UPDATE $this->tbl_applicant SET report = :report WHERE user_id = :uid AND id = :id ";
+		$arr = array('uid'=>$uid, 'id'=>$id, 'report'=>$report);
+		$this->update($str, $arr);
+	}
+
 
 
 	public function getTags($id) {
