@@ -16,8 +16,12 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 		$name = $lia['name'];
 		$desc = $lia['description'];
 		$msg = "Din ansökan till ".$lia['name']." är mottagen.";
+		$comp = $_GET['comp'];
+		$company = new Company();
+		$companyInfo = $company->getFromId($_GET['comp']);
+		$name = "Spontanansökan till ".$companyInfo['name'];
 
-		$redirectPath = CURRENT_PATH.'?cid='.$_GET['cid'];
+		$redirectPath = CURRENT_PATH.'?cid='.$_GET['cid'].'&comp='. $_GET['comp'];
 
 	}else{
 		$comp = $_GET['comp'];
