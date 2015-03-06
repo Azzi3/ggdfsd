@@ -76,7 +76,7 @@
       else {
         echo
             "<a href='$path" . "apply?comp=$userInfo[id]'>" . 
-              "<button type='button' class='btn'>Ansök om LIA-plats</button></a>";
+              "<button type='button' class='btn btn-success'>Ansök om LIA-plats</button></a>";
         }?>
 
     </div>

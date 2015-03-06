@@ -89,103 +89,103 @@ if(isset($_POST['company'])){
     <div class="jumbotron">
 
         <h1>Hantera företagsprofil!</h1>
-        <a class="btn btn-primary" href="<?php echo $path; ?>company-profile" role="button">Företags sida</a>
-        <a class="btn btn-primary" href="<?php echo $path; ?>company-list" role="button">Företags lista</a>
-
+        <a class="btn btn-default" href="<?php echo $path; ?>company-profile" role="button">Tillbaka</a>
     </div>
-</div>
+    <form method="POST" action="" enctype="multipart/form-data">
+    <div class="row">
+        <?php
+        //show error if error-session is active
+        if($session->getSession('error')){
+            echo '<div class="alert alert-danger" role="alert">';
+            foreach ($session->getSession('error') as $item) {
+                echo '<li>'.$item.'</li>';
+            }
+            echo '</div>';
+            //kill session when 'echoed'.
+            $session->killSession('error');
+        }
+        ?>
+        <div class="col-md-6">
+            <legend>Företagsinfo</legend>
+            <div class="form-group">
+                <label for="companyName">Företagsnamn</label>
+                <input type="text" class="form-control" id="name" value="<?php echo $items['name'] ?>" name="company[name]" required>
+            </div>
+            <div class="form-group">
+                <label for="companyAddress">Gatuadress</label>
+                <input type="text" class="form-control" id="street_address" value="<?php echo $items['street_address'] ?>" name="company[street_address]" required>
+            </div>
+            <div class="form-group">
+                <label for="companyZipCode">Postnummer</label>
+                <input type="number" class="form-control" value="<?php echo $items['zip_code'] ?>" id="zip_code" name="company[zip_code]">
+            </div>
+            <div class="form-group">
+                <label for="companyCity">Postort</label>
+                <input type="text" class="form-control" id="city" value="<?php echo $items['city'] ?>" name="company[city]" required>
+            </div>
 
-    <div class="table-responsive">
-
-        <div class="container">
-            <form class="col-md-4" method="POST" action="" enctype="multipart/form-data">
-                <?php
-                //show error if error-session is active
-                if($session->getSession('error')){
-                    echo '<div class="alert alert-danger" role="alert">';
-                    foreach ($session->getSession('error') as $item) {
-                        echo '<li>'.$item.'</li>';
-                    }
-                    echo '</div>';
-                    //kill session when 'echoed'.
-                    $session->killSession('error');
-                }
-                ?>
-                <legend>Kontaktperson</legend>
-                <div class="form-group">
-                    <label for="contactPersonName">Kontaktpersonens namn:</label>
-                    <input type="text" class="form-control" id="contact_name" value="<?php echo $items['contact_name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
-                </div>
-                <div class="form-group">
-                    <label for="contactPersonTel">Kontaktpersonens eelefonnummer:</label>
-                    <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
-                </div>
-                <div class="form-group">
-                    <label for="contactPersonEmail">Kontaktpersonens e-post:</label>
-                    <input type="email" class="form-control" id="contact_email" value="<?php echo $items['contact_email']; ?>" name="company[contact_email]" required>
-                </div>
-
-                <legend>Företagsinfo</legend>
-                <div class="form-group">
-                    <label for="companyName">Företagsnamn</label>
-                    <input type="text" class="form-control" id="name" value="<?php echo $items['name'] ?>" name="company[name]" required>
-                </div>
-                <div class="form-group">
-                    <label for="companyAddress">Gatuadress</label>
-                    <input type="text" class="form-control" id="street_address" value="<?php echo $items['street_address'] ?>" name="company[street_address]" required>
-                </div>
-                <div class="form-group">
-                    <label for="companyZipCode">Postnummer</label>
-                    <input type="number" class="form-control" value="<?php echo $items['zip_code'] ?>" id="zip_code" name="company[zip_code]">
-                </div>
-                <div class="form-group">
-                    <label for="companyCity">Postort</label>
-                    <input type="text" class="form-control" id="city" value="<?php echo $items['city'] ?>" name="company[city]" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="companyURL">Webbadress:</label>
-                    <input type="text" class="form-control" id="website_url" value="<?php echo $items['website_url'] ?>" name="company[website_url]">
-                </div>
-                <div class="form-group">
-                    <label for="companyDescription">Företagsbeskrivning:</label>
-                    <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <?php if($items['image']): ?>
-                        <img src=" <?php echo $path . "images/company/" . $items['name'] . "/tum_" . $items['image'] ?> " alt="">
-                        <label for="deleteimg">Ta bort profilbild?</label>
-                        <input id="deleteimg" type="checkbox" value="0" name="company[deleteimg]">
-                        
-                    <?php else: ?>
-                        <p>Ingen profilbild uppladdad</p>
-                    <?php endif; ?>
-                </div>
-
-                <div class="form-group">
-                    <label for="resume">Ladda upp profilbild</label>
-                    <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
-                </div>
-                
-                <div class="form-group">
-                    <label for="checkbox">Företagstaggar</label>
-                <div class="checkbox">
-                          <?php foreach ($companyTag->getAll() as $item) :
-                            $tag = $companyTag->checkIfTagIsUsed($id, $item['id']);
-                          ?>
-                            <label>
-                              <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
-                            </label>
-                            <?php endforeach; ?>
-                </div>
-                <a href="<?php echo $path; ?>manage-tags">Ny tagg</a>
-                    
-                </div>
-                <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
-            </form>
+            <div class="form-group">
+                <label for="companyURL">Webbadress:</label>
+                <input type="text" class="form-control" id="website_url" value="<?php echo $items['website_url'] ?>" name="company[website_url]">
+            </div>
+            <div class="form-group">
+                <label for="companyDescription">Företagsbeskrivning:</label>
+                <textarea id="description" class="form-control" rows="3" name="company[description]"><?php echo $items['description'] ?></textarea>
+            </div>
         </div>
-    </div>
+        <div class="col-md-6">
+            <legend>Kontaktperson</legend>
+            <div class="form-group">
+                <label for="contactPersonName">Kontaktpersonens namn:</label>
+                <input type="text" class="form-control" id="contact_name" value="<?php echo $items['contact_name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
+            </div>
+            <div class="form-group">
+                <label for="contactPersonTel">Kontaktpersonens eelefonnummer:</label>
+                <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
+            </div>
+            <div class="form-group">
+                <label for="contactPersonEmail">Kontaktpersonens e-post:</label>
+                <input type="email" class="form-control" id="contact_email" value="<?php echo $items['contact_email']; ?>" name="company[contact_email]" required>
+            </div>
+            <hr>
+            <div class="form-group">
+                <?php if($items['image']): ?>
+                    <img src=" <?php echo $path . "images/company/" . $items['name'] . "/tum_" . $items['image'] ?> " alt="">
+                    <label for="deleteimg">Ta bort profilbild?</label>
+                    <input id="deleteimg" type="checkbox" value="0" name="company[deleteimg]">
+                    
+                <?php else: ?>
+                    <p>Ingen profilbild uppladdad</p>
+                <?php endif; ?>
+            </div>
 
+            <div class="form-group">
+                <label for="resume">Ladda upp profilbild</label>
+                <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
+            </div>
+            
+            <div class="form-group">
+                <label for="checkbox">Företagstaggar</label>
+            <div class="checkbox">
+                      <?php foreach ($companyTag->getAll() as $item) :
+                        $tag = $companyTag->checkIfTagIsUsed($id, $item['id']);
+                      ?>
+                        <label>
+                          <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
+                        </label>
+                        <?php endforeach; ?>
+            </div>
+            <a href="<?php echo $path; ?>manage-tags">Ny tagg</a>
+                
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div style="margin-bottom: 1em" class="col-md-6">
+                <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>
