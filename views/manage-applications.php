@@ -112,18 +112,15 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 						$acceptButton = '';
 					 	$denyButton = '';
 					 	$finishButton = '';
-					 	$formButton = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
-					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
-					<button class="btn" type="submit">Spara omdömme</button>
-					</form>';
-
+					 	$formButton = '';
 
 
 				if($signedUser['student']){				
 						$company = $CompanyObj->getFromId($ApplicationForm['company_id']); 
 						$tdName = $company['name'];
-						$formButton = 	'<a data-name=" ansökan till '.$tdName.'" data-applicationid="' . $ApplicationForm['id'] . '"  id="deleteApplicationBtn" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Ta bort</a>';
+						$deleteBtn = 	'<a data-name=" ansökan till '.$tdName.'" data-applicationid="' . $ApplicationForm['id'] . '"  id="deleteApplicationBtn" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Ta bort</a>';
 				}elseif($signedUser['company_owner']){
+						$deleteBtn = '';
 					 	$user = $UserObj->getUserByid($ApplicationForm['user_id']);
 					 	$tdName = $user['firstname'] . ' ' . $user['lastname'];
 
@@ -161,7 +158,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 				 	<td><?php echo $courseName; ?></td>
 				 	<td><b><?php echo $status; ?></b></td>
 				 	<td><?php echo $lastDay; ?></td>
-				 	<td><?php echo $btn; ?></td>
+				 	<td><?php echo $btn.$deleteBtn; ?></td>
 				 </tr>
 			 	 <?php } ?>
 
