@@ -162,11 +162,17 @@ class Upl{
 			$x = ($newWidth/2)/2;
 		}
 		//height greater
-		else{
+		else if ($srcRatio > $destRatio){
 			$newHeight = $maxWidth / $srcRatio;
 			$newWidth = $maxWidth;
 			$x = 0;
 			$y = ($newHeight/2)/2;
+		}
+		else{
+			$newHeight = $maxWidth / $srcRatio;
+			$newWidth = $maxWidth;
+			$x = 0;
+			$y = 0;
 		}
 
 		//die();
