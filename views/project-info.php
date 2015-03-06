@@ -56,9 +56,9 @@ if(isset($_GET['id'])){
     	    </label>
             <?php endforeach; ?>
     	  </div>
-
+    <?php if($signedUser['student']): ?>
           <a class="btn btn-success" href="<?php echo $path ?>apply?cid=<?php echo $items['id']; ?>&comp=<?php echo $items['company_id']; ?>" >Ansök</a>
-    	
+    	<?php endif; ?>
     </div><?php
 //open the object/class....
 $liaProject = new LiaProject();
