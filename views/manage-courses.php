@@ -125,8 +125,7 @@ if(isset($_POST['course'])){
     <div class="jumbotron">
 
         <h1>Hantera kurser!</h1>
-        <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
-        <a class="btn btn-primary" href="<?php echo $path; ?>list-courses" role="button">Visa kurser</a>
+        <a class="btn btn-default" href="<?php echo $path; ?>list-courses" role="button">Tillbaka</a>
 
     </div>
 </div>
