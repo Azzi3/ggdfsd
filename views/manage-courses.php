@@ -150,7 +150,7 @@ if(isset($_POST['course'])){
 
           <div class="form-group">
             <label for="name">Namn</label>
-            <input type="text" name="course[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" pattern="^([^0-9]*)$" placeholder="Namn" required>
+            <input type="text" name="course[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" placeholder="Namn" required>
           </div>
           
           <div class="form-group">
