@@ -127,6 +127,7 @@ if(isset($_POST['tag'])){
         <tr>
           <th>Tillgängliga taggar</th>
           <th>Används</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -147,11 +148,11 @@ if(isset($_POST['tag'])){
                 echo "Nej";
                 $used = false;
               } ?>
-              <?php
+            </td>
+            <td><?php
               if(!$used){ ?>
                 <a id="deleteTagBtn" data-tagid="<?php echo $tag['id'] ?>" class="btn btn-danger pull-right" data-toggle="modal" data-name="<?php echo " ". $tag['name'] ?>" data-target="#deleteModal" >Ta bort</a> <?php
-              } ?>
-            </td>
+              } ?></td>
           </tr>
         <?php } ?>
       </tbody>
