@@ -25,6 +25,29 @@ hr {
     margin: 0 auto;
 }
 
+.status-block{
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.status-default{
+    color: #FFF;
+    background-color: #333;  
+    border: 1px solid #ccc;
+}
+
+.status-success{
+    color: #FFF;
+    background-color: #5cb85c;  
+    border: 1px solid #398439;
+}
+
+.status-danger{
+    color: #FFF;
+    background-color: #c9302c;  
+    border: 1px solid #d43f3a;
+}
 
 /* Startpage css */
 .btn-xl {
