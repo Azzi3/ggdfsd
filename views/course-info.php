@@ -14,18 +14,12 @@
     <div class="jumbotron">
 
         <h1><?php echo $course['name'] ?></h1>
-        
+        <h3><?php echo $course['course_start'] ?> - <?php echo $course['course_end'] ?></h3>    
     </div>
   </div>
 
   <div class="container">
     
-    <div class="row">
-      <div class="col-md-12">
-        <p><?php echo $course['course_start'] ?> - <?php echo $course['course_end'] ?></p>
-      </div>
-    </div>
-
     <div class="row">
       <div class="col-md-12">
         <h3>Kursbeskrivning</h3>
@@ -55,13 +49,13 @@
                 $status = "Unknown";
                 
                 if($application['status'] == 0){
-                  $status = "<a class='btn btn-default'>Ej godkänd</a>";
+                  $status = "<p class='status-block status-default'>Ej godkännd</p>";
                 } else if($application['status'] == 1){
-                  $status = "<a class='btn btn-success'>Godkänd</a>";
+                  $status = "<p class='status-block status-success'>Godkänd</p>";
                 } else if($application['status'] == 2){
-                  $status = "<a class='btn btn-danger'>Nekad</a>";
+                  $status = "<p class='status-block status-danger'>Nekad</p>";
                 } else{
-                  $status = "<a class='btn btn-success'>Genomförd</a>";
+                  $status = "<p class='status-block status-success'>Genomförd</p>";
                 }
 
               ?>
@@ -73,7 +67,8 @@
               </tr>
               
             <?php endforeach; ?>  
-
+            <div>
+            </div>
           </tbody>
 
         </table>
