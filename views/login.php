@@ -95,7 +95,7 @@
 													<label for="password">Lösenord</label>
 													<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord" required>
 												</div>
-												<button type="submit" class="btn">Logga in</button>
+												<button type="submit" class="btn btn-default">Logga in</button>
 											</form>
 											
 											</div>
@@ -115,7 +115,7 @@
 													<label for="mail">Registrera dig med din nyckel</label>
 													<input type="text" class="form-control" id="mail" name="register[secret]" placeholder="Nyckel" required>
 												</div>
-												<button type="submit" class="btn">Registrera</button>
+												<button type="submit" class="btn btn-default">Registrera</button>
 											</form>
 											<?php endif; ?>
 									 </div>
