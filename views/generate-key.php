@@ -38,6 +38,7 @@ Använd nyckeln när du registrerar dig, eller klicka på länken nedan.\n".
 
 
 ?>
+<div class="container">
 
 <?php if($session->getSession('key')) : ?>
 <div class="alert alert-info"><b>Nyckel:</b> <?php echo $session->getSession('key'); ?></div>
@@ -49,6 +50,7 @@ if($session->getSession('error')){
 	$session->killSession('error');
 }
 ?>
+
 <form action="" method="POST" accept-charset="utf-8">
 
 	<div class="form-group">
@@ -78,3 +80,4 @@ if($session->getSession('error')){
 </form>
 
 <?php endif; ?>
+</div>
