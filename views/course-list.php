@@ -29,7 +29,7 @@ if($signedUser['course_leader']){
 <div class="container">
 	<div class="jumbotron">
 
-		<h1>Kurser!</h1>
+		<h1>LIA-Kurser</h1>
 		<?php if($signedUser['course_leader']){  ?>
 		<a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-courses" role="button">Lägg upp Kurser</a>
 		<?php } ?>
@@ -41,11 +41,10 @@ if($signedUser['course_leader']){
 			<thead>
 				<tr>
 					<th>Namn</th>
-					<th>Beskrivning</th>
 					<th>Startdatum</th>
 					<th>Slutdatum</th>
 					<th>Taggar</th>
-					<th>Fil</th>
+					<th>Kursinfo</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -55,7 +54,6 @@ if($signedUser['course_leader']){
 				<?php foreach ($courses as $course){  ?>
 					<tr>
 						<td><a href="<?php echo $path . 'course-info?id=' . $course['id'] ?>"><?php echo $course['name'] ?></a></td>
-						<td style="max-width: 10em"><?php echo $course['description'] ?></td>
 						<td><?php echo $course['course_start'] ?></td>
 						<td><?php echo $course['course_end'] ?></td>
 						<td>

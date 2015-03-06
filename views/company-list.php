@@ -27,7 +27,7 @@ if(isset($_GET['deleteid'])){
 <div class="container">
     <div class="jumbotron">
 
-        <h1>Företagslista</h1>
+        <h1>Företag</h1>
         
     </div>
 </div>
@@ -69,7 +69,6 @@ else {
 					<th>Kontaktperson</th>
 					<th>Stad</th>
 					<th>Hemsida</th>
-					<th>Beskrivning</th>
 					<th>Taggar</th>
 				</tr>
 			</thead>
@@ -81,8 +80,7 @@ else {
 					<td style="max-width: 10em"><?php echo $company['street_address'] ?></td>
 					<td><?php echo $company['zip_code'] ?></td>
 						<td><?php echo $company['city'] ?></td>
-						<td><?php echo $company['website_url'] ?></td>
-						<td><?php echo $company['description'] ?></td>
+						<td><a target="_blank" href="<?php echo $company['website_url'] ?>"><?php echo $company['website_url'] ?></a></td>
 						<td><?php
 						$counter = 0;
 						$companyTags = $companyObj->getTags($company['id']);

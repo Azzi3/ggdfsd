@@ -28,17 +28,13 @@ if(isset($_GET['id'])){
 <div class="container">
     <div class="jumbotron">
 
-        <h1>Projekt!</h1>
+        <h1><?php echo $items['name']; ?></h1>
         <a class="btn btn-default" href="<?php echo $path; ?>projects" role="button">Tillbaka</a>
     </div>
 </div>
 
     <div class="container">
     	
-    	  <div>
-    	    <label for="projectName">Namn</label>
-    	    <p><?php echo $items['name']; ?></p>
-    	  </div>
     	  <div>
     	    <label for="description">Beskriving</label>
     		  <p><?php echo $items['description']; ?></p>

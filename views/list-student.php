@@ -23,7 +23,7 @@ $students = $studentObj->getAll();
 <div class="container">
     <div class="jumbotron">
 
-        <h1>Studentlista</h1>
+        <h1>Elever</h1>
        
     </div>
 </div>

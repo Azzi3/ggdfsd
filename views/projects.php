@@ -27,7 +27,7 @@ if(isset($_GET['deleteid'])){
 <div class="container">
 	<div class="jumbotron">
 
-		<h1>Projekt!</h1>
+		<h1>LIA-Projekt</h1>
 			<?php if($signedUser['company_owner'] == 1) : ?>
 				<a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-projects" role="button">Lägg upp Projekt</a>
 			<?php endif;?>
@@ -39,7 +39,6 @@ if(isset($_GET['deleteid'])){
 			<thead>
 				<tr>
 					<th>Namn</th>
-					<th>Beskrivning</th>
 					<th>Företag</th>
 					<th>Platser</th>
 					<th>Uppskattad tid</th>
@@ -53,9 +52,7 @@ if(isset($_GET['deleteid'])){
 						$companyInfo = $company->getFromId($project['company_id']);
 
 					?>
-				<tr>
-					<td><?php echo $project['name']; ?></td>
-					<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>">Läs mer...<a> </td>
+				<tr>					<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>"><?php echo $project['name']; ?><a> </td>
 					<td><?php echo $companyInfo['name']; ?></td>
 					<td><?php echo $project['spots']; ?></td>
 					<td><?php echo $project['estimated_time']; ?></td>
