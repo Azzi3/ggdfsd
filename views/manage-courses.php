@@ -125,7 +125,7 @@ if(isset($_POST['course'])){
     <div class="jumbotron">
 
         <h1>Hantera kurser!</h1>
-        <a class="btn btn-default" href="<?php echo $path; ?>list-courses" role="button">Tillbaka</a>
+        <a class="btn btn-default" href="<?php echo $path; ?>course-list" role="button">Tillbaka</a>
 
     </div>
 </div>
@@ -190,9 +190,8 @@ if(isset($_POST['course'])){
               <label>
                 <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
               </label>
-            <?php endforeach; ?>
-          
-          </div>
+            <?php endforeach; ?>            &nbsp;<a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
+          </div>          
           <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
         
         </form>

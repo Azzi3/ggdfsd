@@ -24,7 +24,7 @@
     <div class="jumbotron">
 
       <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>
-        <a class="edit-anchor" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>"> <button class="btn pull-right">Redigera uppgifter</button></a>
+        <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>">Redigera uppgifter</a>
       <?php endif; ?>
       <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>
         <a class="edit-anchor" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>
@@ -121,7 +121,6 @@
   				<thead>
   					<tr>
   						<th>Namn</th>
-  						<th>Beskrivning</th>
   						<th>Platser</th>
   						<th>Uppskattad tid</th>
   						<th>Taggar</th>
@@ -136,8 +135,8 @@
   	
   						?>
   					<tr>
-  						<td><?php echo $project['name']; ?></td>
-  						<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>">Läs mer...<a> </td>
+
+  						<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>"><?php echo $project['name']; ?><a> </td>
   						<td><?php echo $project['spots']; ?></td>
   						<td><?php echo $project['estimated_time']; ?></td>
   						<td><?php
@@ -152,7 +151,7 @@
   							} ?></td>
   							<td>
   								<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
-  									<a href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>"><button class="btn">Ändra</button></a>
+  									<a class="btn btn-default" href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>">Ändra</a>
   									<a id="deleteProjectBtn" data-name="<?php echo $project['name'];  ?>" data-projectid="<?php echo $project['id']; ?>" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
   								<?php endif; ?>
   	

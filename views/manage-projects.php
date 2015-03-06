@@ -59,10 +59,7 @@ if(isset($_POST['project'])){
     
     redirect($path.'projects/');
 }
-
-
-require_once('../partials/project-header.php');
-?>
+?><div class="container">    <div class="jumbotron">        <h1>Hantera projekt</h1>        <a class="btn btn-default" href="<?php echo $path; ?>projects" role="button">Visa alla LIA-projekt</a>    </div></div>
     <div class="container">
     	<form method="POST" action="">
             <?php
@@ -100,7 +97,7 @@ require_once('../partials/project-header.php');
     	    <label>
     	      <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
     	    </label>
-            <?php endforeach; ?>
+            <?php endforeach; ?>            &nbsp;<a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
     	  </div>
     	  <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
     	</form>

@@ -92,12 +92,6 @@ if(isset($_POST['tag'])){
     <div class="jumbotron">
 
         <h1>Taggar</h1>
-        <?php
-        if($signedUser['company_owner'] == 1){ ?>
-          <a class="btn btn-default" href="<?php echo $path; ?>" role="button">Tillbaka</a><?php
-        } else { ?>
-          <a class="btn btn-default" href="<?php echo $path; ?>" role="button">Tillbaka</a> <?php
-        } ?>
     </div>
 </div>
 

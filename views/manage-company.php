@@ -175,7 +175,7 @@ if(isset($_POST['company'])){
                         </label>
                         <?php endforeach; ?>
             </div>
-            <a href="<?php echo $path; ?>manage-tags">Ny tagg</a>
+            <a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
                 
             </div>
         </div>

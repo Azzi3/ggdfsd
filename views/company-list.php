@@ -60,7 +60,7 @@ if(isset($_GET['deleteid'])){
 					<th>Kontaktperson</th>
 					<th>Stad</th>
 					<th>Hemsida</th>
-					<th>Taggar</th>
+					<th>Taggar</th>					<th></th>
 				</tr>
 			</thead>
 

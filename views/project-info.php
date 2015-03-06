@@ -29,7 +29,7 @@ if(isset($_GET['id'])){
     <div class="jumbotron">
 
         <h1><?php echo $items['name']; ?></h1>
-        <a class="btn btn-default" href="<?php echo $path; ?>projects" role="button">Tillbaka</a>
+        <a class="btn btn-default" href="<?php echo $path; ?>projects" role="button">Visa alla LIA-Projekt</a>
     </div>
 </div>
 
