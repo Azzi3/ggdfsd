@@ -70,6 +70,15 @@
         </dl>
       </ul>
 
+       <?php if($signedUser['company_owner'] == 1) {
+        //nopnopnonpe
+      }
+      else {
+        echo
+            "<a href='$path" . "apply?comp=$userInfo[id]'>" . 
+              "<button type='button' class='btn'>Ansök om LIA-plats</button></a>";
+        }?>
+
     </div>
 
     <div class="col-md-8">
@@ -153,15 +162,6 @@
   				</tbody>
   			</table>
   		</div>
-      <?php if($signedUser['company_owner'] == 1) {
-        //nopnopnonpe
-      }
-      else {
-        echo
-            "<a href='$path" . "apply?comp=$userInfo[id]'>" . 
-              "<button type='button' class='btn pull-right'>Spontanansökan till Lia</button></a>";
-        }?>
-
   </div>
 	
 </div>
