@@ -53,7 +53,6 @@ if($signedUser['student']){
     <div class="jumbotron">
 
         <h1>Ansökningar</h1>
-        <a class="btn btn-primary" href="<?php echo $path; ?>" role="button">Startsida</a>
     </div>
 </div>
 
