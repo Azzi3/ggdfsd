@@ -84,61 +84,71 @@ if(isset($_POST['register'])){
 	redirect(CURRENT_PATH);
 }
 ?>
+<div class="container">
+	<div class="jumbotron">
+		<h1>Registrera</h1>
+	</div>
+	<form action="" method="POST" accept-charset="utf-8">
+	<div class="row">
 
-<form action="" method="POST" accept-charset="utf-8">
-<?php
-//show error if error-session is active
-if($session->getSession('error')){
-	echo '<div class="alert alert-danger" role="alert">';
-	foreach ($session->getSession('error') as $item) {
-		echo '<li>'.$item.'</li>';
+	<?php
+	//show error if error-session is active
+	if($session->getSession('error')){
+		echo '<div class="alert alert-danger" role="alert">';
+		foreach ($session->getSession('error') as $item) {
+			echo '<li>'.$item.'</li>';
+		}
+		echo '</div>';
+
+		//kill session when 'echoed'.
+		$session->killSession('error');
 	}
-	echo '</div>';
+	?>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="mail">Epostadress</label>
+				<input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="register[email]" placeholder="Epostadress" required>
+			</div>
+			<div class="form-group">
+				<label for="pword">Lösenord</label>
+				<input type="password" class="form-control" id="pword" name="register[password]" placeholder="Lösenord" required>
+			</div>
+			<div class="form-group">
+				<label for="pword2">Validera lösenord</label>
+				<input type="password" class="form-control" id="pword2" name="register[password2]" placeholder="Validera lösenord" required>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="firstname">Förnamn</label>
+				<input type="text" class="form-control" value="<?php echo $formFiller['firstname']; ?>" id="firstname" name="register[firstname]" placeholder="Förnamn" required>
+			</div>
+			<div class="form-group">
+				<label for="lastname">Efternamn</label>
+				<input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="register[lastname]" placeholder="Efternamn" required>
+			</div>
+			<div class="form-group">
+				<label for="region">Välj kommun</label>
+				<select class="form-control" name="register[municipality]" id="region" required>
+					<option value="">-Välj kommun-</option>
+					<?php foreach ($municipality as $item) {
+						$selected = '';
 
-	//kill session when 'echoed'.
-	$session->killSession('error');
-}
-?>
-	<div class="form-group">
-		<label for="mail">Epostadress</label>
-		<input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="register[email]" placeholder="Epostadress" required>
-	</div>
-	<div class="form-group">
-		<label for="pword">Lösenord</label>
-		<input type="password" class="form-control" id="pword" name="register[password]" placeholder="Lösenord" required>
-	</div>
-	<div class="form-group">
-		<label for="pword2">Validera lösenord</label>
-		<input type="password" class="form-control" id="pword2" name="register[password2]" placeholder="Validera lösenord" required>
-	</div>
-	<br>
-	<div class="form-group">
-		<label for="firstname">Förnamn</label>
-		<input type="text" class="form-control" value="<?php echo $formFiller['firstname']; ?>" id="firstname" name="register[firstname]" placeholder="Förnamn" required>
-	</div>
-	<div class="form-group">
-		<label for="lastname">Efternamn</label>
-		<input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="register[lastname]" placeholder="Efternamn" required>
-	</div>
-	<div class="form-group">
-		<label for="region">Välj kommun</label>
-		<select class="form-control" name="register[municipality]" id="region" required>
-			<option value="">-Välj kommun-</option>
-			<?php foreach ($municipality as $item) {
-				$selected = '';
+						if($item['municipality_id'] == $formFiller['municipality'])
+							$selected = 'selected';
 
-				if($item['municipality_id'] == $formFiller['municipality'])
-					$selected = 'selected';
-
-				echo '<option '.$selected.' value="'.$item['municipality_id'].'">'.$item['name'].'</option>';
-			} ?>
-		</select>
+						echo '<option '.$selected.' value="'.$item['municipality_id'].'">'.$item['name'].'</option>';
+					} ?>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-6">
+	
+		<button class="btn btn-default" type="submit">Registrera</button>
+		</div>
 	</div>
-
-	<button class="btn" type="submit">Registrera</button>
-
-</form>
-
+	</form>
+</div>
 
 <?php
 //kill the form session
