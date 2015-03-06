@@ -5,7 +5,7 @@ class Tag extends Database{
   private $tbl = 'tag';
 
   public function getAll(){
-    $str = " SELECT * FROM $this->tbl ";
+    $str = " SELECT * FROM $this->tbl ORDER BY name ASC ";
 
     return $this->selectAll($str);
   }
