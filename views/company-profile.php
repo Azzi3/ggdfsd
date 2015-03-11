@@ -67,17 +67,10 @@
           <dt>Företag</dt>
           <dd>Företagsmail: <?php echo $companyProfileInfo['contact_email']; ?></dd>
           <dd>Hemsida: <?php echo $companyProfileInfo['website_url']; ?></dd>
-        </dl>
+        </dl>                <dl>        	<?php if($signedUser['student'] == 1) {        	echo        	    "<a href='$path" . "apply?comp=$userInfo[id]'>" .         	      "<button type='button' class='btn btn-success'>Ansök om LIA-plats</button></a>";        	  }?>        </dl>        
       </ul>
 
-       <?php if($signedUser['company_owner'] == 1) {
-        //nopnopnonpe
-      }
-      else {
-        echo
-            "<a href='$path" . "apply?comp=$userInfo[id]'>" . 
-              "<button type='button' class='btn btn-success'>Ansök om LIA-plats</button></a>";
-        }?>
+       
 
     </div>
 

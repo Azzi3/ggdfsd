@@ -100,7 +100,7 @@
 											
 											</div>
 											
-											<div class="col-lg-4">
+											<div class="col-md-4">
 											
 											<form action="" method="POST" accept-charset="utf-8">
 											<?php

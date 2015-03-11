@@ -141,7 +141,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 			<label for="txt">Meddelande</label>
 			<textarea id="txt" class="form-control" name="apply[txt]" placeholder="Meddelande till handledare på företaget"><?php echo $formFiller['txt']; ?></textarea>
 			<br>
-			<button class="btn" type="submit">Skicka ansökan</button>
+			<button class="btn btn-success" type="submit">Skicka ansökan</button>
 		</div>
 	</form>
 
