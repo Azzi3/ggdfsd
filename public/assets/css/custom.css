@@ -99,6 +99,14 @@ header .intro-text .intro-heading {
     line-height: 50px;
 }
 
+tr {
+    height: 51px;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
 @media(min-width:768px) {
     header .intro-text {
         padding-top: 300px;
