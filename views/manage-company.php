@@ -140,7 +140,7 @@ if(isset($_POST['company'])){
                 <input type="text" class="form-control" id="contact_name" value="<?php echo $items['contact_name']; ?>" pattern="^([^0-9]*)$"  name="company[contact_name]" required>
             </div>
             <div class="form-group">
-                <label for="contactPersonTel">Kontaktpersonens eelefonnummer:</label>
+                <label for="contactPersonTel">Kontaktpersonens telefonnummer:</label>
                 <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
             </div>
             <div class="form-group">
