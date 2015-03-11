@@ -129,7 +129,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 					 	$finishButton = '<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
 					 	$formButton = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
 					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
-					<button class="btn" type="submit">Spara omdömme</button>
+					<button class="btn btn-default" type="submit">Spara omdömme</button>
 					</form>';
 				}
 
