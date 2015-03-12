@@ -28,7 +28,6 @@
 
 			}
 		}
-
 		foreach ($uniqueCompanies as $company) {
 			if($company['name'] != ''){
 				$imgSrc = $path . 'images/placeholder.jpg';
@@ -44,6 +43,10 @@
 							<p>'.$description .'</p>
 						</div>';
 			}
+		}
+
+		if(count($uniqueCompanies) == 0){
+			echo '<div style=" width: 50%; margin: 0 auto;" class="alert alert-danger" role="alert">Hittade inga företag, testa lägga till fler taggar.</div>';
 		}
 	 ?>	
 	 </div>
