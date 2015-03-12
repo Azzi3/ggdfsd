@@ -17,7 +17,10 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">    
         <ul class="nav navbar-nav navbar-right">
-        
+          <?php if($signedUser['student'] == 1) : ?>
+            <li><a href="<?php echo $path; ?>match">Hitta företag som passar mig</a></li>
+          <?php endif; ?>
+
           <li><a href="<?php echo $path; ?>projects">LIA-Projekt</a></li>
           <li><a href="<?php echo $path; ?>course-list">LIA-Kurser</a></li>
           <li><a href="<?php echo $path; ?>company-list">Företag</a></li>

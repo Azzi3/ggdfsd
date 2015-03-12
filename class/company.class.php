@@ -191,6 +191,20 @@ class Company extends Database{
 		return $this->selectAll($str, $arr);
 	}
 
+	public function getCompaniesWhereTagId($id){
+		$str = "SELECT * FROM `company_tag` where tag_id = :id";
+		$arr = array('id' => $id);
+		$company_tags = $this->selectAll($str, $arr);
+		$companies = array();
+		foreach ($company_tags as $company_tag) {
+			$company = $this->getFromId($company_tag['company_id']);
+			$name = $company['name'];
+			$companies[$name] = $company;
+		}
+
+		return $companies;
+
+	}
 	
 	/**
 	* Get all the projects that belong to the company
