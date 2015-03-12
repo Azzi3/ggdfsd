@@ -51,12 +51,11 @@ if(isset($_GET['deleteid'])){
 				<?php $company = new Company();
 				 foreach ($projects as $project){ 
 						$companyInfo = $company->getFromId($project['company_id']);
-
 					?>
 				<tr>
 					<td style="max-width: 10em"> <a href="<?php echo $path; ?>project-info?id=<?php echo $project['id']; ?>"><?php echo $project['name']; ?><a> </td>
 					<td><a href="<?php echo $path; ?>company-profile?id=<?php echo $project['company_id']; ?>"> <?php echo $companyInfo['name']; ?></a></td>
-					<td><?php echo $project['spots']; ?></td>
+					<td><?php echo $liaProject->getAcceptedApplicantsForProject($project['id'])[0]; ?> / <?php echo $project['spots']; ?></td>
 					<td><?php echo $project['estimated_time']; ?></td>
 					<td><?php
 						$counter = 0;
