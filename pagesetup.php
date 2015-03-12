@@ -75,6 +75,11 @@ else if($curPage == 'course-info'){
 	$subTitle = "Kurs";
 }
 
+else if($curPage == 'student-resume' && $signedUser['course_leader'] == 1){
+	$pageName = "student-resume";
+	$subTitle = "Omdöme";
+}
+
 else if($curPage == 'student-profile' && $signedUser){
 	$pageName = "student-profile";
 	$subtitle = "Studentprofil";

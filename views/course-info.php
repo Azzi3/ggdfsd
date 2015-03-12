@@ -27,53 +27,56 @@
       </div>
     </div>
     
-    <div class="row">
-      <div class="col-md-12">
-        
-        <h3>Lia-ansökningar</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Namn</th>
-              <th>Projekt</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+    <?php if($signedUser['course_leader']): ?>
+      <div class="row">
+        <div class="col-md-12">
           
-          <tbody>
-            
-            <?php foreach($applications as $application): ?>
-              <?php 
-                $user = $userObj->getUserById($application['user_id']);
-                $project = $projectObj->getFromId($application['project_id']);
-                $status = "Unknown";
-                
-                if($application['status'] == 0){
-                  $status = "<p class='status-block status-default'>Ej godkännd</p>";
-                } else if($application['status'] == 1){
-                  $status = "<p class='status-block status-success'>Godkänd</p>";
-                } else if($application['status'] == 2){
-                  $status = "<p class='status-block status-danger'>Nekad</p>";
-                } else{
-                  $status = "<p class='status-block status-success'>Genomförd</p>";
-                }
-
-              ?>
-              
+          <h3>Lia-ansökningar</h3>
+          <table class="table">
+            <thead>
               <tr>
-                <td><a href="<?php echo $path . 'student-profile?uid=' . $user['guid']; ?>"><?php echo $user['firstname'] . " " . $user['lastname']?></a> </td>
-                <td> <a href="<?php echo $path . 'project-info?id=' . $project['id']; ?>"><?php echo $project['name'] ?></a> </td>
-                <td><?php echo $status ?></td>
+                <th>Namn</th>
+                <th>Projekt</th>
+                <th>Status</th>
               </tr>
+            </thead>
+            
+            <tbody>
               
-            <?php endforeach; ?>  
-            <div>
-            </div>
-          </tbody>
+              <?php foreach($applications as $application): ?>
+                <?php 
+                  $user = $userObj->getUserById($application['user_id']);
+                  $project = $projectObj->getFromId($application['project_id']);
+                  $status = "Unknown";
+                  
+                  if($application['status'] == 0){
+                    $status = "<p class='status-block status-default'>Ej godkännd</p>";
+                  } else if($application['status'] == 1){
+                    $status = "<p class='status-block status-success'>Godkänd</p>";
+                  } else if($application['status'] == 2){
+                    $status = "<p class='status-block status-danger'>Nekad</p>";
+                  } else{
+                    $status = "<p class='status-block status-success'>Genomförd</p>" . 
+                              " <a href='" . $path . 'student-resume?id='. $application['id'] . "'><button class='btn btn-default'>Visa omdöme</button></a>";
+                    
+                  }
 
-        </table>
+                ?>
+                
+                <tr>
+                  <td><a href="<?php echo $path . 'student-profile?uid=' . $user['guid']; ?>"><?php echo $user['firstname'] . " " . $user['lastname']?></a> </td>
+                  <td> <a href="<?php echo $path . 'project-info?id=' . $project['id']; ?>"><?php echo $project['name'] ?></a> </td>
+                  <td><?php echo $status ?></td>
+                </tr>
+                
+              <?php endforeach; ?>  
+              <div>
+              </div>
+            </tbody>
+
+          </table>
+        </div>
       </div>
-    </div>
-
+    <?php endif; ?>
   </div>
 
