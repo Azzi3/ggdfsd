@@ -32,13 +32,17 @@
 		foreach ($uniqueCompanies as $company) {
 			if($company['name'] != ''){
 				$imgSrc = $path . 'images/placeholder.jpg';
+				$description = $company['description'];
+				if (strlen($description) > 200){
+   					$description = substr($description, 0, 197) . '...';
+				}
 				if($company['image']){
 					$imgSrc = $path . 'images/company/' . $company['name'] . '/tum_' . $company['image'];
 				}
 				echo '	<div style="margin-bottom:2em" class="col-lg-4 col-md-6 text-center">
 							<a href="'. $path . 'company-profile?id='. $company['id'] . '"><img class="img-circle" src="' . $imgSrc . '"></a>
 							<h2><a href="'. $path . 'company-profile?id='. $company['id'] . '">' . $company['name'] . '</a></h2>
-							<p>'.$company['description'] .'</p>
+							<p>'.$description .'</p>
 						</div>';
 			}
 		}
