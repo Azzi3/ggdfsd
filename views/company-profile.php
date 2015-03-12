@@ -112,10 +112,10 @@
   
   
   <div class="container">
+<?php if($companyProjects) : ?>
   <hr>
   	<div class="col-md-12"><h3 class="text-center">Våra projekt</h3></div>
   </div>
-
 
   <div class="container">
   	<div class="table-responsive">
@@ -164,5 +164,6 @@
   			</table>
   		</div>
   </div>
+<?php endif; ?>
 	
 </div>
