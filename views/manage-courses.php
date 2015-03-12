@@ -18,12 +18,14 @@ $items = array('name'=>'',
 //fetch ID (it's an edit)
 if(isset($_GET['id'])){
     $id = $_GET['id'];
+    $redirectPath = CURRENT_PATH . "?id=" . $id;
 
     $items = $course->getFromId($id);
     $usedTags = $courseTag->getAllFromCourseId($id);
 
     $buttonText = 'Spara';
 }else{
+    $redirectPath = CURRENT_PATH;
     $id = 0;
     $buttonText = 'Skapa';
 }
@@ -60,13 +62,13 @@ if(isset($_POST['course'])){
   if($_POST['course']['course_start'] > $_POST['course']['course_end']){
         $errors[] = 'Kursen kan inte sluta innan den började.';
         $session->setSession('error',$errors);
-        redirect(CURRENT_PATH);
+        redirect($redirectPath);
     }
 
   if($_POST['course']['course_start'] < $earliestDate){
         $errors[] = 'Startdatum för kursen måste ligga minst tre dagar fram i tiden.';
         $session->setSession('error',$errors);
-        redirect(CURRENT_PATH);
+        redirect($redirectPath);
     }
 
 
@@ -190,8 +192,10 @@ if(isset($_POST['course'])){
               <label>
                 <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
               </label>
-            <?php endforeach; ?>            &nbsp;<a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
-          </div>          
+            <?php endforeach; ?>
+            &nbsp;<a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
+          </div>
+          
           <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
         
         </form>
