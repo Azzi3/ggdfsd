@@ -25,7 +25,6 @@
           <li><a href="<?php echo $path; ?>course-list">LIA-Kurser</a></li>
           <li><a href="<?php echo $path; ?>company-list">Företag</a></li>
           <li><a href="<?php echo $path; ?>list-student">Elever</a></li>
-          <li><a href="<?php echo $path; ?>manage-user">Hantera profil</a></li>
            
           <li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
@@ -57,7 +56,7 @@
 		  		<li><a href="<?php echo $path; ?>manage-applications">Mina ansökningar</a></li>
 		  
 		  		<?php elseif($signedUser['company_owner'] == 1) : ?>
-		  		<li><a href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Profil</a></li>
+		  		<li><a href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Profil</a></li>		  		<li><a href="<?php echo $path; ?>manage-user">Inställningar</a></li>
 		  		<li><a href="<?php echo $path; ?>manage-applications">Ansökningar</a></li>
 		  		
 		  		<?php elseif($signedUser['course_leader'] == 1) : ?>
