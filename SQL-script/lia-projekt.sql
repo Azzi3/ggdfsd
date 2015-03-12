@@ -62,24 +62,25 @@ CREATE TABLE `company` (
   `website_url` varchar(128) COLLATE utf8_swedish_ci NOT NULL,
   `description` varchar(1000) COLLATE utf8_swedish_ci NOT NULL,
   `image` varchar(255) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `company_email` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AVG_ROW_LENGTH=16384;
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
 
-INSERT INTO `company` (`id`, `name`, `street_address`, `zip_code`, `city`, `contact_name`, `contact_email`, `contact_phone`, `website_url`, `description`, `image`)
+INSERT INTO `company` (`id`, `name`, `street_address`, `zip_code`, `city`, `contact_name`, `contact_email`, `contact_phone`, `website_url`, `description`, `image`, `company_email`)
 VALUES
-	(3,'Fortnox','Framtidsvägen',35531,'växjö','Jesper Svensson','jespersvensson@test.se','0702323442','www.fortnox.se','Fortnox är Sveriges ledande leverantör av internetbaserade program för företag, föreningar samt redovisnings- och revisionsbyråer. Affärsiden är att erbjuda ett brett sortiment av internetbaserade program som är enkla att lära sig och att använda, men som ändå är kraftfulla och funktionsrika nog för att möta de flesta behov och önskemål.','fortnox.png'),
-	(11,'Sigma','Växjövägen 1',35531,'Växjö','Tommie Holmberg','tommieholmberg@test.se','0702323442','www.sigma.se','Sigma is a leading consulting group with the objective to make our customers more competitive. Our means is technological know-how and a constant passion for finding better solutions. We are 2,000 employees in eleven countries. Sigma is owned by Danir, a private investment company held by the Dan Olofsson family','sigma.png'),
-	(12,'Visma','Växjövägen 1',35531,'Växjö','Peter Härder','peterhärder@test.se','0702323442','www.vismaspcs.se','Drivkraften bakom Visma Spcs är och har alltid varit att skapa de allra bästa förutsättningarna för landets företag. Ett arbete som vi anser vara viktigare i dag än någonsin tidigare. Sverige behöver fler entreprenörer som kan och vill ta steget och då är våra program och tjänster en viktig pusselbit. Vi är din samarbetspartner. Nu och i framtiden.','visma.jpeg'),
-	(13,'JimDavis Labs','Växjövägen 1',35531,'Växjö','Elvis Domazetovski','elvisdomazetovski@test.se','0702323442','www.jimdavislabs.se','JimDavis Labs är en webbyrå som utvecklar webbplatser, e-handelslösningar och appar för iPhone, iPad och Android med avstamp i en tydlig kommunikationsstrategi och fokus på användarvänlighet.\r\n\r\nEnligt oss betyder webbdesign att utseende och funktionalitet i samspel levererar en kommunikativ webbplats som ger användaren en upplevelse. Grafik och form implementeras enligt Responsive Webdesign','jimdavislabs.jpg'),
-	(14,'Bläck & Co','Växjövägen 1',35531,'Växjö','Eddie Andersson','eddieandersson@test.se','0702323442','www.black.se','Bläck & Co är en fullservicebyrå inom reklam, design och marknadskommunikation. \r\n\r\nVi tror på kreativitet, god form, varumärkesorienterad kommunikation och nära relationer. Det har våra kunder och samarbetspartners uppskattat sedan 1992. Vi har kontor i Växjö och Stockholm.','black.jpg'),
-	(15,'Well Hello','Växjövägen 1',35531,'Växjö','Daniel Liljeblad','danielliljeblad@test.se','0702323442','www.wellhello.se','Design och kommunikation är vår grej. Så har det nog alltid varit och därför bestämde vi oss hösten 2013 för att starta något nytt som vi tror på. Modeller, processer och metodik i all ära, men vi värdesätter också starka idéer och snygga produktioner. Att göra det svåra enkelt och inte krångla till det är vår utmaning. Att kunna vara stolta över varenda pixel vi levererar och behålla både skärpa och glädje i allt vi gör.\r\n\r\nVi arbetar för att du ska kunna se resultat i din verksamhet. Så enkelt är det. För att lyckas behöver vi lära känna dig och lära oss allt om din verksamhet och dina kunder. Den bästa kommunikationen gör vi tillsammans','wellhello.png'),
-	(16,'Softhouse','Växjövägen 1',35531,'Växjö','Henric Wästergren','henricwästergren@test.se','0702323442','www.softhouse.se','Vi är ett konsultföretag som är riktigt bra på att utveckla lösningar med mjukvara och att utveckla människor och verksamheter. Detta har vi gjort sedan starten 1996 och idag är vi ett av de ledande företagen i Skandinavien på Lean & Agile. Totalt är vi cirka 200 anställda på plats i Stockholm, Göteborg, Malmö, Karlskrona och Växjö.\r\n\r\nSofthouse är ett privatägt icke noterat svenskt företag, som visat tillväxt och lönsamhet under alla år.','softhouse.png'),
-	(17,'Sitedirect','Växjövägen 1',35531,'Växjö','Mikael Häggström','mikaelhäggström@test.se','0702323442','www.sitedirect.se','Vi skapar innovativa webb- och e-handelslösningar - för dig som söker både den tekniska plattformen och en långsiktig partner som gör att din verksamhet kan växa. \r\n\r\nOavsett om du redan driver en nätbutik, om e-handel är en ny försäljningskanal eller du vill ha en avancerad webblösning så hjälper vi dig med både affärsstrategi och tekniska lösningar - med know-how, val av e-handelsplattform, webbutveckling och de drifttjänster du behöver. ','sitedirect.png'),
-	(18,'Standout','Växjövägen 1',35531,'Växjö','David Elbe','davidelbe@test.se','0702323442','www.standout.se','Standout består av två delar: en konsultdel som levererar webbutvecklingstjänster till andra företag och en del som bygger egna produkter.','standout.png'),
-	(19,'Go Brave','Växjövägen 1',35531,'Växjö','Mats Karlsson','matskarlsson@test.se','0702323442','www.gobrave.se','På GoBrave har vi olika bakgrund med olika kunskaper och erfarenheter – noga sammansatta för att ge dig bästa möjliga verktyg för att nå dina mål. Oavsett om du vill nå ut online eller offline (eller båda samtidigt) kan vi ge dig rätt lösning.','gobrave.png');
+	(3,'Fortnox','Framtidsvägen',35531,'växjö','Jesper Svensson','jespersvensson@test.se','0702323442','www.fortnox.se','Fortnox är Sveriges ledande leverantör av internetbaserade program för företag, föreningar samt redovisnings- och revisionsbyråer. Affärsiden är att erbjuda ett brett sortiment av internetbaserade program som är enkla att lära sig och att använda, men som ändå är kraftfulla och funktionsrika nog för att möta de flesta behov och önskemål.','fortnox.png','fortnox@test.se'),
+	(11,'Sigma','Växjövägen 1',35531,'Växjö','Tommie Holmberg','tommieholmberg@test.se','0702323442','www.sigma.se','Sigma is a leading consulting group with the objective to make our customers more competitive. Our means is technological know-how and a constant passion for finding better solutions. We are 2,000 employees in eleven countries. Sigma is owned by Danir, a private investment company held by the Dan Olofsson family','sigma.png','sigma@test.se'),
+	(12,'Visma','Växjövägen 1',35531,'Växjö','Peter Härder','peterhärder@test.se','0702323442','www.vismaspcs.se','Drivkraften bakom Visma Spcs är och har alltid varit att skapa de allra bästa förutsättningarna för landets företag. Ett arbete som vi anser vara viktigare i dag än någonsin tidigare. Sverige behöver fler entreprenörer som kan och vill ta steget och då är våra program och tjänster en viktig pusselbit. Vi är din samarbetspartner. Nu och i framtiden.','visma.jpeg','visma@test.se'),
+	(13,'JimDavis Labs','Växjövägen 1',35531,'Växjö','Elvis Domazetovski','elvisdomazetovski@test.se','0702323442','www.jimdavislabs.se','JimDavis Labs är en webbyrå som utvecklar webbplatser, e-handelslösningar och appar för iPhone, iPad och Android med avstamp i en tydlig kommunikationsstrategi och fokus på användarvänlighet.\r\n\r\nEnligt oss betyder webbdesign att utseende och funktionalitet i samspel levererar en kommunikativ webbplats som ger användaren en upplevelse. Grafik och form implementeras enligt Responsive Webdesign','jimdavislabs.jpg','jimdavislabs@test.se'),
+	(14,'Bläck & Co','Växjövägen 1',35531,'Växjö','Eddie Andersson','eddieandersson@test.se','0702323442','www.black.se','Bläck & Co är en fullservicebyrå inom reklam, design och marknadskommunikation. \r\n\r\nVi tror på kreativitet, god form, varumärkesorienterad kommunikation och nära relationer. Det har våra kunder och samarbetspartners uppskattat sedan 1992. Vi har kontor i Växjö och Stockholm.','black.jpg','black@test.se'),
+	(15,'Well Hello','Växjövägen 1',35531,'Växjö','Daniel Liljeblad','danielliljeblad@test.se','0702323442','www.wellhello.se','Design och kommunikation är vår grej. Så har det nog alltid varit och därför bestämde vi oss hösten 2013 för att starta något nytt som vi tror på. Modeller, processer och metodik i all ära, men vi värdesätter också starka idéer och snygga produktioner. Att göra det svåra enkelt och inte krångla till det är vår utmaning. Att kunna vara stolta över varenda pixel vi levererar och behålla både skärpa och glädje i allt vi gör.\r\n\r\nVi arbetar för att du ska kunna se resultat i din verksamhet. Så enkelt är det. För att lyckas behöver vi lära känna dig och lära oss allt om din verksamhet och dina kunder. Den bästa kommunikationen gör vi tillsammans','wellhello.png','wellhello@test.se'),
+	(16,'Softhouse','Växjövägen 1',35531,'Växjö','Henric Wästergren','henricwästergren@test.se','0702323442','www.softhouse.se','Vi är ett konsultföretag som är riktigt bra på att utveckla lösningar med mjukvara och att utveckla människor och verksamheter. Detta har vi gjort sedan starten 1996 och idag är vi ett av de ledande företagen i Skandinavien på Lean & Agile. Totalt är vi cirka 200 anställda på plats i Stockholm, Göteborg, Malmö, Karlskrona och Växjö.\r\n\r\nSofthouse är ett privatägt icke noterat svenskt företag, som visat tillväxt och lönsamhet under alla år.','softhouse.png','softhout@test.se'),
+	(17,'Sitedirect','Växjövägen 1',35531,'Växjö','Mikael Häggström','mikaelhäggström@test.se','0702323442','www.sitedirect.se','Vi skapar innovativa webb- och e-handelslösningar - för dig som söker både den tekniska plattformen och en långsiktig partner som gör att din verksamhet kan växa. \r\n\r\nOavsett om du redan driver en nätbutik, om e-handel är en ny försäljningskanal eller du vill ha en avancerad webblösning så hjälper vi dig med både affärsstrategi och tekniska lösningar - med know-how, val av e-handelsplattform, webbutveckling och de drifttjänster du behöver. ','sitedirect.png','sitedirect@test.se'),
+	(18,'Standout','Växjövägen 1',35531,'Växjö','David Elbe','davidelbe@test.se','0702323442','www.standout.se','Standout består av två delar: en konsultdel som levererar webbutvecklingstjänster till andra företag och en del som bygger egna produkter.','standout.png','standout@test.se'),
+	(19,'Go Brave','Växjövägen 1',35531,'Växjö','Mats Karlsson','matskarlsson@test.se','0702323442','www.gobrave.se','På GoBrave har vi olika bakgrund med olika kunskaper och erfarenheter – noga sammansatta för att ge dig bästa möjliga verktyg för att nå dina mål. Oavsett om du vill nå ut online eller offline (eller båda samtidigt) kan vi ge dig rätt lösning.','gobrave.png','gobrave@test.se');
 
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -144,31 +145,31 @@ VALUES
 	(55,18,2),
 	(56,18,3),
 	(57,18,4),
-	(73,19,1),
-	(74,19,2),
-	(75,19,3),
-	(76,19,4),
-	(77,19,5),
-	(78,19,6),
-	(79,19,8),
-	(80,19,9),
-	(81,19,10),
-	(82,19,11),
-	(83,19,12),
-	(84,19,13),
-	(85,19,14),
-	(86,19,15),
-	(87,19,16),
-	(88,19,17),
-	(89,19,18),
-	(90,19,19),
-	(91,19,20),
-	(92,19,21),
-	(93,19,22),
-	(94,19,23),
-	(95,19,24),
-	(96,19,25),
-	(97,19,26);
+	(98,19,1),
+	(99,19,2),
+	(100,19,3),
+	(101,19,4),
+	(102,19,5),
+	(103,19,6),
+	(104,19,8),
+	(105,19,9),
+	(106,19,10),
+	(107,19,11),
+	(108,19,12),
+	(109,19,13),
+	(110,19,14),
+	(111,19,15),
+	(112,19,16),
+	(113,19,17),
+	(114,19,18),
+	(115,19,19),
+	(116,19,20),
+	(117,19,21),
+	(118,19,22),
+	(119,19,23),
+	(120,19,24),
+	(121,19,25),
+	(122,19,26);
 
 /*!40000 ALTER TABLE `company_tag` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -869,7 +870,7 @@ VALUES
 	(4,'jespersvensson@test.se','cb7326e6a821d590274ea7d51c38d345c3a0840858c8fd853df139aa4b35250fcd00a67ad7eb459ec2e9705623d4b4ec0fa609e5ff6861f2f5f45482151a89d7','u7_KxRYc61','Jesper','Svensson',0,1,0,77,0,'0',3,'d935904e-be60-11e4-b6bb-0c8bfd7a8af4'),
 	(9,'johanhovbrandt@test.se','6cd234b09d284782a4d2eb31331139ff0ca16e5df5e9d5cd5357a2eece282c895ecfb8c2b7c1e8f7f9dd11f30844797d220599e5e8bc1925f661d325217ecc52','Ppe3rMwQvH','Johan','Hovbrandt',1,0,0,77,0,'0',0,'528864c6-c896-11e4-87fe-30cb6bb44744'),
 	(10,'tomsvaleklev@test.se','4c493ff7133a448ecad282df3e4d74424c3c6899a3c146235c54fa188f07ffcb628a5fde5d6cc255e1ff1343409f97c253baad88a2287997a4480fc8518ea317','jfgithNzd6','Tom','Svaleklev',1,0,0,77,0,'0',0,'91091d94-c896-11e4-87fe-30cb6bb44744'),
-	(11,'matskarlsson@test.se','78dae89ba8efbaf9d72f77c6385953b99d36e6161243ddd0d83be36f4b169ba67ee6afea83ea1e7846bfdca1e63584f6ccdc87104ca95bae4f3223fbd7bea8c9','xeDipqL7aE','Mats','Karlsson',0,1,0,77,1,'0',19,'9dff0aee-c897-11e4-87fe-30cb6bb44744'),
+	(11,'matskarlsson@test.se','2685699cf1e045aafa9710a8a88eb71ccee79577a6d036448c4fb114266e05e6b2d474de3e0947a8db83d24ab4d55e63a359883525f9c2e9d0c558ae907ecaa3','iJ1LxVfUzq','Mats','Karlsson',0,1,0,77,1,'0',19,'9dff0aee-c897-11e4-87fe-30cb6bb44744'),
 	(12,'peterhärder@test.se','8df04fd29325124beee651e60f14ea6a622ee36f540336c87d63efaf18a1e64e9f1139802939e9a93b89645011a1de7311a927d39c50296624a6487d1ac20a5e','YbojpVuALS','Peter','Härder',0,1,0,77,0,'0',12,'215e2eba-c898-11e4-87fe-30cb6bb44744'),
 	(13,'elvisdomazetovski@test.se','eb19f1a2c63d2b40794d7bb3c6728ab7b3d8f77bfb336df5ce5330b4ca9ff32a630ccb237ced7a2281882059c921f7eb907a636ac6b9664543b855c6a02844ab','8DMwRHJ_hv','Elvis','Domazetovski',0,1,0,77,0,'0',13,'78d94300-c898-11e4-87fe-30cb6bb44744'),
 	(15,'eddieandersson@test.se','7f2f71f924c2a5d7f00ffda8ced3b6ce9a5de4619b8f23406750431e05c2ded3e3cf41b635acbd52bd5bc2b926fe58079436b45b7bae1b89b6853092acb5e474','B8De8kvXGB','Eddie','Andersson',0,1,0,77,0,'0',14,'aa901996-c898-11e4-87fe-30cb6bb44744'),
