@@ -73,7 +73,7 @@ if(isset($_POST['course'])){
 
   // CHECKS IF THERE IS ANOTHER COURSE WITH THE SAME NAME & START DATE
 
-  if(isset($_GET['id'])){
+  if(!isset($_GET['id'])){
     foreach ($allCourses as $courseRow) {
       if($_POST['course']['course_start'] == $courseRow['course_start'] && ($_POST['course']['name'] == $courseRow['name'])){
         $errors[] = 'En kurs med det här namnet och startdatum finns redan.';
