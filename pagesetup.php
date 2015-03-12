@@ -98,7 +98,7 @@ else if($curPage == 'manage-tags'){
 	$pageName = "manage-tags";
 	$subtitle = "Manage tags";
 }
-else if($curPage == 'match'){
+else if($curPage == 'match' && $signedUser){
 	$pageName = "match";
 	$subtitle = "Hitta företag";
 }
