@@ -52,7 +52,8 @@ $students = $studentObj->getAll();
 	     </span>
 	</form>
 
-	<div class="table-responsive">
+	<?php if(!empty($students)){ ?>
+		<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -72,7 +73,10 @@ $students = $studentObj->getAll();
 					<?php endforeach; ?>
 				</tbody>
 
-			</div>
+			</div> <?php
+	} else { 
+		echo "Sökningen gav inget resultat.";
+	} ?>
 		</div>
 	</div>
 </div>

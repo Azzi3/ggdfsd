@@ -51,7 +51,8 @@ if(isset($_GET['deleteid'])){
 	       <button class="btn btn-default" type="submit">Sök</button>
 	     </span>
 	</form>
-	<div class="table-responsive">
+	<?php if(!empty($companies)){ ?>
+		<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -65,8 +66,10 @@ if(isset($_GET['deleteid'])){
 				</tr>
 			</thead>
 
+
 			<tbody>
 				<?php foreach ($companies as $company){	?>
+
 				<tr>
 					<td><a href="<?php echo $path; ?>company-profile?id=<?php echo $company['id']; ?>"><?php echo $company['name'] ?></a></td>
 					<td style="max-width: 10em"><?php echo $company['street_address'] ?></td>
@@ -86,7 +89,11 @@ if(isset($_GET['deleteid'])){
 					<?php } ?>
 				</tbody>
 
-			</div>
+			</div> <?php
+	} else { 
+		echo "Sökningen gav inget resultat.";
+	} ?>
+	
 		</div>
 	</div>
 </div>
