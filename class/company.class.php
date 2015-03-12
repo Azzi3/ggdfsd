@@ -23,6 +23,7 @@ class Company extends Database{
 
 		$str = " SELECT * FROM $this->tbl WHERE
 		name LIKE :string
+		OR contact_name LIKE :string
 		OR description LIKE :string 
 		OR city LIKE :string ";
 
