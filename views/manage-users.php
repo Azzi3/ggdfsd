@@ -163,7 +163,13 @@ if(isset($_POST['manage'])){
 
 
 
-<div class="container">	<div class="jumbotron">		        <h1>Hantera profil</h1>	        <a class="btn btn-default" href="<?php echo $path; ?>company-profile" role="button">Tillbaka</a>	    </div>
+<div class="container">
+
+	<div class="jumbotron">
+	
+	        <h1>Hantera profil</h1>
+	        <a class="btn btn-default" href="<?php echo $path; ?>student-profile" role="button">Tillbaka</a>
+	    </div>
 
     <form action="" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
     <?php
