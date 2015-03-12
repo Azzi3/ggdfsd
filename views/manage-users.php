@@ -5,7 +5,7 @@
 $user = new User();
 $county = new County();
 $studentProfile = new StudentProfile();
-$studentTag = new StudentTag();
+$studentTag = new StudentTag();$company = new Company();
 
 $municipality = $county->listMunicipality();
 
@@ -167,8 +167,7 @@ if(isset($_POST['manage'])){
 
 	<div class="jumbotron">
 	
-	        <h1>Hantera profil</h1>
-	        <a class="btn btn-default" href="<?php echo $path; ?>student-profile" role="button">Tillbaka</a>
+	        <h1>Hantera profil</h1>	        	        <?php if($signedUser['student'] == 1) : ?>	        <a class="btn btn-default" href="<?php echo $path; ?>student-profile" role="button">Tillbaka</a>	        	        <?php elseif($signedUser['company_owner'] == 1) : ?>	        <a class="btn btn-default" href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Tillbaka</a>	        <?php endif; ?>	        
 	    </div>
 
     <form action="" enctype="multipart/form-data" method="POST" accept-charset="utf-8">

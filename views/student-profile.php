@@ -19,10 +19,6 @@
 
     <div class="jumbotron">
 
-      <?php if($session->getSession('guid') == $userInfo['guid']) : ?>
-        <a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-user">Redigera uppgifter</a>
-      <?php endif; ?>
-
       <div class="row">
         <div class="col-md-3 text-center">
           
@@ -32,7 +28,7 @@
           
           <h3 class="text-center"> <?php echo $userInfo['firstname'] . " " . $userInfo['lastname']; ?> </h3>
           <h4><?php echo $userCounty['name']; ?></h4>
-        </div>
+        </div>        <div class="col-md-3 pull-right	">        	<?php if($session->getSession('guid') == $userInfo['guid']) : ?>          	<a class="btn btn-warning pull-right" href="<?php echo $path; ?>manage-user">Redigera uppgifter</a>        	<?php endif; ?>        </div>
       </div>
       
     </div>
