@@ -45,7 +45,8 @@ class Company extends Database{
 			image,
 			contact_phone,
 			contact_email,
-			contact_name)
+			contact_name,
+			company_email)
 		VALUES(:name,
 			:street_address,
 			:zip_code,
@@ -55,7 +56,8 @@ class Company extends Database{
 			:image,
 			:contact_phone,
 			:contact_email,
-			:contact_name) ";
+			:contact_name,
+			:company_email) ";
 		$arr = array('name'=>$item['name'],
 					'street_address'=>$item['street_address'],
 					'zip_code'=>$item['zip_code'],
@@ -65,7 +67,8 @@ class Company extends Database{
 					'image'=>$image,
 					'contact_phone'=>$item['contact_phone'],
 					'contact_email'=>$item['contact_email'],
-					'contact_name'=>$item['contact_name']);
+					'contact_name'=>$item['contact_name'],
+					'company_email'=>$item['company_email']);
 		
 		$lastCompanyId = $this->insert($str, $arr);
 
@@ -93,7 +96,8 @@ class Company extends Database{
 		description = :description,
 		contact_name = :contact_name,
 		contact_phone = :contact_phone,
-		contact_email = :contact_email
+		contact_email = :contact_email,
+		company_email = :company_email
 		WHERE id = :id ";
 
 
@@ -107,7 +111,8 @@ class Company extends Database{
 					'id'=>$id,
 					'contact_phone'=>$item['contact_phone'],
 					'contact_email'=>$item['contact_email'],
-					'contact_name'=>$item['contact_name']);
+					'contact_name'=>$item['contact_name'],
+					'company_email'=>$item['company_email']);
 
 		$this->update($str, $arr);
 

@@ -65,9 +65,18 @@
         
         <dl>
           <dt>Företag</dt>
-          <dd>Företagsmail: <?php echo $companyProfileInfo['contact_email']; ?></dd>
+          <dd>Email: <?php echo $companyProfileInfo['company_email']; ?></dd>
           <dd>Hemsida: <?php echo $companyProfileInfo['website_url']; ?></dd>
-        </dl>                <dl>        	<?php if($signedUser['student'] == 1) {        	echo        	    "<a href='$path" . "apply?comp=$userInfo[id]'>" .         	      "<button type='button' class='btn btn-success'>Ansök om LIA-plats</button></a>";        	  }?>        </dl>        
+        </dl>
+        
+        <dl>
+        	<?php if($signedUser['student'] == 1) {
+        	echo
+        	    "<a href='$path" . "apply?comp=$userInfo[id]'>" . 
+        	      "<button type='button' class='btn btn-success'>Ansök om LIA-plats</button></a>";
+        	  }?>
+        </dl>
+        
       </ul>
 
        
