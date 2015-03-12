@@ -98,7 +98,10 @@ else if($curPage == 'manage-tags'){
 	$pageName = "manage-tags";
 	$subtitle = "Manage tags";
 }
-
+else if($curPage == 'match'){
+	$pageName = "match";
+	$subtitle = "Hitta företag";
+}
 
 else{
 	$pageName = "404";
