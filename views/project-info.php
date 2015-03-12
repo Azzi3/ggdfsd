@@ -48,13 +48,13 @@ if(isset($_GET['id'])){
     	    <p><?php echo $items['estimated_time']; ?></p> 	
     	  </div>
     	  <div class="checkbox">
-          <?php foreach ($projectTag->getAll() as $item) :
-            $tag = $projectTag->checkIfTagIsUsed($id, $item['id']);
-          ?>
-    	    <label>
-    	      <input type="checkbox" disabled <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
-    	    </label>
-            <?php endforeach; ?>
+          <?php foreach ($projectTag->getAll() as $item){
+                $tag = $projectTag->checkIfTagIsUsed($id, $item['id']);
+                if($tag['id']){
+                    echo '<a class="tag btn btn-primary">'. $item["name"] . '</a> ';
+                };
+            }; 
+            ?>
     	  </div>
     <?php if($signedUser['student']): ?>
           <a class="btn btn-success" href="<?php echo $path ?>apply?cid=<?php echo $items['id']; ?>&comp=<?php echo $items['company_id']; ?>" >Ansök</a>
