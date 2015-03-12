@@ -31,19 +31,15 @@
       <?php endif; ?>
 
       <div class="container">
-        <div class="col-md-3 text-center">
-          
-
-
+        <div class="col-md-6">
           <?php if($companyInfo['image']): ?>
 						<a href="<?php echo $path . "images/company/" . $companyProfileInfo['name'] . "/" . $companyProfileInfo['image']; ?>" target="_blank">
-            	<img class="profile-img" src="<?php echo $path . "images/company/" . $companyProfileInfo['name'] . "/tum_" . $companyProfileInfo['image']; ?>" alt="">
+            	<img class="img-responsive" src="<?php echo $path . "images/company/" . $companyProfileInfo['name'] . "/" . $companyProfileInfo['image']; ?>" alt="">
           	</a>
           <?php else: ?>
 						<img class="profile-img" src="<?php echo $path . "images/placeholder.jpg" ?>" alt="">
           <?php endif; ?>
 			
-          <h3 class="text-center"> <?php echo $companyInfo['name']; ?> </h3>
           <h4><?php echo $companyInfo['city']; ?></h4>
         </div>
       </div>
