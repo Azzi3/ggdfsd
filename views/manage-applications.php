@@ -126,7 +126,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 
 					 	$acceptButton = '<a href="'.CURRENT_PATH.'?accept='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-success">Godkänd</a>';
 					 	$denyButton = '<a href="'.CURRENT_PATH.'?deny='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-danger">Neka</a>';
-					 	$finishButton = '<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id'].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
+					 	$finishButton = '<a href="'.CURRENT_PATH.'?finish='.$ApplicationForm['id' ].'&uid='.$user['id'].'" class="btn btn-warning">Genomförd</a>';
 					 	$formButton = '<form action="?app='.$ApplicationForm['user_id'].'&id='.$ApplicationForm['id'].'" method="POST">
 					<textarea name="report" class="form-control" placeholder="Omdömme">'.$ApplicationForm['report'].'</textarea><br>
 					<button class="btn btn-default" type="submit">Spara omdömme</button>
@@ -145,7 +145,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 					$btn = $denyButton.' '.$finishButton;
 				}else if($ApplicationForm['status'] == 2){
 					$status = 'Nekad';
-					$btn = $acceptButton.' '.$finishButton;
+					$btn = $acceptButton;
 				}else if($ApplicationForm['status'] == 3){
 					$status = 'Genomförd';
 					$btn = $formButton;
