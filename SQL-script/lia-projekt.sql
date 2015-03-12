@@ -1,19 +1,3 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4096
-#
-# http://www.sequelpro.com/
-# http://code.google.com/p/sequel-pro/
-#
-# Host: 127.0.0.1 (MySQL 5.5.38)
-# Database: lia-projekt
-# Generation Time: 2015-03-12 12:44:39 +0000
-# ************************************************************
-
-
---
--- Definition for database `lia-projekt`
---
 DROP DATABASE IF EXISTS `lia-projekt`;
 CREATE DATABASE IF NOT EXISTS `lia-projekt`
   CHARACTER SET utf8
@@ -39,7 +23,7 @@ USE `lia-projekt`;
 --
 -- Tabellstruktur `application_form`
 --
----------------------------------
+-- -------------------------------
 
 DROP TABLE IF EXISTS `application_form`;
 
