@@ -23,13 +23,6 @@
 
     <div class="jumbotron">
 
-      <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>
-        <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>">Redigera uppgifter</a>
-      <?php endif; ?>
-      <?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>
-        <a class="edit-anchor" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>
-      <?php endif; ?>
-
       <div class="container">
         <div class="col-md-6">
           <?php if($companyInfo['image']): ?>
@@ -41,7 +34,7 @@
           <?php endif; ?>
 			
           <h4><?php echo $companyInfo['city']; ?></h4>
-        </div>
+        </div>        <div class="col-md-3 pull-right">        	<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>        	  <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>">Redigera uppgifter</a>        	<?php endif; ?>        	<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>        	  <a class="btn btn-success pull-right" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>        	<?php endif; ?>        </div>
       </div>
       
     </div>
