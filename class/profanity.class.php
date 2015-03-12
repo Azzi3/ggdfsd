@@ -9,7 +9,6 @@ public function getProfanityList(){
 		"slyna",
 		"kåt",
 		"slampa",
-		"dick",
 		"whore",
 		"penis",
 		"cunt",
@@ -36,6 +35,7 @@ public function getProfanityList(){
 		"arsle",
 		"shit",
 		"luder",
+		"damn",
 	);
 	return $profanities;
 }

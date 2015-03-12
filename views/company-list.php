@@ -2,6 +2,25 @@
 $companyObj = new Company();
 $user = new User();
 $companies = $companyObj->getAll();
+
+function checkForProfanity($stringToCheck){
+	$profanities = new Profanity();
+	$profanitiesList = $profanities->getProfanityList();
+	$nameLowerCase = strtolower($stringToCheck); 
+		foreach ($profanitiesList as $profanity){
+      		if(in_array($nameLowerCase, $profanitiesList)) {
+      			$msg = 'Sökningen tycker inte om fula ord';
+        		return $msg;
+      		} else if(strpos($nameLowerCase, $profanity) !== false) {
+      			$msg = 'Sökningen tycker inte om delvis fula ord heller'; 
+      			return $msg;
+      		} else {
+      			$msg = 'Sökningen gav inget resultat';
+      			return $msg;
+      		}
+    	}
+}
+
 if(isset($_GET['deleteid'])){
 	$getCmpName = $companyObj->getFromId($_GET['deleteid']);
 	$companyName = $getCmpName['name'];
@@ -91,7 +110,7 @@ if(isset($_GET['deleteid'])){
 
 			</div> <?php
 	} else { 
-		echo "Sökningen gav inget resultat.";
+		echo checkForProfanity($_POST['search']);
 	} ?>
 	
 		</div>
