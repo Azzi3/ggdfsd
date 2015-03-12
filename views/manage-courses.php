@@ -71,15 +71,17 @@ if(isset($_POST['course'])){
         redirect($redirectPath);
     }
 
-  // CHECKS IF THERE IS ANOTHER COURSE WITH THE SAME NAME & START DATE  
-  foreach ($allCourses as $courseRow) {
-    if($_POST['course']['course_start'] == $courseRow['course_start'] && ($_POST['course']['name'] == $courseRow['name'])){
+  // CHECKS IF THERE IS ANOTHER COURSE WITH THE SAME NAME & START DATE
+
+  if(isset($_GET['id'])){
+    foreach ($allCourses as $courseRow) {
+      if($_POST['course']['course_start'] == $courseRow['course_start'] && ($_POST['course']['name'] == $courseRow['name'])){
         $errors[] = 'En kurs med det här namnet och startdatum finns redan.';
         $session->setSession('error',$errors);
         redirect($redirectPath);
-    }
+      }
+    } 
   }
-
 
   $uplPath = PUBLIC_ROOT.'/files/';
 
@@ -89,7 +91,6 @@ if(isset($_POST['course'])){
         $fileName = $upl->upload($file, $uplPath);
         $form['file'] = $fileName['name'];
     }
-
   
   if(count($error) > 0){
       $session->setSession('error',$error);
