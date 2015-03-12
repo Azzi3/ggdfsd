@@ -41,7 +41,7 @@ if(isset($_GET['id'])){
     		</div>
           <div>
             <label for="spots">Antal platser</label>
-            <p><?php echo $items['spots']; ?></p>
+            <p><?php echo $liaProject->getAcceptedApplicantsForProject($id)[0]; ?> / <?php echo $items['spots']; ?></p>
           </div>
     	  <div>
     	    <label for="file">Uppskattad tid</label>

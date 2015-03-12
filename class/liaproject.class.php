@@ -140,6 +140,14 @@ class LiaProject extends Database{
 		$this->insert($str, $arr);
 	}
 
+	public function getAcceptedApplicantsForProject($course){
+		$str = " SELECT COUNT(id)FROM project_applicant WHERE course_id = :course AND status = 1 ";
+		$arr = array('course' => $course);
+
+		return $this->select($str, $arr);
+
+	}
+
 	public function getMyApplicationsUser($userId){
 		$str = " SELECT * FROM $this->tbl_applicant WHERE user_id = :id ";
 		$arr = array('id'=>$userId);
