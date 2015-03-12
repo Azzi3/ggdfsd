@@ -22,6 +22,7 @@ if(isset($_GET['id'])){
 }else if(!isset($_POST['company'])){
     $items['contact_name'] = '';
     $items['contact_email'] = '';
+    $items['company_email'] = '';
     $items['image'] = '';
     $id = 0;
     $buttonText = 'Skapa';
@@ -125,6 +126,11 @@ if(isset($_POST['company'])){
             </div>
 
             <div class="form-group">
+                <label for="companyEmail">Företagets email:</label>
+                <input type="email" class="form-control" id="company_email" value="<?php echo $items['company_email'] ?>" name="company[company_email]">
+            </div>
+
+            <div class="form-group">
                 <label for="companyURL">Webbadress:</label>
                 <input type="text" class="form-control" id="website_url" value="<?php echo $items['website_url'] ?>" name="company[website_url]">
             </div>
@@ -144,7 +150,7 @@ if(isset($_POST['company'])){
                 <input type="number" class="form-control" id="contact_phone" value="<?php echo $items['contact_phone']; ?>" name="company[contact_phone]" required>
             </div>
             <div class="form-group">
-                <label for="contactPersonEmail">Kontaktpersonens e-post:</label>
+                <label for="contactPersonEmail">Kontaktpersonens email:</label>
                 <input type="email" class="form-control" id="contact_email" value="<?php echo $items['contact_email']; ?>" name="company[contact_email]" required>
             </div>
             <hr>
