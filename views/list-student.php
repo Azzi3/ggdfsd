@@ -5,19 +5,21 @@ $students = $studentObj->getAll();
 function checkForProfanity($stringToCheck){
 	$profanities = new Profanity();
 	$profanitiesList = $profanities->getProfanityList();
-	$nameLowerCase = strtolower($stringToCheck); 
-		foreach ($profanitiesList as $profanity){
-      		if(in_array($nameLowerCase, $profanitiesList)) {
+	$nameLowerCase = strtolower($stringToCheck);
+	
+	if(in_array($nameLowerCase, $profanitiesList)) {
       			$msg = 'Sökningen tycker inte om fula ord';
         		return $msg;
-      		} else if(strpos($nameLowerCase, $profanity) !== false) {
-      			$msg = 'Sökningen tycker inte om delvis fula ord heller'; 
-      			return $msg;
-      		} else {
-      			$msg = 'Sökningen gav inget resultat';
-      			return $msg;
-      		}
-    	}
+      		}  
+	foreach ($profanitiesList as $profanity){
+		if(strpos($nameLowerCase, $profanity) !== false) {
+      		$msg = 'Sökningen tycker inte om delvis fula ord heller'; 
+      		return $msg;
+      	}
+	}
+
+    $msg = 'Sökningen gav inget resultat';
+    return $msg;  	
 }
 
 ?>
