@@ -19,7 +19,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 		$comp = $_GET['comp'];
 		$company = new Company();
 		$companyInfo = $company->getFromId($_GET['comp']);
-		$name = "Spontanansökan till ".$companyInfo['name'];
+		$name = $companyInfo['name'];
 
 		$redirectPath = CURRENT_PATH.'?cid='.$_GET['cid'].'&comp='. $_GET['comp'];
 
@@ -92,7 +92,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 ?>
 <div class="container">
 
-	<h1>Ansök lia (<?php echo $name; ?>)</h1>
+	<h1>LIA-ansökan till <?php echo $name; ?></h1>
 	<p><?php echo newLine($desc); ?></p>
 	<form action="" method="POST" accept-charset="utf-8">
 	    <?php
