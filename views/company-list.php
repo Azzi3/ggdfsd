@@ -70,7 +70,7 @@ if(isset($_GET['deleteid'])){
 				<tr>
 					<td><a href="<?php echo $path; ?>company-profile?id=<?php echo $company['id']; ?>"><?php echo $company['name'] ?></a></td>
 					<td style="max-width: 10em"><?php echo $company['street_address'] ?></td>
-					<td><?php echo $company['zip_code'] ?></td>
+					<td><?php echo $company['contact_name'] ?></td>
 						<td><?php echo $company['city'] ?></td>
 						<td><a target="_blank" href="<?php echo $company['website_url'] ?>"><?php echo $company['website_url'] ?></a></td>
 						<td><?php
