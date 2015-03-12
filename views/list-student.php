@@ -2,6 +2,24 @@
 $studentObj = new Student();
 $students = $studentObj->getAll();
 
+function checkForProfanity($stringToCheck){
+	$profanities = new Profanity();
+	$profanitiesList = $profanities->getProfanityList();
+	$nameLowerCase = strtolower($stringToCheck); 
+		foreach ($profanitiesList as $profanity){
+      		if(in_array($nameLowerCase, $profanitiesList)) {
+      			$msg = 'Sökningen tycker inte om fula ord';
+        		return $msg;
+      		} else if(strpos($nameLowerCase, $profanity) !== false) {
+      			$msg = 'Sökningen tycker inte om delvis fula ord heller'; 
+      			return $msg;
+      		} else {
+      			$msg = 'Sökningen gav inget resultat';
+      			return $msg;
+      		}
+    	}
+}
+
 ?>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -75,7 +93,7 @@ $students = $studentObj->getAll();
 
 			</div> <?php
 	} else { 
-		echo "Sökningen gav inget resultat.";
+		echo checkForProfanity($_POST['search']);
 	} ?>
 		</div>
 	</div>
