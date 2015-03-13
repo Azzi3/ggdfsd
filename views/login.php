@@ -29,9 +29,10 @@
 													$session->setSession('guid',$userResult['guid']);
 												}else{
 													$session->setSession('error','Fel användaruppgifter.');
+													redirect('#login');
 												}
 
-									
+											
 											
 											}
 											// Why isnt signed user set @Tobias
@@ -59,9 +60,9 @@
 												}
 												else{
 													$session->setSession('errorKey','Det finns ingen nyckel med det värdet.');
+													redirect('#login');
 												}
 											
-												redirect(CURRENT_PATH);
 											}
 					
 											?>
@@ -80,12 +81,6 @@
 											
 											
 											
-											//show error if error-session is active
-											if($session->getSession('error')){
-												echo '<div class="alert alert-danger" role="alert">'.$session->getSession('error').'</div>';
-												//kill session when 'echoed'.
-												$session->killSession('error');
-											}
 											?>
 												<div class="form-group">
 													<label for="mail">Epostadress</label>
@@ -96,6 +91,18 @@
 													<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord" required>
 												</div>
 												<button type="submit" class="btn btn-default">Logga in</button>
+
+												<?php 
+												//show error if error-session is active
+												if($session->getSession('error')){
+													echo '<div class="alert alert-danger error-alert" role="alert">'.$session->getSession('error').'</div>';
+													//kill session when 'echoed'.
+
+													$session->killSession('error');
+												}
+
+												?>
+
 											</form>
 											
 											</div>
@@ -106,8 +113,9 @@
 											<?php
 											//show error if error-session is active
 											if($session->getSession('errorKey')){
-												echo '<div class="alert alert-danger" role="alert">'.$session->getSession('errorKey').'</div>';
+												echo '<div class="alert alert-danger error-alert" role="alert">'.$session->getSession('errorKey').'</div>';
 												//kill session when 'echoed'.
+
 												$session->killSession('errorKey');
 											}
 											?>

@@ -43,4 +43,12 @@ $(document).ready(function() {
 		});
 	});
 
+	setTimeout(function(){
+		$('.error-alert').fadeOut(1000, function(){
+				
+		});
+	},5000);
+			
+
+
 });
