@@ -40,20 +40,20 @@
       
 
       <ul class="info-list">
-        <li> <?php echo $studentProfileInfo['phone']; ?> </li>
-        <li> <?php echo $userInfo['email']; ?> </li>
+        <dl>        <dd> <?php echo $studentProfileInfo['phone']; ?> </dd>
+        <dd> <?php echo $userInfo['email']; ?> </dd>
 
         <?php if(strlen($studentProfileInfo['website']) > 1) : ?>
-          <li> <a href="<?php echo 'http://'.$studentProfileInfo['website']; ?>" target="_blank"><?php echo $studentProfileInfo['website']; ?></a>  </li>
+          <dd> <a href="<?php echo 'http://'.$studentProfileInfo['website']; ?>" target="_blank"><?php echo $studentProfileInfo['website']; ?></a>  </dd>
         <?php endif; ?>
         <?php if(strlen($studentProfileInfo['resume']) > 1) : ?>
-          <li> <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['resume']; ?>" target="_blank"> <?php echo $studentProfileInfo['resume'] ?> </a> </li>
+          <dd> <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['resume']; ?>" target="_blank"> <?php echo $studentProfileInfo['resume'] ?> </a> </dd>
         <?php endif; ?>
     </div>
 
     <div class="col-md-8">
       <h3 class="text-center">Om</h3>
-        <p><?php echo newLine($studentProfileInfo['info']); ?></p>
+        <p id="profile-description"><?php echo newLine($studentProfileInfo['info']); ?></p>
       
       <hr>
       

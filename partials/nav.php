@@ -56,13 +56,13 @@
 		  		<li><a href="<?php echo $path; ?>manage-applications">Mina ansökningar</a></li>
 		  
 		  		<?php elseif($signedUser['company_owner'] == 1) : ?>
-		  		<li><a href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Profil</a></li>		  		<li><a href="<?php echo $path; ?>manage-user">Inställningar</a></li>
+		  		<li><a href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Profil</a></li>
 		  		<li><a href="<?php echo $path; ?>manage-applications">Ansökningar</a></li>
 		  		
 		  		<?php elseif($signedUser['course_leader'] == 1) : ?>
 		  		<li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>
 		  		<?php endif; ?>
-
+								<li><a href="<?php echo $path; ?>manage-user">Inställningar</a></li>
 		  		<li><a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut</a></li>
 		  	</ul>
 		  </li>		          
