@@ -137,21 +137,18 @@
 							<div class="row">
 									<div class="col-lg-12 text-center">
 											<h2 class="section-heading">Information</h2>
-											<h3 class="section-subheading text-muted">Undertext</h3>
+											<!--<h3 class="section-subheading text-muted">Undertext</h3>-->
 									</div>
 							</div>
 							<div class="row text-center">
 									<div class="col-md-6">
-											<h4 class="service-heading">Arbetsgivare</h4>
+											<h4 class="service-heading">Info</h4>
 											<p class="text-muted">
-											Rekryteringsmöjligheter.
-										Vägen till rätt person.
-										YH-studenters utbildning består av ca 30% "Lärande i arbete". Här har du som arbetsgivare möjligheten att lära känna personer och testa deras kompetens inför en potentiell rekrytering.
-										På Liabanken.se kan du erbjuda YH-studenter i hela landet olika spännande karriärmöjligheter som LIA-jobb, extrajobb, sommarjobb, examensarbeten eller heltidsjobb efter studierna.</p>
+											All utbildning inom yrkeshögskolan sker i nära samarbete med arbetslivet. Lärande i arbete (LIA) innebär att en del av utbildningen är förlagd till en eller flera arbetsplatser. LIA-banken erbjuder en unik mötesplats till studenter och företag för att säkra LIA-platser till Växjö Yrkeshögskola.</p>
 								</div>
 								
 								<div class="col-md-6">
-										<h4 class="service-heading">Studenter</h4>
+										<h4 class="service-heading">Ej korrekt info</h4>
 										<p class="text-muted">Karriärcentrum för dig som läser en YH- eller KY-utbildning.
 										Liabanken.se finns för att du som läser på någon av landets YH/KY-utbildningar lättare ska komma in på arbetsmarknaden.
 										Man kan säga att Liabanken.se är språngbrädan för din karriär och en hjälpreda för dig som söker LIA-plats, extrajobb eller anställning efter studierna.</p>
