@@ -60,7 +60,7 @@
 		  		<li><a href="<?php echo $path; ?>manage-applications">Ansökningar</a></li>
 		  		
 		  		<?php elseif($signedUser['course_leader'] == 1) : ?>
-		  		<li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>
+		  		<li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>		  		<li><a href="<?php echo $path; ?>manage-user">Inställningar</a></li>
 		  		<?php endif; ?>
 
 		  		<li><a href="<?php echo CURRENT_PATH ?>?logout=1">Logga ut</a></li>
