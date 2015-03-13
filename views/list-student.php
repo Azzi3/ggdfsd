@@ -77,8 +77,7 @@ function checkForProfanity($stringToCheck){
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Förnamn</th>
-					<th>Efternamn</th>
+					<th>Namn</th>
 					<th>Email</th>
 				</tr>
 			</thead>
@@ -86,8 +85,8 @@ function checkForProfanity($stringToCheck){
 			<tbody>
 				<?php foreach ($students as $student) :  ?>
 				<tr>
-					<td><a href="<?php echo $path.'student-profile?uid='.$student['guid']; ?>"><b><?php echo $student['firstname'] ?></b></a></td>
-					<td style="max-width: 10em"><?php echo $student['lastname'] ?></td>
+					<td><a href="<?php echo $path.'student-profile?uid='.$student['guid']; ?>"><b><?php echo $student['firstname'] . ' ' . $student['lastname'] ?></b></a></td>
+
 					<td><?php echo $student['email'] ?></td>
 				</tr>
 					<?php endforeach; ?>
