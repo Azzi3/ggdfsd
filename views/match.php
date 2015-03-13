@@ -22,8 +22,8 @@
 		foreach ($arrayWithCompanies as $company) {
 			if($company['name'] != ''){
 				$description = $company['description'];
-				if (strlen($description) > 200){
-   					$description = substr($description, 0, 197) . '...';
+				if (strlen($description) > 150){
+   					$description = substr($description, 0, 147) . '...';
 				}
 				echo '	<div style="margin-bottom:2em" class="col-lg-4 col-md-6 text-center">
 							<h2><a href="'. $path . 'company-profile?id='. $company['id'] . '">' . $company['name'] . '</a></h2>
