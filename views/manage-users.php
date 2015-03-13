@@ -5,7 +5,8 @@
 $user = new User();
 $county = new County();
 $studentProfile = new StudentProfile();
-$studentTag = new StudentTag();$company = new Company();
+$studentTag = new StudentTag();
+$company = new Company();
 
 $municipality = $county->listMunicipality();
 
@@ -124,7 +125,7 @@ if(isset($_POST['manage'])){
         $error[] .= 'Välj en korrekt kommun.';
     }
 
-    if(!is_numeric($form['phone'])){
+    if(strlen($form['phone']) > 1 && !is_numeric($form['phone'])){
         $error[] .= 'Telefonnummer måste bestå av endast nummer.';
     }
     if(strlen($form['phone']) > 30){
@@ -167,7 +168,15 @@ if(isset($_POST['manage'])){
 
 	<div class="jumbotron">
 	
-	        <h1>Hantera profil</h1>	        	        <?php if($signedUser['student'] == 1) : ?>	        <a class="btn btn-default" href="<?php echo $path; ?>student-profile" role="button">Tillbaka</a>	        	        <?php elseif($signedUser['company_owner'] == 1) : ?>	        <a class="btn btn-default" href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Tillbaka</a>	        <?php endif; ?>	        
+	        <h1>Hantera profil</h1>
+	        
+	        <?php if($signedUser['student'] == 1) : ?>
+	        <a class="btn btn-default" href="<?php echo $path; ?>student-profile" role="button">Tillbaka</a>
+	        
+	        <?php elseif($signedUser['company_owner'] == 1) : ?>
+	        <a class="btn btn-default" href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Tillbaka</a>
+	        <?php endif; ?>
+	        
 	    </div>
 
     <form action="" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
@@ -214,6 +223,9 @@ if(isset($_POST['manage'])){
             <label for="lastname">*Efternamn</label>
             <input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="manage[lastname]" placeholder="Efternamn" required>
         </div>
+
+        <?php if($signedUser['company_owner'] != 1) : ?>
+
         <div class="form-group">
             <label for="phone">Telefonnummer</label>
             <input type="text" class="form-control" value="<?php echo $formFiller['phone']; ?>" id="phone" name="manage[phone]" placeholder="Telefonnummer">
@@ -289,6 +301,8 @@ if(isset($_POST['manage'])){
             <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
         </div>
 
+
+    <?php endif; ?>
 
         * Måste anges<br>
         ** Lämnas blankt om du vill behålla nuvarande lösenord<br>
