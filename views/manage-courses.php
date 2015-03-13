@@ -41,10 +41,17 @@ else{
 
 
 if(isset($_POST['course'])){
+  $removeFileValue = 0;
 
   $form = $_POST['course'];
   $file = $_FILES['uplFile'];
   $form['file'] = '';
+
+  if(isset($form['removefile'])){
+    $removeFileValue = 1;
+  }
+
+
 
   $session->setSession('form',$form);
   $error = array();
@@ -87,7 +94,7 @@ if(isset($_POST['course'])){
 
   $upl = new Upl();
 
-    if(strlen($file['tmp_name']) > 0){
+    if(strlen($file['tmp_name']) > 0 && $form['removefile'] == 0){
         $fileName = $upl->upload($file, $uplPath);
         $form['file'] = $fileName['name'];
     }
@@ -109,6 +116,11 @@ if(isset($_POST['course'])){
 
       if($courseItems['file'] == ''){
         $courseItems['file'] = $items['file'];
+      }
+
+      if($removeFileValue == 1 && strlen($items['file']) > 2){
+        $courseItems['file'] = '';
+        unlink($uplPath.$items['file']);
       }
 
         $course->updateCourse($courseItems, $tags, $id);
@@ -183,7 +195,10 @@ if(isset($_POST['course'])){
             <label for="uplFile">Ladda upp Fil</label>
             <input type="file" name="uplFile" value="" id="uplFile" placeholder="Ladda upp FIl">
             <?php if(!empty($items['file']) && strlen($items['file']) > 1) : ?>
-              Nuvarande fil: <b><?php echo $items['file']; ?>.</b>
+              Nuvarande fil: <b><?php echo $items['file']; ?>.</b><br>
+              <div class="alert alert-warning">
+                <input type="checkbox" name="course[removefile]" value="1"> Ta bort filen
+              </div>
             <?php else : ?>
               <b>Ingen nuvarande fil.</b>
             <?php endif; ?>
