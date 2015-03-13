@@ -1,10 +1,11 @@
 <?php 
 	$studentProfile = new StudentProfile(); 
 	$companyObj = new Company(); 
-
+	$arrayWithCompanies = array();
 	$studentTags = $studentProfile->getTagIds($signedUser['id']);
-
-	$arrayWithCompanies = $companyObj->getCompaniesWithTagIds($studentTags);
+	if(count($studentTags) != 0){
+		$arrayWithCompanies = $companyObj->getCompaniesWithTagIds($studentTags);
+	}
 
 
  ?>
