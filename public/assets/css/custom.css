@@ -9,6 +9,10 @@
 	margin-bottom: 0px; 
 }
 
+.jumbotron {
+    margin-top: 20px;
+}
+
 .profile-img {
   border-radius: 50%;
   -webkit-border-radius: 50%;
