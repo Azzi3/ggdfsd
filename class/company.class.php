@@ -192,17 +192,25 @@ class Company extends Database{
 		return $this->selectAll($str, $arr);
 	}
 
-	public function getCompaniesWhereTagId($id){
-		$str = "SELECT * FROM `company_tag` where tag_id = :id";
-		$arr = array('id' => $id);
-		$company_tags = $this->selectAll($str, $arr);
-		$companies = array();
-		foreach ($company_tags as $company_tag) {
-			$company = $this->getFromId($company_tag['company_id']);
-			$name = $company['name'];
-			$companies[$name] = $company;
+	public function getCompaniesWithTagIds($studentTagids){
+		$str = "SELECT DISTINCT company_id FROM `company_tag` where tag_id IN (";
+		foreach ($studentTagids as $tagId) {
+			if(end($studentTagids) === $tagId){
+				$str .= $tagId['tag_id']; 
+			}else{
+				$str .= $tagId['tag_id'] . ","; 
+			}
 		}
+		$str .= ')';
 
+		$company_ids = $this->selectAll($str);
+		$companies = array();
+		foreach ($company_ids as $company_id) {
+			$company = $this->getFromId($company_id['company_id']);
+			if($company){
+				array_push($companies,$company);
+			}
+		}
 		return $companies;
 
 	}
