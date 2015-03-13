@@ -96,7 +96,7 @@ if(isset($_GET['deleteid'])){
 					<td style="max-width: 10em"><?php echo $company['street_address'] ?></td>
 					<td><?php echo $company['contact_name'] ?></td>
 						<td><?php echo $company['city'] ?></td>
-						<td><a target="_blank" href="<?php echo $company['website_url'] ?>"><?php echo $company['website_url'] ?></a></td>
+						<td><a target="_blank" href="http://<?php echo $company['website_url'] ?>"><?php echo $company['website_url'] ?></a></td>
 						<td><?php
 						$counter = 0;
 						$companyTags = $companyObj->getTags($company['id']);

@@ -34,7 +34,15 @@
           <?php endif; ?>
 			
           <h4><?php echo $companyInfo['city']; ?></h4>
-        </div>        <div class="col-md-3 pull-right">        	<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>        	  <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>">Redigera uppgifter</a>        	<?php endif; ?>        	<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>        	  <a class="btn btn-success pull-right" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>        	<?php endif; ?>        </div>
+        </div>
+        <div class="col-md-3 pull-right">
+        	<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $companyInfo['id']) : ?>
+        	  <a class="btn btn-warning pull-right" href="<?php echo $path . "manage-company?id=" . $companyInfo['id']; ?>">Redigera uppgifter</a>
+        	<?php endif; ?>
+        	<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == 0) : ?>
+        	  <a class="btn btn-success pull-right" href="<?php echo $path . "manage-company"; ?>"> <button class="btn pull-right">Skapa företag</button></a>
+        	<?php endif; ?>
+        </div>
       </div>
       
     </div>
@@ -55,7 +63,7 @@
         <dl>
           <dt>Företag</dt>
           <dd>Email: <?php echo $companyProfileInfo['company_email']; ?></dd>
-          <dd>Hemsida: <?php echo $companyProfileInfo['website_url']; ?></dd>
+          <dd>Hemsida: <a href="<?php echo 'http://' . $companyProfileInfo['website_url']; ?>"><?php echo $companyProfileInfo['website_url']?></a></dd>
         </dl>
         
         <dl>
