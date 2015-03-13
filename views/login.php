@@ -3,7 +3,7 @@
 				<div class="container">
 						<div class="intro-text">
 								<div class="intro-lead-in">Välkommen till LIA-Banken</div>
-								<a href="#login" class="page-scroll btn btn-xl">Logga in</a>
+								<a href="#login" class="page-scroll btn-xl">Logga in</a>
 						</div>
 				</div>
 		</header>
@@ -155,33 +155,4 @@
 								</div>
 						</div>
 				</div>
-		</section>
-
-
-		<footer>
-				<div class="container">
-						<div class="row">
-								<div class="col-md-4">
-										<ul class="list-inline quicklinks">
-												<li><a href="#">Länkar 1</a>
-												</li>
-												<li><a href="#">Länkar 2</a>
-												</li>
-										</ul>
-								</div>
-								<div class="col-md-4">
-										<span class="copyright">Copyright &copy; LIA-Banken 2015</span>
-										
-										
-								</div>
-								<div class="col-md-4">
-										<ul class="list-inline quicklinks">
-												<li><a href="#">Länkar 3</a>
-												</li>
-												<li><a href="#">Länkar 4</a>
-												</li>
-										</ul>
-								</div>
-						</div>
-				</div>
-		</footer>
+		</section>				<footer>			<div class="container">				<div class="row">					<div class="col-md-4">					</div>													<div class="col-md-4">						<span class="copyright">Copyright &copy; LIA-Banken 2015</span>						</div>												<div class="col-md-4">					</div>				</div>			</div>		</footer>

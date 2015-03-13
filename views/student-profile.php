@@ -48,7 +48,7 @@
         <?php endif; ?>
         <?php if(strlen($studentProfileInfo['resume']) > 1) : ?>
           <dd> <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['resume']; ?>" target="_blank"> <?php echo $studentProfileInfo['resume'] ?> </a> </dd>
-        <?php endif; ?>
+        <?php endif; ?>        </dl>        </ul>
     </div>
 
     <div class="col-md-8">

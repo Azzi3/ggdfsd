@@ -20,10 +20,6 @@
           
 }
 
-.edit-anchor{
-  font-size: 30px;
-}
-
 #profile-description {
 	min-height: 160px;
 }
@@ -59,7 +55,7 @@ hr {
     background-color: #c9302c;  
     border: 1px solid #d43f3a;
 }
-
+tr {    height: 51px;}td {    vertical-align: middle !important;}
 /* Startpage css */
 .btn-xl {
     padding: 20px 40px;
@@ -70,16 +66,15 @@ hr {
     font-size: 18px;
     font-weight: 700;
     color: #fff;
-    background-color: #fed136;
-}
+    background-color: #fed136;}
 
 .btn-xl:hover {
-	color: #fff;
+	color: #fff;	text-decoration: none;
 }
 
 .tag{
     margin-bottom: 0.5em;
-}
+}
 header {
     text-align: center;
     height: 100%;
@@ -115,14 +110,6 @@ header .intro-text .intro-heading {
     font-size: 50px;
     font-weight: 700;
     line-height: 50px;
-}
-
-tr {
-    height: 51px;
-}
-
-td {
-    vertical-align: middle !important;
 }
 
 @media(min-width:768px) {
@@ -173,7 +160,7 @@ section#login {
 	background: #f1f1f1;
 }
 
-footer {
+/* Footer Section */footer {	margin-top: 20px;
     padding: 25px 0;
     text-align: center;
     background: #777;
@@ -183,5 +170,5 @@ footer span.copyright {
     text-transform: uppercase;
     text-transform: none;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 40px;
+    line-height: 40px;    color: #fff;
 }
