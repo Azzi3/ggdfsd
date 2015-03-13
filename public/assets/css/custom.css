@@ -77,6 +77,9 @@ hr {
 	color: #fff;
 }
 
+.tag{
+    margin-bottom: 0.5em;
+}
 header {
     text-align: center;
     height: 100%;
