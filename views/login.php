@@ -144,15 +144,35 @@
 									<div class="col-md-6">
 											<h4 class="service-heading">Info</h4>
 											<p class="text-muted">
-											All utbildning inom yrkeshögskolan sker i nära samarbete med arbetslivet. Lärande i arbete (LIA) innebär att en del av utbildningen är förlagd till en eller flera arbetsplatser. LIA-banken erbjuder en unik mötesplats till studenter och företag för att säkra LIA-platser till Växjö Yrkeshögskola.</p>
+											All utbildning inom yrkeshögskolan sker i nära samarbete med arbetslivet. 
+											Lärande i arbete (LIA) innebär att en del av utbildningen är förlagd till en eller flera arbetsplatser. 
+											LIA-banken erbjuder en unik mötesplats till studenter och företag för att säkra LIA-platser till Växjö Yrkeshögskola.</p>
 								</div>
 								
 								<div class="col-md-6">
-										<h4 class="service-heading">Ej korrekt info</h4>
-										<p class="text-muted">Karriärcentrum för dig som läser en YH- eller KY-utbildning.
-										Liabanken.se finns för att du som läser på någon av landets YH/KY-utbildningar lättare ska komma in på arbetsmarknaden.
-										Man kan säga att Liabanken.se är språngbrädan för din karriär och en hjälpreda för dig som söker LIA-plats, extrajobb eller anställning efter studierna.</p>
+										<h4 class="service-heading">Lorem ipsum</h4>
+										<p class="text-muted">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+											Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+											Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+											Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 								</div>
 						</div>
 				</div>
-		</section>				<footer>			<div class="container">				<div class="row">					<div class="col-md-4">					</div>													<div class="col-md-4">						<span class="copyright">Copyright &copy; LIA-Banken 2015</span>						</div>												<div class="col-md-4">					</div>				</div>			</div>		</footer>
+		</section>
+		
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+					</div>
+								
+					<div class="col-md-4">
+						<span class="copyright">Copyright &copy; LIA-Banken 2015</span>	
+					</div>
+							
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div>
+		</footer>
