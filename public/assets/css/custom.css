@@ -6,7 +6,7 @@
 }
 
 .navbar {
-	margin-bottom: 0px; 
+	margin-bottom: 0px;
 }
 
 .jumbotron {
@@ -17,9 +17,12 @@
   border-radius: 50%;
   -webkit-border-radius: 50%;
      -moz-border-radius: 50%;
-          
+
 }
 
+.checkbox-label{
+      padding: 1em 1.3em;
+}
 #profile-description {
 	min-height: 160px;
 }
@@ -40,22 +43,31 @@ hr {
 
 .status-default{
     color: #FFF;
-    background-color: #333;  
+    background-color: #333;
     border: 1px solid #ccc;
 }
 
 .status-success{
     color: #FFF;
-    background-color: #5cb85c;  
+    background-color: #5cb85c;
     border: 1px solid #398439;
 }
 
 .status-danger{
     color: #FFF;
-    background-color: #c9302c;  
+    background-color: #c9302c;
     border: 1px solid #d43f3a;
 }
-tr {    height: 51px;}td {    vertical-align: middle !important;}
+
+tr {
+    height: 51px;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+
 /* Startpage css */
 .btn-xl {
     padding: 20px 40px;
@@ -66,15 +78,18 @@ hr {
     font-size: 18px;
     font-weight: 700;
     color: #fff;
-    background-color: #fed136;}
+    background-color: #fed136;
+}
 
 .btn-xl:hover {
-	color: #fff;	text-decoration: none;
+	color: #fff;
+	text-decoration: none;
 }
 
 .tag{
     margin-bottom: 0.5em;
-}
+}
+
 header {
     text-align: center;
     height: 100%;
@@ -87,7 +102,7 @@ header {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    
+
 }
 
 header .intro-text {
@@ -160,7 +175,10 @@ section#login {
 	background: #f1f1f1;
 }
 
-/* Footer Section */footer {	margin-top: 20px;
+/* Footer Section */
+
+footer {
+	margin-top: 20px;
     padding: 25px 0;
     text-align: center;
     background: #777;
@@ -170,5 +188,6 @@ footer span.copyright {
     text-transform: uppercase;
     text-transform: none;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 40px;    color: #fff;
+    line-height: 40px;
+    color: #fff;
 }

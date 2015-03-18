@@ -249,7 +249,7 @@ if(isset($_POST['manage'])){
 	        <a class="btn btn-default" href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Tillbaka</a>
 	        <?php endif; ?>
 
-	    </div>
+    </div>
 
     <form action="" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
     <?php
@@ -331,7 +331,7 @@ if(isset($_POST['manage'])){
                   <?php foreach ($studentTag->getAll() as $item) :
                     $tag = $studentTag->checkIfTagIsUsed($signedUser['id'], $item['id']);
                   ?>
-                    <label>
+                    <label class="checkbox-label">
                       <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
                     </label>
                     <?php endforeach; ?>
@@ -339,61 +339,65 @@ if(isset($_POST['manage'])){
             <a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
         </div>
 
-
-
         <div class="form-group">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group">
 
-            <?php if(isset($profileInfo['resume']) && strlen($profileInfo['resume']) > 1): ?>
-                <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
-                <label for="deleteresume">Ta bort CV?</label>
-                <input id="deleteresume" type="checkbox" name="manage[deleteresume]">
-                <br>
-            <?php else: ?>
-                <p>Inget CV uppladdat</p>
-            <?php endif; ?>
+                    <?php if(isset($profileInfo['resume']) && strlen($profileInfo['resume']) > 1): ?>
+                        <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
+                        <label for="deleteresume">Ta bort CV?</label>
+                        <input id="deleteresume" type="checkbox" name="manage[deleteresume]">
+                        <br>
+                    <?php else: ?>
+                        <p>Inget CV uppladdat</p>
+                    <?php endif; ?>
 
-            <label for="resume">Ladda upp CV</label>
-            <input type="file" name="resume" value="" placeholder="Ladda upp CV">
+                    <label for="resume">Ladda upp CV</label>
+                    <input type="file" name="resume" value="" placeholder="Ladda upp CV">
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group">
+                    <?php if(isset($profileInfo['picture']) && strlen($profileInfo['picture']) > 1): ?>
+                        <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
+                        <br>
+                        <label for="deleteimg">Rotera inte</label>
+                        <input id="deleteimg" checked type="radio" value="0" name="manage[rotate]">
+                        <br>
+                        <label for="deleteimg">Rotera 90 grader -></label>
+                        <input id="deleteimg" type="radio" value="1" name="manage[rotate]">
+                        <br>
+                        <label for="deleteimg">Rotera 90 grader <-</label>
+                        <input id="deleteimg" type="radio" value="2" name="manage[rotate]">
+                        <br>
+                        <label for="deleteimg">Ta bort profilbild?</label>
+                        <input id="deleteimg" type="checkbox" name="manage[deleteimg]">
+                        <br>
+                    <?php else: ?>
+                        <p>Ingen profilbild uppladdad</p>
+                    <?php endif; ?>
+
+                    <label for="resume">Ladda upp profilbild</label>
+                    (jpg, jpeg, png, gif)
+                    <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
+                </div>
+            </div>
         </div>
-
-
-
-        <div class="form-group">
-
-            <?php if(isset($profileInfo['picture']) && strlen($profileInfo['picture']) > 1): ?>
-                <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
-                <br>
-                <label for="deleteimg">Rotera inte</label>
-                <input id="deleteimg" checked type="radio" value="0" name="manage[rotate]">
-                <br>
-                <label for="deleteimg">Rotera 90 grader -></label>
-                <input id="deleteimg" type="radio" value="1" name="manage[rotate]">
-                <br>
-                <label for="deleteimg">Rotera 90 grader <-</label>
-                <input id="deleteimg" type="radio" value="2" name="manage[rotate]">
-                <br>
-                <label for="deleteimg">Ta bort profilbild?</label>
-                <input id="deleteimg" type="checkbox" name="manage[deleteimg]">
-                <br>
-            <?php else: ?>
-                <p>Ingen profilbild uppladdad</p>
-            <?php endif; ?>
-
-            <label for="resume">Ladda upp profilbild</label>
-            (jpg, jpeg, png, gif)
-            <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
         </div>
 
 
     <?php endif; ?>
 
-        * Måste anges<br>
-        ** Lämnas blankt om du vill behålla nuvarande lösenord<br>
-        <button class="btn btn-default" type="submit">Spara uppgifter</button>
-
+            <div class="form-group">
+                <p><i>* Måste anges <br>
+                ** Lämnas blankt om du vill behålla nuvarande lösenord</i></p>
+                <button class="btn btn-default" type="submit">Spara uppgifter</button>
+            </div>
     </form>
-
 </div>
+
 
 
 <?php
