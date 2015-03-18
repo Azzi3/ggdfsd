@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col-md-3 text-center">
 
-          <a href="<?php echo $path . "images/users/" . $userInfo['id'] . "/" . $studentProfileInfo['picture']; ?>" target="_blank">
+          <a href="<?php echo $profileImage ?>" target="_blank">
             <img class="profile-img" src=" <?php echo $profileImage ?> " alt="">
           </a>
 
