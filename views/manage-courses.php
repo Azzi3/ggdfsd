@@ -72,11 +72,15 @@ if(isset($_POST['course'])){
         redirect($redirectPath);
     }
 
+// UNLESS IT'S AN EDIT, THE SYSTEM CHECKS THE DATE AGAINST EARLIEST DATE
+    
+if(!isset($_GET['id'])){
   if($_POST['course']['course_start'] < $earliestDate){
         $errors[] = 'Startdatum för kursen måste ligga minst tre dagar fram i tiden.';
         $session->setSession('error',$errors);
         redirect($redirectPath);
     }
+}
 
   // CHECKS IF THERE IS ANOTHER COURSE WITH THE SAME NAME & START DATE
 
