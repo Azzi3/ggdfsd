@@ -274,59 +274,87 @@ if(isset($_POST['manage'])){
         $session->killSession('success');
     }
     ?>
-        <div class="form-group">
-            <label for="mail">*Epostadress</label>
-            <input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="manage[email]" placeholder="Epostadress" required>
-        </div>
-        <div class="form-group">
-            <label for="pword">**Lösenord</label>
-            <input type="password" autocomplete="off" class="form-control" id="pword" name="manage[password]" placeholder="Lösenord">
-        </div>
-        <div class="form-group">
-            <label for="pword2">**Validera lösenord</label>
-            <input type="password" autocomplete="off" class="form-control" id="pword2" name="manage[password2]" placeholder="Validera lösenord">
-        </div>
-        <br>
-        <div class="form-group">
-            <label for="firstname">*Förnamn</label>
-            <input type="text" class="form-control" value="<?php echo $formFiller['firstname']; ?>" id="firstname" name="manage[firstname]" placeholder="Förnamn" required>
-        </div>
-        <div class="form-group">
-            <label for="lastname">*Efternamn</label>
-            <input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="manage[lastname]" placeholder="Efternamn" required>
-        </div>
+        <fieldset>
+            <legend>Inloggninsuppgifter</legend>
+            <div class="row">
+                <div class="col-md-4">
+                <div class="form-group">
+                    <label for="mail"><span style="color:#FF8989;">* </span>Epostadress</label>
+                    <input type="text" class="form-control" value="<?php echo $formFiller['email']; ?>" id="mail" name="manage[email]" placeholder="Epostadress" required>
+                </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="pword"><span style="color:#FF8989">** </span>Lösenord</label>
+                        <input type="password" autocomplete="off" class="form-control" id="pword" name="manage[password]" placeholder="Lösenord">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="pword2"><span style="color:#FF8989">** </span> Validera lösenord</label>
+                        <input type="password" autocomplete="off" class="form-control" id="pword2" name="manage[password2]" placeholder="Validera lösenord">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Profiluppgifter</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstname"><span style="color:#FF8989;">* </span>Förnamn</label>
+                        <input type="text" class="form-control" value="<?php echo $formFiller['firstname']; ?>" id="firstname" name="manage[firstname]" placeholder="Förnamn" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastname"><span style="color:#FF8989">* </span>Efternamn</label>
+                        <input type="text" class="form-control" value="<?php echo $formFiller['lastname']; ?>" id="lastname" name="manage[lastname]" placeholder="Efternamn" required>
+                    </div>
+                </div>
+            </div>
+
 
         <?php if($signedUser['company_owner'] != 1) : ?>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="phone">Telefonnummer</label>
+                    <input type="text" class="form-control" value="<?php echo $formFiller['phone']; ?>" id="phone" name="manage[phone]" placeholder="Telefonnummer">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="region"><span style="color:#FF8989">* </span>Välj kommun</label>
+                    <select class="form-control" name="manage[municipality]" id="region" required>
+                        <option value="">-Välj kommun-</option>
+                        <?php foreach ($municipality as $item) {
+                            $selected = '';
 
-        <div class="form-group">
-            <label for="phone">Telefonnummer</label>
-            <input type="text" class="form-control" value="<?php echo $formFiller['phone']; ?>" id="phone" name="manage[phone]" placeholder="Telefonnummer">
-        </div>
-        <div class="form-group">
-            <label for="region">*Välj kommun</label>
-            <select class="form-control" name="manage[municipality]" id="region" required>
-                <option value="">-Välj kommun-</option>
-                <?php foreach ($municipality as $item) {
-                    $selected = '';
+                            if($item['municipality_id'] == $formFiller['municipality'])
+                                $selected = 'selected';
 
-                    if($item['municipality_id'] == $formFiller['municipality'])
-                        $selected = 'selected';
+                            echo '<option '.$selected.' value="'.$item['municipality_id'].'">'.$item['name'].'</option>';
+                        } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="website">Hemsida</label>
+                    <input type="text" class="form-control" value="<?php echo $formFiller['website']; ?>" id="website" name="manage[website]" placeholder="Hemsida">
+                </div>
+            </div>
+        </div>
 
-                    echo '<option '.$selected.' value="'.$item['municipality_id'].'">'.$item['name'].'</option>';
-                } ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="website">Hemsida</label>
-            <input type="text" class="form-control" value="<?php echo $formFiller['website']; ?>" id="website" name="manage[website]" placeholder="Hemsida">
-        </div>
         <div class="form-group">
             <label for="info">Information</label>
             <textarea class="form-control" id="info" name="manage[info]" placeholder="Information"><?php echo $formFiller['info']; ?></textarea>
         </div>
-
+        </fieldset>
+        <fieldset>
+            <legend>Taggar</legend>
         <div class="form-group">
-            <label for="checkbox">Taggar</label>
             <div class="checkbox">
                   <?php foreach ($studentTag->getAll() as $item) :
                     $tag = $studentTag->checkIfTagIsUsed($signedUser['id'], $item['id']);
@@ -336,14 +364,15 @@ if(isset($_POST['manage'])){
                     </label>
                     <?php endforeach; ?>
             </div>
-            <a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
+            <a style="margin-top:-25px;" class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
         </div>
+        </fieldset>
+        <fieldset>
+        <legend>Uppladdning</legend>
 
-        <div class="form-group">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <div class="input-group">
-
+                <div class="form-group">
                     <?php if(isset($profileInfo['resume']) && strlen($profileInfo['resume']) > 1): ?>
                         <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
                         <label for="deleteresume">Ta bort CV?</label>
@@ -359,7 +388,7 @@ if(isset($_POST['manage'])){
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <div class="input-group">
+                <div class="form-group">
                     <?php if(isset($profileInfo['picture']) && strlen($profileInfo['picture']) > 1): ?>
                         <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
                         <br>
@@ -385,13 +414,13 @@ if(isset($_POST['manage'])){
                 </div>
             </div>
         </div>
-        </div>
+    </fieldset>
 
 
     <?php endif; ?>
 
-            <div class="form-group">
-                <p><i>* Måste anges <br>
+            <div style="margin-top:10px;" class="form-group">
+                <p style="font-size:0.8em; color: #FF8989"><i>* Måste anges <br>
                 ** Lämnas blankt om du vill behålla nuvarande lösenord</i></p>
                 <button class="btn btn-default" type="submit">Spara uppgifter</button>
             </div>
