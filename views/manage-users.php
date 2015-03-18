@@ -41,9 +41,9 @@ if($signedUser){
         $emptyProfile = false;
     }
 
-    
+
     $formFillerTemplate = array_merge($formFillerTemplate, $profileInfo);
-   
+
     //if form is edited, set formFiller to form-values.
     if($session->getSession('form'))
         $formFiller = array_merge($formFillerTemplate, $session->getSession('form'));
@@ -96,7 +96,7 @@ if(isset($_POST['manage'])){
             $form['resume'] = $resumename['name'];
         }
     }
-    
+
 
     if(isset($form['deleteresume'])){
         $form['resume'] = "";
@@ -125,7 +125,7 @@ if(isset($_POST['manage'])){
                 $rotate = imagerotate($source, -90, 0);
                 imagejpeg($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
                 imagejpeg($rotate, $uplPath.$profileInfo['picture']);
-            }          
+            }
         }
         if($ext == 'png'){
             $sourceTum = imagecreatefrompng($uplPath.'tum_'.$profileInfo['picture']);
@@ -141,7 +141,7 @@ if(isset($_POST['manage'])){
                 $rotate = imagerotate($source, -90, 0);
                 imagepng($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
                 imagepng($rotate, $uplPath.$profileInfo['picture']);
-            }          
+            }
         }
         if($ext == 'gif'){
             $sourceTum = imagecreatefromgif($uplPath.'tum_'.$profileInfo['picture']);
@@ -157,10 +157,10 @@ if(isset($_POST['manage'])){
                 $rotate = imagerotate($source, -90, 0);
                 imagegif($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
                 imagegif($rotate, $uplPath.$profileInfo['picture']);
-            }          
+            }
         }
 
-        
+
 
     }
 
@@ -168,7 +168,7 @@ if(isset($_POST['manage'])){
 
     $form['guid'] = $thisUser['guid'];
     $session->setSession('form',$form);
-    
+
 
     if(!filter_var($form['email'], FILTER_VALIDATE_EMAIL)){
         $error[] .= 'Epostadressen är inte gilltig.';
@@ -239,16 +239,16 @@ if(isset($_POST['manage'])){
 <div class="container">
 
 	<div class="jumbotron">
-	
+
 	        <h1>Hantera profil</h1>
-	        
+
 	        <?php if($signedUser['student'] == 1) : ?>
 	        <a class="btn btn-default" href="<?php echo $path; ?>student-profile" role="button">Tillbaka</a>
-	        
+
 	        <?php elseif($signedUser['company_owner'] == 1) : ?>
 	        <a class="btn btn-default" href="<?php echo $path; ?>company-profile?id=<?php $signedUser['company_id'] ?>">Tillbaka</a>
 	        <?php endif; ?>
-	        
+
 	    </div>
 
     <form action="" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
@@ -335,31 +335,31 @@ if(isset($_POST['manage'])){
                       <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
                     </label>
                     <?php endforeach; ?>
-            </div>   
+            </div>
             <a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
         </div>
 
-        
+
 
         <div class="form-group">
-            
+
             <?php if(isset($profileInfo['resume']) && strlen($profileInfo['resume']) > 1): ?>
                 <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
                 <label for="deleteresume">Ta bort CV?</label>
                 <input id="deleteresume" type="checkbox" name="manage[deleteresume]">
                 <br>
             <?php else: ?>
-                <p>Ingen profilbild uppladdad</p>
+                <p>Inget CV uppladdat</p>
             <?php endif; ?>
 
             <label for="resume">Ladda upp CV</label>
             <input type="file" name="resume" value="" placeholder="Ladda upp CV">
         </div>
-        
-        
+
+
 
         <div class="form-group">
-            
+
             <?php if(isset($profileInfo['picture']) && strlen($profileInfo['picture']) > 1): ?>
                 <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
                 <br>
@@ -378,7 +378,7 @@ if(isset($_POST['manage'])){
             <?php else: ?>
                 <p>Ingen profilbild uppladdad</p>
             <?php endif; ?>
-            
+
             <label for="resume">Ladda upp profilbild</label>
             (jpg, jpeg, png, gif)
             <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
