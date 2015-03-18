@@ -30,7 +30,7 @@ else if($curPage == 'manage-company' && $signedUser['company_owner'] == 1){
 	$pageName = "manage-company";
 	$subTitle = "Hantera företag";
 }
-else if($curPage == 'company-list'){
+else if($curPage == 'company-list' && $signedUser){
 	$pageName = "company-list";
 	$subTitle = "Företagslista";
 }
@@ -65,12 +65,12 @@ else if($curPage == 'register') {
 	$subTitle = "Registrera";
 }
 
-else if($curPage == 'course-list') {
+else if($curPage == 'course-list' && $signedUser) {
 	$pageName = "course-list";
 	$subTitle = "Kurser";
 }
 
-else if($curPage == 'course-info'){
+else if($curPage == 'course-info' && $signedUser){
 	$pageName = "course-info";
 	$subTitle = "Kurs";
 }
@@ -88,18 +88,18 @@ else if($curPage == 'manage-applications' && $signedUser){
 	$pageName = "manage-applications";
 	$subtitle = "Ansökningar";
 }
-else if($curPage == 'project-info'){
+else if($curPage == 'project-info' && $signedUser){
 	$pageName = "project-info";
 	$subtitle = "Projektinfo";
 }
 
 
-else if($curPage == 'list-student'){
+else if($curPage == 'list-student' && $signedUser){
 	$pageName = "list-student";
 	$subtitle = "List students";
 }
 
-else if($curPage == 'manage-tags'){
+else if($curPage == 'manage-tags' && $signedUser){
 	$pageName = "manage-tags";
 	$subtitle = "Manage tags";
 }
