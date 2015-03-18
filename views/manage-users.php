@@ -72,17 +72,31 @@ if(isset($_POST['manage'])){
     $picture = $_FILES['picture'];
     $resume = $_FILES['resume'];
 
+    $error = array();
+
     $upl = new Upl();
 
-    if(strlen($picture['tmp_name']) > 0){
-        $picturename = $upl->upload($picture, $uplPath, 200, 200, 1);
-        $form['picture'] = $picturename['name'];
+
+
+
+    if($picture['error'] == 1){
+        $error[] .= 'Bilden är för stor, välj en mindre bild (max 2MB).';
+    }else{
+
+        if(strlen($picture['tmp_name']) > 0){
+            $picturename = $upl->upload($picture, $uplPath, 200, 200, 1);
+            $form['picture'] = $picturename['name'];
+        }
     }
-    if(strlen($resume['tmp_name']) > 0){
-        
-        $resumename = $upl->upload($resume, $uplPath);
-        $form['resume'] = $resumename['name'];    
+    if($resume['error'] == 1){
+        $error[] .= 'CV-filen är för stor, välj en mindre fil (max 2MB).';
+    }else{
+        if(strlen($resume['tmp_name']) > 0){
+            $resumename = $upl->upload($resume, $uplPath);
+            $form['resume'] = $resumename['name'];
+        }
     }
+    
 
     if(isset($form['deleteresume'])){
         $form['resume'] = "";
@@ -92,11 +106,69 @@ if(isset($_POST['manage'])){
         $form['picture'] = "";
     }
 
+
+    if(isset($form['rotate']) && !isset($form['deleteimg'])){
+
+        $ext = strtolower(pathinfo($uplPath.$profileInfo['picture'], PATHINFO_EXTENSION));
+
+        if($ext == 'jpg' || $ext == 'jpeg'){
+            $sourceTum = imagecreatefromjpeg($uplPath.'tum_'.$profileInfo['picture']);
+            $source = imagecreatefromjpeg($uplPath.$profileInfo['picture']);
+
+            if($form['rotate'] == 2){
+                $rotateTum = imagerotate($sourceTum, 90, 0);
+                $rotate = imagerotate($source, 90, 0);
+                imagejpeg($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
+                imagejpeg($rotate, $uplPath.$profileInfo['picture']);
+            }else if($form['rotate'] == 1){
+                $rotateTum = imagerotate($sourceTum, -90, 0);
+                $rotate = imagerotate($source, -90, 0);
+                imagejpeg($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
+                imagejpeg($rotate, $uplPath.$profileInfo['picture']);
+            }          
+        }
+        if($ext == 'png'){
+            $sourceTum = imagecreatefrompng($uplPath.'tum_'.$profileInfo['picture']);
+            $source = imagecreatefrompng($uplPath.$profileInfo['picture']);
+
+            if($form['rotate'] == 2){
+                $rotateTum = imagerotate($sourceTum, 90, 0);
+                $rotate = imagerotate($source, 90, 0);
+                imagepng($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
+                imagepng($rotate, $uplPath.$profileInfo['picture']);
+            }else if($form['rotate'] == 1){
+                $rotateTum = imagerotate($sourceTum, -90, 0);
+                $rotate = imagerotate($source, -90, 0);
+                imagepng($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
+                imagepng($rotate, $uplPath.$profileInfo['picture']);
+            }          
+        }
+        if($ext == 'gif'){
+            $sourceTum = imagecreatefromgif($uplPath.'tum_'.$profileInfo['picture']);
+            $source = imagecreatefromgif($uplPath.$profileInfo['picture']);
+
+            if($form['rotate'] == 2){
+                $rotateTum = imagerotate($sourceTum, 90, 0);
+                $rotate = imagerotate($source, 90, 0);
+                imagegif($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
+                imagegif($rotate, $uplPath.$profileInfo['picture']);
+            }else if($form['rotate'] == 1){
+                $rotateTum = imagerotate($sourceTum, -90, 0);
+                $rotate = imagerotate($source, -90, 0);
+                imagegif($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
+                imagegif($rotate, $uplPath.$profileInfo['picture']);
+            }          
+        }
+
+        
+
+    }
+
     $form = array_merge($formFiller, $form);
 
     $form['guid'] = $thisUser['guid'];
     $session->setSession('form',$form);
-    $error = array();
+    
 
     if(!filter_var($form['email'], FILTER_VALIDATE_EMAIL)){
         $error[] .= 'Epostadressen är inte gilltig.';
@@ -271,7 +343,7 @@ if(isset($_POST['manage'])){
 
         <div class="form-group">
             
-            <?php if(isset($profileInfo['resume'])): ?>
+            <?php if(isset($profileInfo['resume']) && strlen($profileInfo['resume']) > 1): ?>
                 <a href="<?php echo $path . "images/users/" . $thisUser['id'] . "/" . $profileInfo['resume']; ?>"><?php echo $profileInfo['resume']; ?></a>
                 <label for="deleteresume">Ta bort CV?</label>
                 <input id="deleteresume" type="checkbox" name="manage[deleteresume]">
@@ -288,8 +360,18 @@ if(isset($_POST['manage'])){
 
         <div class="form-group">
             
-            <?php if(isset($profileInfo['picture'])): ?>
+            <?php if(isset($profileInfo['picture']) && strlen($profileInfo['picture']) > 1): ?>
                 <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
+                <br>
+                <label for="deleteimg">Rotera inte</label>
+                <input id="deleteimg" checked type="radio" value="0" name="manage[rotate]">
+                <br>
+                <label for="deleteimg">Rotera 90 grader -></label>
+                <input id="deleteimg" type="radio" value="1" name="manage[rotate]">
+                <br>
+                <label for="deleteimg">Rotera 90 grader <-</label>
+                <input id="deleteimg" type="radio" value="2" name="manage[rotate]">
+                <br>
                 <label for="deleteimg">Ta bort profilbild?</label>
                 <input id="deleteimg" type="checkbox" name="manage[deleteimg]">
                 <br>
@@ -298,6 +380,7 @@ if(isset($_POST['manage'])){
             <?php endif; ?>
             
             <label for="resume">Ladda upp profilbild</label>
+            (jpg, jpeg, png, gif)
             <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
         </div>
 
