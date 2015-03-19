@@ -27,7 +27,7 @@ if(isset($_GET['cid']) || isset($_GET['comp'])){
 		$comp = $_GET['comp'];
 		$company = new Company();
 		$companyInfo = $company->getFromId($_GET['comp']);
-		$name = "Spontanansökan till ".$companyInfo['name'];
+		$name = $companyInfo['name'];
 		$desc = '';
 		$msg = "Din Spontanansökan är mottagen.";
 
