@@ -275,7 +275,7 @@ if(isset($_POST['manage'])){
     }
     ?>
         <fieldset>
-            <legend>Inloggninsuppgifter</legend>
+            <legend>Inloggningsuppgifter</legend>
             <div class="row">
                 <div class="col-md-4">
                 <div class="form-group">
