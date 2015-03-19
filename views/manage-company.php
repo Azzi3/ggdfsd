@@ -45,7 +45,7 @@ if(isset($_POST['company'])){
         $maxsize = 2097152;
 
         $uplPath = PUBLIC_ROOT.'/images/company/'.$company['name'].'/';
-        
+
         if (!file_exists($uplPath)) {
             mkdir($uplPath, 0777);
         }
@@ -60,7 +60,7 @@ if(isset($_POST['company'])){
             $session->setSession('error',$errors);
             redirect(PATH.'manage-company/');
         }
-  
+
     } elseif(isset($company['deleteimg'])){
         $picturename['name'] = "";
     } else{
@@ -159,7 +159,7 @@ if(isset($_POST['company'])){
                     <img src=" <?php echo $path . "images/company/" . $items['name'] . "/tum_" . $items['image'] ?> " alt="">
                     <label for="deleteimg">Ta bort profilbild?</label>
                     <input id="deleteimg" type="checkbox" value="0" name="company[deleteimg]">
-                    
+
                 <?php else: ?>
                     <p>Ingen profilbild uppladdad</p>
                 <?php endif; ?>
@@ -169,27 +169,25 @@ if(isset($_POST['company'])){
                 <label for="resume">Ladda upp profilbild</label>
                 <input type="file" name="picture" accept="image/*" value="" placeholder="Ladda upp profilbild">
             </div>
-            
-            <div class="form-group">
-                <label for="checkbox">Företagstaggar</label>
-            <div class="checkbox">
-                      <?php foreach ($companyTag->getAll() as $item) :
-                        $tag = $companyTag->checkIfTagIsUsed($id, $item['id']);
-                      ?>
-                        <label>
-                          <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
-                        </label>
-                        <?php endforeach; ?>
-            </div>
-            <a class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
-                
-            </div>
         </div>
         </div>
         <div class="row">
-            <div style="margin-bottom: 1em" class="col-md-6">
-                <button type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
+            <div class="form-group">
+                <legend>Taggar</legend>
+                <div class="checkbox">
+                          <?php foreach ($companyTag->getAll() as $item) :
+                            $tag = $companyTag->checkIfTagIsUsed($id, $item['id']);
+                          ?>
+                          <label class="checkbox-label">
+                              <input type="checkbox" <?php if($tag){echo 'checked';} ?> value="<?php echo $item['id']; ?>" name="tag[<?php echo $item['id']; ?>]"> <?php echo $item['name']; ?>
+                            </label>
+                            <?php endforeach; ?>
+                </div>
+                <a style="margin-top:-25px;" class="btn btn-default" href="<?php echo $path; ?>manage-tags">Ny tagg</a>
             </div>
+        </div>
+        <div class="row">
+            <button style="margin-bottom: 1em;" type="submit" class="btn btn-default"><?php echo $buttonText; ?></button>
         </div>
     </form>
 </div>
