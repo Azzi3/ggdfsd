@@ -1,7 +1,7 @@
 .error-alert{
     position: fixed;
-    right: 50px;
-    top: 50px;
+    right: 40%;
+    top: 70px;
     margin-right: 10px;
 }
 
@@ -67,25 +67,6 @@ td {
     vertical-align: middle !important;
 }
 
-
-/* Startpage css */
-.btn-xl {
-    padding: 20px 40px;
-    border-color: #fed136;
-    border-radius: 60px;
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    background-color: #fed136;
-}
-
-.btn-xl:hover {
-	color: #fff;
-	text-decoration: none;
-}
-
 .tag{
     margin-bottom: 0.5em;
 }
@@ -93,7 +74,8 @@ td {
 header {
     text-align: center;
     height: 100%;
-    color: #fff;
+    min-height: 800px;
+    padding-top: 15em;
     background-attachment: scroll;
     background-image: url(../../images/header.jpg);
     background-position: center center;
@@ -105,10 +87,13 @@ header {
 
 }
 
-header .intro-text {
-    padding-top: 100px;
-    padding-bottom: 50px;
+
+@media (max-width: 600px) {
+    header{
+        padding-top: 2em;
+    }
 }
+
 
 header .intro-text .intro-lead-in {
     margin-bottom: 25px;
@@ -155,21 +140,15 @@ section {
     padding: 100px 0;
 }
 
-section h2.section-heading {
+.section-heading {
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 40px;
+    font-size: 4em;
 }
 
-section h3.section-subheading {
-    margin-bottom: 75px;
-    text-transform: none;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 400;
+.section-text{
+    font-size: 1.5em;
 }
-
 
 section#login {
 	background: #f1f1f1;
@@ -178,7 +157,6 @@ section#login {
 /* Footer Section */
 
 footer {
-	margin-top: 20px;
     padding: 25px 0;
     text-align: center;
     background: #777;

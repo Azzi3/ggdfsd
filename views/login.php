@@ -1,178 +1,136 @@
-<!-- Header -->
-		<header>
-				<div class="container">
-						<div class="intro-text">
-								<div class="intro-lead-in">Välkommen till LIA-Banken</div>
-								<a href="#login" class="page-scroll btn-xl">Logga in</a>
-						</div>
-				</div>
-		</header>
-		
-		<!-- login Section -->
-		<section id="login">
-				<div class="container">
-								<div class="row">
-										<div class="col-lg-12 text-center">
-												<h2 class="section-heading">Logga in</h2>
-										</div>
-								</div>
-								
-								<div class="row">
-										<div class="col-md-4 col-md-offset-2">
-											<?php
-											
-											if(isset($_POST['loginform'])){
-											
-												$userResult = $user->loginUser($_POST['loginform']);
-											
-												if($userResult){
-													$session->setSession('guid',$userResult['guid']);
-												}else{
-													$session->setSession('error','Fel användaruppgifter.');
-													redirect('#login');
-												}
 
-											
-											
-											}
-											// Why isnt signed user set @Tobias
-											$signedUser = $user->getUserByGuid($session->getSession('guid'));
-											if($signedUser['student'] == 1){
-												redirect($path."student-profile");
-											 }
-											if($signedUser['company_owner'] == 1){
-												redirect($path."company-profile?id=". $signedUser['company_id']);
-											}
-											if($signedUser['course_leader'] == 1){
-												redirect($path."generate-key");
-											}
-							
-											if(isset($_POST['register'])){
-											$key = new Key();
-												$secret = '';
-												$secret = $_POST['register']['secret'];
-											
-												$validKey = $key->checkValidKey($secret);
-											
-												if($validKey){
-													$session->setSession('secretKey',$validKey);
-													redirect(CURRENT_PATH.'register');
-												}
-												else{
-													$session->setSession('errorKey','Det finns ingen nyckel med det värdet.');
-													redirect('#login');
-												}
-											
-											}
-					
-											?>
-											
-											
-											<?php if(!$session->getSession('guid')) : ?>
-											<form action="" method="POST" accept-charset="utf-8">
-											
-											<?php
-											//show success if success-session is active
-											if($session->getSession('success')){
-												echo '<div class="alert alert-success" role="alert">'.$session->getSession('success').'</div>';
-												//kill session when 'echoed'.
-												$session->killSession('success');
-											}
-											
-											
-											
-											?>
-												<div class="form-group">
-													<label for="mail">Epostadress</label>
-													<input type="text" class="form-control" id="mail" name="loginform[email]" placeholder="Epostadress" required>
-												</div>
-												<div class="form-group">
-													<label for="password">Lösenord</label>
-													<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord" required>
-												</div>
-												<button type="submit" class="btn btn-default">Logga in</button>
+<!-- login Section -->
 
-												<?php 
-												//show error if error-session is active
-												if($session->getSession('error')){
-													echo '<div class="alert alert-danger error-alert" role="alert">'.$session->getSession('error').'</div>';
-													//kill session when 'echoed'.
+<?php
 
-													$session->killSession('error');
-												}
+if(isset($_POST['loginform'])){
 
-												?>
+	$userResult = $user->loginUser($_POST['loginform']);
 
-											</form>
-											
-											</div>
-											
-											<div class="col-md-4">
-											
-											<form action="" method="POST" accept-charset="utf-8">
-											<?php
-											//show error if error-session is active
-											if($session->getSession('errorKey')){
-												echo '<div class="alert alert-danger error-alert" role="alert">'.$session->getSession('errorKey').'</div>';
-												//kill session when 'echoed'.
+	if($userResult){
+		$session->setSession('guid',$userResult['guid']);
+	}else{
+		$session->setSession('error','Fel användaruppgifter.');
+	}
+}
+$signedUser = $user->getUserByGuid($session->getSession('guid'));
+if($signedUser['student'] == 1){
+	redirect($path."student-profile");
+}
+if($signedUser['company_owner'] == 1){
+	redirect($path."company-profile?id=". $signedUser['company_id']);
+}
+if($signedUser['course_leader'] == 1){
+	redirect($path."generate-key");
+}
 
-												$session->killSession('errorKey');
-											}
-											?>
-												<div class="form-group">
-													<label for="mail">Registrera dig med din nyckel</label>
-													<input type="text" class="form-control" id="mail" name="register[secret]" placeholder="Nyckel" required>
-												</div>
-												<button type="submit" class="btn btn-default">Registrera</button>
-											</form>
-											<?php endif; ?>
-									 </div>
-						</div>
-				</div>
-		</section>
+if(isset($_POST['register'])){
+	$key = new Key();
+	$secret = '';
+	$secret = $_POST['register']['secret'];
 
-<!-- information Section -->
-		<section id="information">
-				<div class="container">
-							<div class="row">
-									<div class="col-lg-12 text-center">
-											<h2 class="section-heading">Information</h2>
-											<!--<h3 class="section-subheading text-muted">Undertext</h3>-->
-									</div>
-							</div>
-							<div class="row text-center">
-									<div class="col-md-6">
-											<h4 class="service-heading">Info</h4>
-											<p class="text-muted">
-											All utbildning inom yrkeshögskolan sker i nära samarbete med arbetslivet. 
-											Lärande i arbete (LIA) innebär att en del av utbildningen är förlagd till en eller flera arbetsplatser. 
-											LIA-banken erbjuder en unik mötesplats till studenter och företag för att säkra LIA-platser till Växjö Yrkeshögskola.</p>
-								</div>
-								
-								<div class="col-md-6">
-										<h4 class="service-heading">Lorem ipsum</h4>
-										<p class="text-muted">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-											Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-											Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-											Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-								</div>
-						</div>
-				</div>
-		</section>
-		
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
+	$validKey = $key->checkValidKey($secret);
+
+	if($validKey){
+		$session->setSession('secretKey',$validKey);
+		redirect(CURRENT_PATH.'register');
+	}
+	else{
+		$session->setSession('errorKey','Det finns ingen nyckel med det värdet.');
+	}
+
+}
+
+			//show error if error-session is active
+if($session->getSession('errorKey')){
+	echo '<div class="alert alert-danger error-alert" role="alert">'.$session->getSession('errorKey').'</div>';
+				//kill session when 'echoed'.
+
+	$session->killSession('errorKey');
+}
+			//show error if error-session is active
+if($session->getSession('error')){
+	echo '<div class="alert alert-danger error-alert" role="alert">'.$session->getSession('error').'</div>';
+				//kill session when 'echoed'.
+
+	$session->killSession('error');
+}
+			//show success if success-session is active
+if($session->getSession('success')){
+	echo '<div class="alert alert-success" role="alert">'.$session->getSession('success').'</div>';
+				//kill session when 'echoed'.
+	$session->killSession('success');
+}
+?>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<form action="" method="POST" accept-charset="utf-8">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="form-group">
+						<label for="mail">Epostadress</label>
+						<input type="text" class="form-control" id="mail" name="loginform[email]" placeholder="Epostadress" required>
 					</div>
-								
-					<div class="col-md-4">
-						<span class="copyright">Copyright &copy; LIA-Banken 2015</span>	
+					<div class="form-group">
+						<label for="password">Lösenord</label>
+						<input type="password" class="form-control" id="password" name="loginform[password]" placeholder="Lösenord" required>
 					</div>
-							
-					<div class="col-md-4">
-					</div>
+					<button type="submit" class="btn btn-default">Logga in</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Avbryt</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<form action="" method="POST" accept-charset="utf-8">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<form action="" method="POST" accept-charset="utf-8">
+						<div class="form-group">
+							<label for="mail">Registrera dig med din nyckel</label>
+							<input type="text" class="form-control" id="mail" name="register[secret]" placeholder="Nyckel" required>
+						</div>
+						<button type="submit" class="btn btn-default">Registrera</button>
+					</form>
 				</div>
 			</div>
-		</footer>
+		</div>
+	</div>
+
+	<!-- Header -->
+	<header>
+		<div class="container">
+
+
+					<!--<h3 class="section-subheading text-muted">Undertext</h3>-->
+			<div class="row text-center">
+				<h2 class="section-heading">LIA-Banken</h2>
+				<div class="col-md-5 col-md-offset-1">
+					<p class="section-text">
+						All utbildning inom yrkeshögskolan sker i nära samarbete med arbetslivet.
+						Lärande i arbete (LIA) innebär att en del av utbildningen är förlagd till en eller flera arbetsplatser.</p>
+					</div>
+					<div class="col-md-5">
+						<p class="section-text">LIA-banken erbjuder en unik mötesplats till studenter och företag för att säkra LIA-platser till Växjö Yrkeshögskola.</p>
+					</div>
+				</div>
+			</header>
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+						</div>
+
+						<div class="col-md-4">
+							<span class="copyright">Copyright &copy; LIA-Banken 2015</span>
+						</div>
+
+						<div class="col-md-4">
+						</div>
+					</div>
+				</div>
+			</footer>
