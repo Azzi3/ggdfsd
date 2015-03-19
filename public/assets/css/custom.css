@@ -169,3 +169,16 @@ footer span.copyright {
     line-height: 40px;
     color: #fff;
 }
+.scrollbox{
+    height: 300px;
+    overflow: auto;
+    background: #eee;
+    margin: 1em;
+    padding: 1em;
+}
+.scrollbox ul{
+    padding: 0;
+}
+.scrollbox li{
+    list-style: none;
+}

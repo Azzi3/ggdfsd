@@ -8,8 +8,13 @@ class Student extends Database{
 		$str = " SELECT * FROM $this->tbl WHERE student != 0";
 		return $this->selectAll($str);
 	}
+	public function getAllWithoutGroup(){
+		$str = " SELECT * FROM $this->tbl WHERE student != 0 AND group_id is null";
+		return $this->selectAll($str);
 
-		public function searchResult($string){
+	}
+
+	public function searchResult($string){
 
 		$str = " SELECT * FROM $this->tbl WHERE
 		(firstname LIKE :string AND student != 0)

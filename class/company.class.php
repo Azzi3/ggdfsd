@@ -12,6 +12,12 @@ class Company extends Database{
 		return $this->selectAll($str);
 
 	}
+	public function getAllWithoutGroup(){
+		$str = " SELECT * FROM $this->tbl WHERE group_id = 0 ";
+
+		return $this->selectAll($str);
+
+	}
 
 	public function getFromId($id){
 		$str = " SELECT * FROM $this->tbl WHERE id = :id ";
@@ -43,7 +49,7 @@ class Company extends Database{
 		$str = " SELECT * FROM $this->tbl WHERE
 		name LIKE :string
 		OR contact_name LIKE :string
-		OR description LIKE :string 
+		OR description LIKE :string
 		OR city LIKE :string ";
 
 		$arr = array('string' => "%".$string."%");
@@ -89,7 +95,7 @@ class Company extends Database{
 					'contact_email'=>$item['contact_email'],
 					'contact_name'=>$item['contact_name'],
 					'company_email'=>$item['company_email']);
-		
+
 		$lastCompanyId = $this->insert($str, $arr);
 
 		foreach ($tags as $value => $key) {
@@ -142,7 +148,7 @@ class Company extends Database{
 		$this->delete($str, $arr);
 
 		foreach ($tags as $key) {
-			
+
 			$str = " INSERT INTO $this->tbl_tags (company_id, tag_id)
 			values(:company_id, :tagId) ";
 			$arr = array('company_id' => $id, 'tagId'=>$key);
@@ -175,15 +181,15 @@ class Company extends Database{
 
 
 	public function deleteCompanyAndTag($id, $companyName){
-			// ta bort mellantabell rader 
-		// ta bort tagger med projekt 
+			// ta bort mellantabell rader
+		// ta bort tagger med projekt
 		$str = " DELETE FROM $this->tbl_tags WHERE company_id = :id ";
 		$arr = array('id'=>$id);
-		$this->delete($str, $arr);		
+		$this->delete($str, $arr);
 		$str = "DELETE FROM $this->tbl WHERE id = :id";
 		 $arr = array('id'=>$id);
 		$this->delete($str, $arr);
-		
+
 		//REMOVES IMAGE
 		$imageDirectory = PUBLIC_ROOT . '/images/' . '/company/' . $companyName;
 		$path = $imageDirectory . '/*';
@@ -193,7 +199,7 @@ class Company extends Database{
 				unlink($file);
 			}
 		//REMOVES DIRECTORY
-		rmdir($imageDirectory);	
+		rmdir($imageDirectory);
 	}
 
 	public function getTags($id) {
@@ -215,9 +221,9 @@ class Company extends Database{
 		$str = "SELECT DISTINCT company_id FROM `company_tag` where tag_id IN (";
 		foreach ($studentTagids as $tagId) {
 			if(end($studentTagids) === $tagId){
-				$str .= $tagId['tag_id']; 
+				$str .= $tagId['tag_id'];
 			}else{
-				$str .= $tagId['tag_id'] . ","; 
+				$str .= $tagId['tag_id'] . ",";
 			}
 		}
 		$str .= ')';
@@ -233,7 +239,7 @@ class Company extends Database{
 		return $companies;
 
 	}
-	
+
 	/**
 	* Get all the projects that belong to the company
 	*/
@@ -249,7 +255,7 @@ class Company extends Database{
 	}
 
 	public function getContact($contactId){
-		$str = "SELECT * 
+		$str = "SELECT *
 		FROM contact_person
 		WHERE id = :id ";
 

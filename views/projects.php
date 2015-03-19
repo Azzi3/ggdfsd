@@ -16,7 +16,7 @@ if(isset($_GET['deleteid'])){
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Är du säker på att du vill ta bort <span></span></h4>
 			</div>
-		
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 				<button id="reallyDelete" type="button" class="btn btn-danger">Ta bort</button>
@@ -49,7 +49,7 @@ if(isset($_GET['deleteid'])){
 
 			<tbody>
 				<?php $company = new Company();
-				 foreach ($projects as $project){ 
+				 foreach ($projects as $project){
 						$companyInfo = $company->getFromId($project['company_id']);
 					?>
 				<tr>
@@ -70,7 +70,7 @@ if(isset($_GET['deleteid'])){
 						<td>
 							<?php if($signedUser['company_owner'] == 1 && $signedUser['company_id'] == $project['company_id']) : ?>
 								<a class="btn btn-default" href="<?php echo $path; ?>manage-projects?id=<?php echo $project['id']; ?>">Ändra</a>
-								<a class="btn btn-danger" id="deleteProjectBtn" data-name="<?php echo $project['name'];  ?>" data-projectid="<?php echo $project['id']; ?>" class="btn" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
+								<a class="btn btn-danger" id="deleteProjectBtn" data-name="<?php echo $project['name'];  ?>" data-projectid="<?php echo $project['id']; ?>" class="btn btn-default" data-toggle="modal" data-target="#deleteModal" >Ta bort</a>
 							<?php endif; ?>
 
 						</td>

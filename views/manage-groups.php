@@ -1,6 +1,7 @@
 <?php
 $groups = new Group();
 $company = new Company();
+$student = new Student();
 
 
 //ADD ITEMS FUNCTION
@@ -10,12 +11,18 @@ if(isset($_GET['add']) && is_numeric($_GET['add'])){
 
 	if(isset($_POST['add'])){
 		if($addGroup['student'] == 1) {
-			if($user->getUserByEmail($_POST['add']['mail'])){
-				$user->updateGroup($_POST['add']['mail'], $_GET['add']);
+			foreach ($_POST['add'] as $studentId) {
+				$userGoingToGroup = $user->getUserById($studentId);
+				if($userGoingToGroup){
+					$user->updateGroup($userGoingToGroup['email'], $_GET['add']);
+				}
 			}
 		}else{
-			if($company->getFromCompanyEmail($_POST['add']['mail'])){
-				$company->updateGroup($_POST['add']['mail'], $_GET['add']);
+			foreach ($_POST['add'] as $companyId) {
+				$companyGoingToGroup = $company->getFromId($companyId);
+				if($companyGoingToGroup){
+					$company->updateGroup($companyGoingToGroup['company_email'], $_GET['add']);
+				}
 			}
 		}
 	}
@@ -23,11 +30,14 @@ if(isset($_GET['add']) && is_numeric($_GET['add'])){
 	if(isset($_GET['remove']) && is_numeric($_GET['remove'])){
 		if($addGroup['student'] == 1) {
 			$userMail = $user->getUserById($_GET['remove'])['email'];
-			$user->updateGroup($userMail, 0);
+			$user->updateGroup($userMail, null);
 		}else{
 			$companyMail = $company->getFromId($_GET['remove'])['company_email'];
 			$company->updateGroup($companyMail, 0);
 		}
+		redirect(CURRENT_PATH .'?add='. $_GET['add']);
+
+
 	}
 
 
@@ -82,8 +92,8 @@ if(isset($_POST['group'])){
 		}else{
 			$groups->createGroup($group);
 		}
-		
-	}else{	
+
+	}else{
 		$session->setSession('error',$error);
 	}
 
@@ -113,33 +123,59 @@ if(isset($_POST['group'])){
                     $session->killSession('error');
                 }
                 ?>
-        <?php if(isset($addGroup)) : ?>
-
+        <?php if(isset($addGroup)) :?>
         	<h3><?php echo $addGroup['name']; ?> grupp</h3>
         	<form action="" method="POST" accept-charset="utf-8">
-	        	<div class="form-group">
-	        		<label for="email">Sök epostadress</label>
-	        		<input type="email" id="email" name="add[mail]" value="" class="form-control" placeholder="Epostadress">
-	        	</div>
+    			<div class="scrollbox">
+		        	<ul>
+			        	<?php
+			        	if($addGroup['student'] == 1){
+			        		$allStudentList = $student->getAllWithoutGroup();
+			        		foreach ($allStudentList as $studentData):?>
+			        		<li>
+			        			<label>
+				        			<input type="checkbox" name="add[<?php echo $studentData['id']; ?>]" value="<?php echo $studentData['id']; ?>">
+				        			<?php echo $studentData['firstname'] . ' ' . $studentData['lastname'] . ' ('.
+				        			$studentData['email'] . ')';
+				        			?>
+			        			</label>
+			        		</li>
+			        	<?php
+			        	endforeach;
+			        	}else{
+			        		$allcompanyList = $company->getAllWithoutGroup();
+    		        		foreach ($allcompanyList as $companyData):?>
+    		        		<li>
+    		        			<label>
+    			        			<input type="checkbox" name="add[<?php echo $companyData['id']; ?>]" value="<?php echo $companyData['id']; ?>">
+    			        			<?php echo $companyData['name'] . ' ('.
+    			        			$companyData['company_email'] . ')';
+    			        			?>
+    		        			</label>
+    		        		</li>
+						<?php
+						endforeach;
+						};?>
 
+					</ul>
+        		</div>
+       			<button type="submit" class="btn btn-default">Lägg till</button>
+        	</form>
 
-	        	<button type="submit" class="btn">Lägg till</button>
 	        	<hr>
 	        	<h3>Medlemmar</h3>
-        	</form>
 
         	<?php
         	if($addGroup['student'] == 1) :
-	        	$student = new Student();
 	        	$allStudent = $student->getAllFromGroup($addGroup['group_id']);
 	        	foreach ($allStudent as $item) {
-	        		echo '<a href="'.CURRENT_PATH.'?add='.$addGroup['group_id'].'&remove='.$item['id'].'"><button class="btn btn-danger">Ta bort</button></a>
+	        		echo '<a style="margin:0.2em 0" href="'.CURRENT_PATH.'?add='.$addGroup['group_id'].'&remove='.$item['id'].'" class="btn btn-danger">Ta bort</a>
 	        		 '.$item['firstname'].' '.$item['lastname'].' ('.$item['email'].')<br>';
 	        	}
         	else :
         		$allCompany = $company->getCompanyFromGroup($addGroup['group_id']);
         		foreach ($allCompany as $item) {
-	        		echo '<a href="'.CURRENT_PATH.'?add='.$addGroup['group_id'].'&remove='.$item['id'].'"><button class="btn btn-danger">Ta bort</button></a>
+	        		echo '<a style="margin:0.2em 0" href="'.CURRENT_PATH.'?add='.$addGroup['group_id'].'&remove='.$item['id'].'" class="btn btn-danger">Ta bort</a>
 	        		 '.$item['name'].' ('.$item['company_email'].')<br>';
         		}
 
@@ -148,19 +184,19 @@ if(isset($_POST['group'])){
         	?>
 
         <?php else : ?>
-	<form action="" method="POST" accept-charset="utf-8">
-	<h3><?php echo $headText; ?> grupp</h3>
-		<div class="form-group">
-            <label for="name">Gruppnamn</label>
-            <input type="text" name="group[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" placeholder="Namn" required>
-        </div>
-        <div class="form-group">
-            Grupptyp<br>
-            <label for="radio01">Elevklass</label> <input type="radio" <?php if($formFiller['student'] == 1){echo 'checked';} ?> id="radio01" name="group[type]" value="1" placeholder=""><br>
-            <label for="radio02">Företagsgrupp</label> <input type="radio" <?php if($formFiller['company'] == 1){echo 'checked';} ?> id="radio02" name="group[type]" value="2" placeholder="">
-        </div>
-        <button type="submit" class="btn"><?php echo $headText; ?> grupp</button>
-	</form>
+			<form action="" method="POST" accept-charset="utf-8">
+			<h3><?php echo $headText; ?> grupp</h3>
+				<div class="form-group">
+		            <label for="name">Gruppnamn</label>
+		            <input type="text" name="group[name]" value="<?php echo $formFiller['name']; ?>" class="form-control" id="name" placeholder="Namn" required>
+		        </div>
+		        <div class="form-group">
+		            Grupptyp<br>
+		            <label for="radio01">Elevklass</label> <input type="radio" <?php if($formFiller['student'] == 1){echo 'checked';} ?> id="radio01" name="group[type]" value="1" placeholder=""><br>
+		            <label for="radio02">Företagsgrupp</label> <input type="radio" <?php if($formFiller['company'] == 1){echo 'checked';} ?> id="radio02" name="group[type]" value="2" placeholder="">
+		        </div>
+		        <button type="submit" class="btn btn-default"><?php echo $headText; ?> grupp</button>
+			</form>
 		<?php endif; ?>
 
 	<hr>
