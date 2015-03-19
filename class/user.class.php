@@ -34,6 +34,20 @@ class User extends Database{
 		$this->update($str, $arr);
 	}
 
+	public function getUserByEmail($email){
+		$str = " SELECT * FROM $this->tbl WHERE email = :email ";
+		$arr = array('email'=>$email);
+
+		return $this->select($str, $arr);
+	}
+
+	public function updateGroup($email, $groupId){
+		$str = " UPDATE $this->tbl SET group_id = :groupId WHERE email = :email ";
+		$arr = array('groupId'=>$groupId, 'email'=>$email);
+
+		$this->update($str, $arr);
+	}
+
 
 
 

@@ -50,6 +50,11 @@ else if($curPage == 'generate-key' && $signedUser['course_leader'] == 1){
 	$subTitle = "Generera nyckel";
 }
 
+else if($curPage == 'manage-groups' && $signedUser['course_leader'] == 1){
+	$pageName = "manage-groups";
+	$subTitle = "Hantera grupper";
+}
+
 else if($curPage == 'manage-user' && $signedUser) {
 	$pageName = "manage-users";
 	$subTitle = "Hantera dina uppgifter";
