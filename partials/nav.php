@@ -73,6 +73,7 @@
 
 		  		<?php elseif($signedUser['course_leader'] == 1) : ?>
 		  		<li><a href="<?php echo $path; ?>generate-key">Generera nyckel</a></li>
+          <li><a href="<?php echo $path; ?>manage-groups">Hantera grupper</a></li>
 		  		<?php endif; ?>
 
 				<li><a href="<?php echo $path; ?>manage-user">Inställningar</a></li>

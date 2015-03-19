@@ -19,6 +19,25 @@ class Company extends Database{
 		return $this->select($str, $arr);
 	}
 
+	public function getFromCompanyEmail($email){
+		$str = " SELECT * FROM $this->tbl WHERE company_email = :email ";
+		$arr = array('email'=>$email);
+		return $this->select($str, $arr);
+	}
+
+	public function getCompanyFromGroup($groupId){
+		$str = " SELECT * FROM $this->tbl WHERE group_id = :groupId ";
+		$arr = array('groupId'=>$groupId);
+		return $this->selectAll($str, $arr);
+	}
+
+	public function updateGroup($email, $groupId){
+		$str = " UPDATE $this->tbl SET group_id = :groupId WHERE company_email = :email ";
+		$arr = array('groupId'=>$groupId, 'email'=>$email);
+
+		$this->update($str, $arr);
+	}
+
 	public function searchResult($string){
 
 		$str = " SELECT * FROM $this->tbl WHERE

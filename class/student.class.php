@@ -22,6 +22,15 @@ class Student extends Database{
 
 	}
 
+	public function getAllFromGroup($groupId){
+
+		$str = " SELECT * FROM $this->tbl WHERE group_id = :groupId ";
+		$arr = array('groupId'=>$groupId);
+
+		return $this->selectAll($str, $arr);
+
+	}
+
 }
 
 ?>
