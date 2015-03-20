@@ -2,13 +2,6 @@
 $newCompany = new Company();
 $companyTag = new CompanyTag();
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
-     empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0)
-{
-  $errors = array();
-  $errors[] = 'The file is way too large to upload buddy.';
-  $session->setSession('error',$errors);
-}
 //default values for form
 
 $items = array_fill_keys(
