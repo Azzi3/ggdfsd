@@ -112,7 +112,7 @@ else if($curPage == 'match' && $signedUser){
 	$pageName = "match";
 	$subtitle = "Hitta företag";
 }
-
+else if($curPage == 'application-info' && $signedUser){	$pageName = "application-info";	$subtitle = "Ansökningsinfo";}
 else{
 	$pageName = "404";
 	$subTitle = "404 (Page not found)";
