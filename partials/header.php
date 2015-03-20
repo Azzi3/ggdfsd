@@ -34,6 +34,13 @@
 		$signedUser = $user->getUserByGuid($session->getSession('guid'));
 	}
 
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
+     empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0) {
+  		$errors = array();
+ 		$errors[] = 'Filen är för stor, välj en mindre fil (max 2MB).';
+ 		$session->setSession('error',$errors);
+	}
+
 	include("nav.php");
 
 ?>
