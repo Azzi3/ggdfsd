@@ -98,7 +98,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 			}else{ ?>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr>						<th>Ansöknings info</th>
 						<th><?php echo $thName; ?></th>
 						<th>Lia kurs</th>
 						<th>Status</th>
@@ -156,7 +156,7 @@ if(isset($_POST['report']) && isset($_GET['app']) && isset($_GET['id'])){
 				?>
 				
 					 <tr>
-					 	<td><?php echo $tdName; ?></td>
+					 	<td><a href="<?php echo $path.'application-info?id='.$ApplicationForm['id']; ?>">Länk</a></td>					 						 	<?php if($signedUser['student'] == 1) : ?>					 	<td><a href="<?php echo $path.'company-profile?id='.$company['id']; ?>"><?php echo $tdName; ?></a></td>					 	<?php endif; ?>					 						 	<?php if($signedUser['company_owner'] == 1) : ?>					 	<td><a href="<?php echo $path.'student-profile?uid='.$user['guid']; ?>"><?php echo $tdName; ?></a></td>					 	<?php endif; ?>					 	
 					 	<td><?php echo $courseName; ?></td>
 					 	<td><b><?php echo $status; ?></b></td>
 					 	<td><?php echo $lastDay; ?></td>
