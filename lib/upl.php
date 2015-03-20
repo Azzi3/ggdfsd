@@ -182,6 +182,24 @@ class Upl{
 
 
 
+		
+
+		$exifData = exif_read_data($uplPath.$filename);
+
+		if(!empty($exifData['Orientation'])) {
+		    switch($exifData['Orientation']) {
+		        case 8:
+		            $image = imagerotate($image,90,0);
+		            break;
+		        case 3:
+		            $image = imagerotate($image,180,0);
+		            break;
+		        case 6:
+		            $image = imagerotate($image,-90,0);
+		            break;
+		    }
+		}
+
 		imagecopyresampled($thumb, $image, 0, 0, $x, $y, $newWidth, $newHeight, $width, $height);
 
 		if ($fileEnding == "png" || $fileEnding == "gif") {
@@ -190,6 +208,8 @@ class Upl{
 		else{
 			imagejpeg($thumb,$uplPath.'tum_'.$filename,100);
 		}
+
+
 
 	}
 

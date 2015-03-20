@@ -107,63 +107,6 @@ if(isset($_POST['manage'])){
     }
 
 
-    if(isset($form['rotate']) && !isset($form['deleteimg'])){
-
-        $ext = strtolower(pathinfo($uplPath.$profileInfo['picture'], PATHINFO_EXTENSION));
-
-        if($ext == 'jpg' || $ext == 'jpeg'){
-            $sourceTum = imagecreatefromjpeg($uplPath.'tum_'.$profileInfo['picture']);
-            $source = imagecreatefromjpeg($uplPath.$profileInfo['picture']);
-
-            if($form['rotate'] == 2){
-                $rotateTum = imagerotate($sourceTum, 90, 0);
-                $rotate = imagerotate($source, 90, 0);
-                imagejpeg($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
-                imagejpeg($rotate, $uplPath.$profileInfo['picture']);
-            }else if($form['rotate'] == 1){
-                $rotateTum = imagerotate($sourceTum, -90, 0);
-                $rotate = imagerotate($source, -90, 0);
-                imagejpeg($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
-                imagejpeg($rotate, $uplPath.$profileInfo['picture']);
-            }
-        }
-        if($ext == 'png'){
-            $sourceTum = imagecreatefrompng($uplPath.'tum_'.$profileInfo['picture']);
-            $source = imagecreatefrompng($uplPath.$profileInfo['picture']);
-
-            if($form['rotate'] == 2){
-                $rotateTum = imagerotate($sourceTum, 90, 0);
-                $rotate = imagerotate($source, 90, 0);
-                imagepng($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
-                imagepng($rotate, $uplPath.$profileInfo['picture']);
-            }else if($form['rotate'] == 1){
-                $rotateTum = imagerotate($sourceTum, -90, 0);
-                $rotate = imagerotate($source, -90, 0);
-                imagepng($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
-                imagepng($rotate, $uplPath.$profileInfo['picture']);
-            }
-        }
-        if($ext == 'gif'){
-            $sourceTum = imagecreatefromgif($uplPath.'tum_'.$profileInfo['picture']);
-            $source = imagecreatefromgif($uplPath.$profileInfo['picture']);
-
-            if($form['rotate'] == 2){
-                $rotateTum = imagerotate($sourceTum, 90, 0);
-                $rotate = imagerotate($source, 90, 0);
-                imagegif($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
-                imagegif($rotate, $uplPath.$profileInfo['picture']);
-            }else if($form['rotate'] == 1){
-                $rotateTum = imagerotate($sourceTum, -90, 0);
-                $rotate = imagerotate($source, -90, 0);
-                imagegif($rotateTum, $uplPath.'tum_'.$profileInfo['picture']);
-                imagegif($rotate, $uplPath.$profileInfo['picture']);
-            }
-        }
-
-
-
-    }
-
     $form = array_merge($formFiller, $form);
 
     $form['guid'] = $thisUser['guid'];
@@ -391,15 +334,6 @@ if(isset($_POST['manage'])){
                 <div class="form-group">
                     <?php if(isset($profileInfo['picture']) && strlen($profileInfo['picture']) > 1): ?>
                         <img src=" <?php echo $path . "images/users/" . $thisUser['id'] . "/tum_" . $profileInfo['picture']; ?> " alt="">
-                        <br>
-                        <label for="deleteimg">Rotera inte</label>
-                        <input id="deleteimg" checked type="radio" value="0" name="manage[rotate]">
-                        <br>
-                        <label for="deleteimg">Rotera 90 grader -></label>
-                        <input id="deleteimg" type="radio" value="1" name="manage[rotate]">
-                        <br>
-                        <label for="deleteimg">Rotera 90 grader <-</label>
-                        <input id="deleteimg" type="radio" value="2" name="manage[rotate]">
                         <br>
                         <label for="deleteimg">Ta bort profilbild?</label>
                         <input id="deleteimg" type="checkbox" name="manage[deleteimg]">
